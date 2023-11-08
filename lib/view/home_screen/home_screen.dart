@@ -12,7 +12,11 @@ class _HomescreenState extends State<Homescreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [],
+        children: [
+          SearchBar(
+            backgroundColor: MaterialStatePropertyAll(Colors.grey),
+          )
+        ],
       ),
     );
   }
