@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rent_cruise/view/home_screen/home_screen.dart';
-
-import 'package:rent_cruise/view/product_detail_screen/product_detail_screen.dart';
-
-import 'package:rent_cruise/view/login_screen/login_scrren.dart';
 import 'package:rent_cruise/view/splash_screen/splash_screen.dart';
 
 void main() {
