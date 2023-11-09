@@ -12,11 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-
-      home: Scaffold(
-        backgroundColor: Colors.amber,
-        body: Container(),
-      ),
-    
+      home: Homescreen(),
+    );
   }
 }
