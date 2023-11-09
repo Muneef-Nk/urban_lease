@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/home_screen/home_screen.dart';
 import 'package:rent_cruise/view/login_screen/widgets/social_container.dart';
-import 'package:rent_cruise/view/signup_screen/signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
