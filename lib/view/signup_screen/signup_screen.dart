@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
+import 'package:rent_cruise/view/login_screen/login_scrren.dart';
 import 'package:rent_cruise/view/login_screen/widgets/social_container.dart';
-import 'package:rent_cruise/view/signup_screen/signup_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,29 @@ class LoginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30)),
                 ),
               ),
-              SignBotton(),
+              Row(
+                children: [
+                  Checkbox(value: true, onChanged: (e) {}),
+                  Text("Agree with tems and contitin")
+                ],
+              ),
+              Container(
+                height: 60,
+                width: MediaQuery.of(context).size.width * 0.9,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40),
+                  color: ColorConstant.primaryColor,
+                ),
+                child: Center(
+                  child: Text(
+                    "Sign In",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
               Row(
                 children: [
                   Expanded(
@@ -83,44 +105,19 @@ class LoginScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Dont't have an accont?"),
+                  Text("Alredy have an accont?"),
                   TextButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => SignUpScreen()));
+                            builder: (context) => LoginScreen()));
                       },
                       child: Text(
-                        "Sign Up",
+                        "Sign In",
                         style: TextStyle(color: ColorConstant.primaryColor),
                       ))
                 ],
               )
             ]),
-      ),
-    );
-  }
-}
-
-class SignBotton extends StatelessWidget {
-  const SignBotton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 60,
-      width: MediaQuery.of(context).size.width * 0.9,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(40),
-        color: ColorConstant.primaryColor,
-      ),
-      child: Center(
-        child: Text(
-          "Sign In",
-          style: TextStyle(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-        ),
       ),
     );
   }
