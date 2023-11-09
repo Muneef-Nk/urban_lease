@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
+import 'package:rent_cruise/view/home_screen/home_screen.dart';
 import 'package:rent_cruise/view/login_screen/widgets/social_container.dart';
 import 'package:rent_cruise/view/signup_screen/signup_screen.dart';
 
@@ -12,18 +13,64 @@ class LoginScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              SizedBox(
+                height: 100,
+              ),
               Column(
                 children: [
                   Text(
                     "Sign In",
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Text(
                     "Hi! welcome back you have been missed",
                     style: TextStyle(fontSize: 14, color: Colors.grey),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 100,
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 7, bottom: 6),
+                    child: Text(
+                      'Email',
+                      style: TextStyle(fontSize: 13),
+                    ),
+                  ),
+                ],
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: "email",
+                  border: InputBorder.none,
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(30)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(30)),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 7, bottom: 6),
+                    child: Text(
+                      'Password',
+                      style: TextStyle(fontSize: 13),
+                    ),
                   ),
                 ],
               ),
@@ -33,23 +80,20 @@ class LoginScreen extends StatelessWidget {
                   border: InputBorder.none,
                   label: Text("email"),
                   enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
                       borderRadius: BorderRadius.circular(30)),
                   focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
                       borderRadius: BorderRadius.circular(30)),
                 ),
               ),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: "email",
-                  border: InputBorder.none,
-                  label: Text("email"),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                ),
+              SizedBox(
+                height: 50,
               ),
               SignBotton(),
+              SizedBox(
+                height: 20,
+              ),
               Row(
                 children: [
                   Expanded(
@@ -65,6 +109,9 @@ class LoginScreen extends StatelessWidget {
                     color: Colors.grey,
                   )),
                 ],
+              ),
+              SizedBox(
+                height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -87,7 +134,7 @@ class LoginScreen extends StatelessWidget {
                   TextButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => SignUpScreen()));
+                            builder: (context) => Homescreen()));
                       },
                       child: Text(
                         "Sign Up",
