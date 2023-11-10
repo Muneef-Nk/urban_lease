@@ -16,7 +16,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     return Scaffold(
       bottomNavigationBar: Container(
         height: 50,
-        color: Colors.black,
+        color: Colors.brown,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -83,7 +83,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               Icons.arrow_back_ios,
                               color: Colors.white,
                             )),
-                            backgroundColor: Colors.black,
+                            backgroundColor: Colors.brown,
                           ),
                         ),
                         Padding(
@@ -99,7 +99,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     Icons.shopping_cart,
                                     color: Colors.white,
                                   )),
-                                  backgroundColor: Colors.black,
+                                  backgroundColor: Colors.brown,
                                 ),
                               ),
                               CircleAvatar(
@@ -108,7 +108,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   Icons.favorite_border,
                                   color: Colors.white,
                                 ),
-                                backgroundColor: Colors.black,
+                                backgroundColor: Colors.brown,
                               ),
                             ],
                           ),
@@ -116,11 +116,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       ],
                     ),
                     SizedBox(
-                      height: 210,
+                      height: 200,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
                         right: 20,
+                        
+
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -184,6 +186,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     },
                     icon: Icon(
                       Icons.calendar_month_outlined,
+                      color: Colors.brown,
                     ),
                   ),
                   border: OutlineInputBorder(
@@ -217,6 +220,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     },
                     icon: Icon(
                       Icons.calendar_month_outlined,
+                      color: Colors.brown,
                     ),
                   ),
                   border: OutlineInputBorder(

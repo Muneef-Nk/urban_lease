@@ -5,6 +5,7 @@ import 'package:rent_cruise/view/product_detail_screen/product_detail_screen.dar
 
 import 'package:rent_cruise/view/login_screen/login_scrren.dart';
 import 'package:rent_cruise/controller/login_controller/login_controller.dart';
+
 import 'package:rent_cruise/view/splash_screen/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -21,8 +22,13 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => LoginScreenController())
       ],
-      child:
-          MaterialApp(debugShowCheckedModeBanner: false, home: SplashScreen()),
+
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen(),
+        
+      ),
+
     );
   }
 }
