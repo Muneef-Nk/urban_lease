@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rent_cruise/controller/login_controller/login_controller.dart';
+
 import 'package:rent_cruise/view/splash_screen/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: SplashScreen(),
+        
       ),
     );
   }
