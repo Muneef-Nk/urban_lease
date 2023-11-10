@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rent_cruise/view/home_screen/home_screen.dart';
+import 'package:rent_cruise/view/order_screen/active_screen/active_screen.dart';
+import 'package:rent_cruise/view/order_screen/order_screen.dart';
 
 import 'package:rent_cruise/view/product_detail_screen/product_detail_screen.dart';
 
@@ -25,8 +27,8 @@ class MyApp extends StatelessWidget {
 
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
-        
+        // home: SplashScreen(),
+        home:ProductDetailsScreen(itemIndex: 1),
       ),
 
     );
