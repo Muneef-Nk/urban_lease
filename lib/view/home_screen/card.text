@@ -1,0 +1,42 @@
+import 'package:flutter/material.dart';
+
+class Mycard1 extends StatefulWidget {
+  const Mycard1({super.key});
+
+  @override
+  State<Mycard1> createState() => _Mycard1State();
+}
+
+class _Mycard1State extends State<Mycard1> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 100,
+        width: double.infinity,
+        color: const Color.fromARGB(255, 196, 187, 187),
+        child: ListTile(
+          title: Text("name"),
+          subtitle: Text(""),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.edit),
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.delete),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
