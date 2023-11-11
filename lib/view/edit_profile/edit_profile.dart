@@ -1,9 +1,17 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
+import 'package:rent_cruise/view/home_screen/home_screen.dart';
 
-class EditProfile extends StatelessWidget {
+class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
+
+  @override
+  State<EditProfile> createState() => _EditProfileState();
+}
+
+class _EditProfileState extends State<EditProfile> {
+  var newValue;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +34,14 @@ class EditProfile extends StatelessWidget {
             ),
           ),
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => Homescreen()));
+              },
+              icon: Icon(Icons.skip_next))
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -145,10 +161,9 @@ class EditProfile extends StatelessWidget {
                   ),
                 ],
               ),
-              TextField(
-                decoration: InputDecoration(
-                  // hintText: "phone number",
-                  prefix: Container(
+              Row(
+                children: [
+                  Container(
                     width: 80,
                     height: 50,
                     // color: Colors.red,
@@ -182,15 +197,56 @@ class EditProfile extends StatelessWidget {
                       // alignLeft: true,
                     ),
                   ),
-                  border: InputBorder.none,
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(30)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(30)),
-                ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.65,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "phone number",
+                        border: InputBorder.none,
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(30)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(30)),
+                      ),
+                    ),
+                  ),
+                ],
               ),
+              //
+              DropdownButton(
+                  items: [
+                    DropdownMenuItem<String>(
+                      value: newValue,
+                      child: Text(
+                        "Gender",
+                        selectionColor: Colors.black,
+                      ),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: newValue,
+                      child: Text(
+                        "Male",
+                        selectionColor: Colors.black,
+                      ),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: newValue,
+                      child: Text(
+                        "Female",
+                        selectionColor: Colors.black,
+                      ),
+                    ),
+                  ],
+                  onChanged: (e) {
+                    setState(() {
+                      newValue = e;
+                    });
+                  })
             ],
           ),
         ),

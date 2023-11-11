@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:rent_cruise/view/favourite_screen/card_screen/card_screen.dart';
+import 'package:rent_cruise/view/card_screen/card_screen.dart';
 
 class favourite_screeen extends StatelessWidget {
   const favourite_screeen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List CategoryList = ["Home Equipments","Medical Equipment","Electronics","Furnitures"];
+    List CategoryList = [
+      "Home Equipments",
+      "Medical Equipment",
+      "Electronics",
+      "Furnitures"
+    ];
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -28,11 +33,16 @@ class favourite_screeen extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
-                    
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.brown),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.brown),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(CategoryList[index],style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                        child: Text(
+                          CategoryList[index],
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   );
@@ -44,9 +54,8 @@ class favourite_screeen extends StatelessWidget {
               child: GridView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                gridDelegate:
-                    SliverGridDelegateWithFixedCrossAxisCount(mainAxisExtent:  230,
-                      crossAxisCount: 2),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisExtent: 230, crossAxisCount: 2),
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return card_screen();

@@ -39,6 +39,9 @@ dependencies:
   provider: ^6.1.0
   pinput: ^3.0.1
   country_code_picker: ^3.0.0
+  # salomon_bottom_bar: ^3.3.2
+  dot_navigation_bar: ^1.0.2
+  circle_nav_bar: ^2.0.1+1
 
 dev_dependencies:
   flutter_test:
