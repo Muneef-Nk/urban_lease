@@ -1,6 +1,7 @@
 import 'package:circle_nav_bar/circle_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
+import 'package:rent_cruise/view/Profile/profile..dart';
 import 'package:rent_cruise/view/home_screen/home_screen.dart';
 
 class BottomNav extends StatefulWidget {
@@ -17,7 +18,7 @@ class _BottomNavState extends State<BottomNav> {
     Homescreen(),
     Homescreen(),
     Homescreen(),
-    Homescreen(),
+    Profile(),
   ];
   @override
   Widget build(BuildContext context) {

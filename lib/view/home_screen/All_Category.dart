@@ -56,7 +56,7 @@ class _AllCategoryState extends State<AllCategory> {
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisExtent: 250, crossAxisCount: 2),
+                mainAxisExtent: 230, crossAxisCount: 2),
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.only(top: 20),
@@ -65,9 +65,12 @@ class _AllCategoryState extends State<AllCategory> {
                     Container(
                       height: 150,
                       width: 150,
-                      child: Image.network(
-                        categories[index]['image'].toString(),
-                        fit: BoxFit.fill,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          categories[index]['image'].toString(),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     Padding(

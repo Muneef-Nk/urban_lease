@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rent_cruise/view/order_screen/active_screen/active_screen.dart';
+import 'package:rent_cruise/view/order_screen/cancelled_screen/cancelled_screen.dart';
+import 'package:rent_cruise/view/order_screen/completed_screen/completed_screen.dart';
 
 class order_screen extends StatefulWidget {
   const order_screen({super.key});
@@ -35,20 +38,13 @@ class _order_screenState extends State<order_screen> {
                 )
               ]),
         ),
-        body: SingleChildScrollView(
-            // child: TabBarView(
-            //   children: [
-            //     Column(
-            //       children: [
-            //         ListView.builder(itemBuilder: (context, index) {
-            //           return
-            //         },)
-            //       ],
-            //     )
-
-            //   ],
-            // ),
-            ),
+        body: TabBarView(
+          children: [
+            active_screen(),
+            Completed_screen(),
+            Cancelled_screen(),
+          ],
+        ),
       ),
     );
   }
