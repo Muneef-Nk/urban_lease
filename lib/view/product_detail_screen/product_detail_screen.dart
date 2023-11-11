@@ -55,90 +55,78 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 300,
-                    width: 350,
-                    decoration: BoxDecoration(
+                  child: Center(
+                    child: Container(
+                      height: 300,
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.amber),
+                      child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.amber),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.network(
-                        "https://i.pinimg.com/564x/76/5d/89/765d89a14f6b6cb4b0eefdcf9e8c2766.jpg",
-                        fit: BoxFit.cover,
+                        child: Image.network(
+                          "https://i.pinimg.com/564x/76/5d/89/765d89a14f6b6cb4b0eefdcf9e8c2766.jpg",
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
                 ),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20, left: 20),
-                          child: CircleAvatar(
-                            radius: 20,
-                            child: Center(
-                                child: Icon(
-                              Icons.arrow_back_ios,
-                              color: Colors.white,
-                            )),
-                            backgroundColor: Colors.brown,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20, left: 180),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: CircleAvatar(
-                                  radius: 20,
-                                  child: Center(
-                                      child: Icon(
-                                    Icons.shopping_cart,
-                                    color: Colors.white,
-                                  )),
-                                  backgroundColor: Colors.brown,
-                                ),
-                              ),
-                              CircleAvatar(
-                                radius: 20,
-                                child: Icon(
-                                  Icons.favorite_border,
-                                  color: Colors.white,
-                                ),
-                                backgroundColor: Colors.brown,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                Positioned(
+                  left: 30,
+                  top: 15,
+                  child: CircleAvatar(
+                    radius: 20,
+                    child: Center(
+                        child: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                    )),
+                    backgroundColor: Colors.brown,
+                  ),
+                ),
+                Positioned(
+                  right: 30,
+                  top: 15,
+                  child: CircleAvatar(
+                    radius: 20,
+                    child: Center(
+                        child: Icon(
+                      Icons.shopping_cart,
+                      color: Colors.white,
+                    )),
+                    backgroundColor: Colors.brown,
+                  ),
+                ),
+                Positioned(
+                  right: 80,
+                  top: 15,
+                  child: CircleAvatar(
+                    radius: 20,
+                    child: Icon(
+                      Icons.favorite_border,
+                      color: Colors.white,
                     ),
-                    SizedBox(
-                      height: 200,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        right: 20,
-                        
-
+                    backgroundColor: Colors.brown,
+                  ),
+                ),
+                
+                Positioned(
+                  bottom: 15,
+                  right: 40,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Icon(
+                        Icons.star,
+                        color: Colors.amber,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          Text(
-                            "4.5",
-                            style: TextStyle(color: Colors.white),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
+                      Text(
+                        "4.5",
+                        style: TextStyle(color: Colors.white),
+                      )
+                    ],
+                  ),
                 )
               ],
             ),

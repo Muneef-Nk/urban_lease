@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:rent_cruise/view/Profile/profile..dart';
+
+import 'package:rent_cruise/view/home_screen/home_screen.dart';
+import 'package:rent_cruise/view/order_screen/active_screen/active_screen.dart';
+import 'package:rent_cruise/view/order_screen/order_screen.dart';
+
 
 import 'package:rent_cruise/controller/login_controller/login_controller.dart';
 
@@ -19,6 +25,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => LoginScreenController())
       ],
+
       child:
           MaterialApp(debugShowCheckedModeBanner: false, home: SplashScreen()),
     );
