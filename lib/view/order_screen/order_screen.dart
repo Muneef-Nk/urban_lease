@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 
@@ -14,40 +13,46 @@ class _order_screenState extends State<order_screen> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
-      child: Scaffold(appBar:
-         AppBar(
+      child: Scaffold(
+        appBar: AppBar(
           title: Text(
             "My Orders",
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
           ),
           backgroundColor: Colors.white,
           bottom: TabBar(
-            labelColor: Colors.brown,
-            dividerColor: Colors.brown,
-            indicatorColor: Colors.brown,
-            tabs: [
-            Tab(
-              text: "Active",
-            ),
-            Tab(text: "Completed",),
-            Tab(text: "Cancelled",)
-          ]),
+              labelColor: Colors.brown,
+              dividerColor: Colors.brown,
+              indicatorColor: Colors.brown,
+              tabs: [
+                Tab(
+                  text: "Active",
+                ),
+                Tab(
+                  text: "Completed",
+                ),
+                Tab(
+                  text: "Cancelled",
+                )
+              ]),
         ),
         body: SingleChildScrollView(
           child: TabBarView(
             children: [
               Column(
                 children: [
-                  ListView.builder(itemBuilder: (context, index) {
-                    return
-                  },)
+                  ListView.builder(
+                    itemBuilder: (context, index) {
+                      return null;
+                    
+                      // return
+                    },
+                  )
                 ],
               )
-        
             ],
           ),
         ),
-        
       ),
     );
   }
