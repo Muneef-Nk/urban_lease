@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rent_cruise/controller/login_controller/login_controller.dart';
+import 'package:rent_cruise/view/checkout_screen/checkout_screen.dart';
+import 'package:rent_cruise/view/search_screen/search_result_screen/search_result_screen.dart';
+import 'package:rent_cruise/view/search_screen/search_screen.dart';
 import 'package:rent_cruise/view/splash_screen/splash_screen.dart';
 
 void main() {
@@ -17,7 +20,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => LoginScreenController())
       ],
       child:
-          MaterialApp(debugShowCheckedModeBanner: false, home: SplashScreen()),
+          MaterialApp(debugShowCheckedModeBanner: false, home: checkout_screen()),
     );
   }
 }

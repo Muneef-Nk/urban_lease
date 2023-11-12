@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rent_cruise/view/card_screen/card_screen.dart';
+import 'package:rent_cruise/view/favourite_screen/card_screen/card_screen.dart';
 
 class favourite_screeen extends StatelessWidget {
   const favourite_screeen({super.key});
