@@ -12,14 +12,17 @@ class _card_screenState extends State<card_screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(height: 230,
-        width: 160,
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+        child: Container(
+          height: 230,
+          width: 160,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 height: 160,
                 width: 150,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(20)),
                 child: Stack(children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
@@ -41,23 +44,28 @@ class _card_screenState extends State<card_screen> {
                   )
                 ]),
               ),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text("Mixer Grinder",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),),
+                  Text(
+                    "Mixer Grinder",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.black),
+                  ),
                   Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                            size: 18,
-                          ),
-                          Text(
-                            "4.5",
-                            style: TextStyle(color: Colors.black),
-                          )
-                        ],
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                        size: 18,
                       ),
+                      Text(
+                        "4.5",
+                        style: TextStyle(color: Colors.black),
+                      )
+                    ],
+                  ),
                 ],
               ),
               Padding(
@@ -66,7 +74,6 @@ class _card_screenState extends State<card_screen> {
               )
             ],
           ),
-
         ),
       ),
     );

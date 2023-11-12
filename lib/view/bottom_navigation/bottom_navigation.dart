@@ -2,6 +2,9 @@ import 'package:circle_nav_bar/circle_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/Profile/profile..dart';
+import 'package:rent_cruise/view/cart_screen/cart_screen.dart';
+import 'package:rent_cruise/view/chat/chat_screen.dart';
+import 'package:rent_cruise/view/home_screen/All_Category.dart';
 import 'package:rent_cruise/view/home_screen/home_screen.dart';
 
 class BottomNav extends StatefulWidget {
@@ -15,9 +18,9 @@ class _BottomNavState extends State<BottomNav> {
   int _currentIndex = 0;
   List screens = [
     Homescreen(),
-    Homescreen(),
-    Homescreen(),
-    Homescreen(),
+    ChatScreen(),
+    AllCategory(),
+    CartScreen(),
     Profile(),
   ];
   @override
@@ -26,8 +29,12 @@ class _BottomNavState extends State<BottomNav> {
       bottomNavigationBar: CircleNavBar(
         activeIcons: [
           Icon(Icons.person, color: Colors.black),
-          Icon(Icons.search, color: Colors.black),
-          Icon(Icons.add, color: Colors.black),
+          Icon(Icons.chat, color: Colors.black),
+          Icon(
+            Icons.add,
+            color: Colors.black,
+            size: 35,
+          ),
           Icon(Icons.shopping_cart, color: Colors.black),
           Icon(Icons.person, color: Colors.black),
         ],
@@ -37,7 +44,7 @@ class _BottomNavState extends State<BottomNav> {
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           Text(
-            "Search",
+            "Chat ",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           Text(
@@ -63,7 +70,7 @@ class _BottomNavState extends State<BottomNav> {
             _currentIndex = i;
           });
         },
-        padding: EdgeInsets.only(left: 16, right: 16, bottom: 20),
+        padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
         cornerRadius: BorderRadius.only(
           topLeft: Radius.circular(8),
           topRight: Radius.circular(8),
@@ -72,7 +79,7 @@ class _BottomNavState extends State<BottomNav> {
         ),
         // shadowColor: Colors.deepPurple,
         // circleShadowColor: Colors.deepPurple,
-        elevation: 10,
+        elevation: 0,
 
         activeIndex: _currentIndex,
       ),
