@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class card_screen extends StatefulWidget {
-  const card_screen({super.key});
+class search_card extends StatefulWidget {
+  const search_card({super.key});
 
   @override
-  State<card_screen> createState() => _card_screenState();
+  State<search_card> createState() => _search_cardState();
 }
 
-class _card_screenState extends State<card_screen> {
+class _search_cardState extends State<search_card> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +27,7 @@ class _card_screenState extends State<card_screen> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.network(
-                      "https://i.pinimg.com/564x/32/a9/b3/32a9b3e3a29e12a2c3d895ce87e8c639.jpg",
+                      "https://i.pinimg.com/564x/da/3f/ce/da3fcee3a26bce1eecac671280999f12.jpg",
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -48,7 +48,7 @@ class _card_screenState extends State<card_screen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    "Mixer Grinder",
+                    "Camera",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.black),
                   ),

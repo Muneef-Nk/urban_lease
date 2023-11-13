@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
+import 'package:rent_cruise/view/bottom_navigation/bottom_navigation.dart';
 import 'package:rent_cruise/view/edit_profile/edit_profile.dart';
+import 'package:rent_cruise/view/home_screen/home_screen.dart';
 
 class VerifyCode extends StatefulWidget {
   VerifyCode({super.key});
@@ -93,7 +95,7 @@ class _VerifyCodeState extends State<VerifyCode> {
             onCompleted: (pin) {
               print(pin);
               if (pin == '7777') {
-                Navigator.of(context).push(
+                Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) => EditProfile()));
               }
             },

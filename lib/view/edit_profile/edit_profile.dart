@@ -1,9 +1,17 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
+import 'package:rent_cruise/view/home_screen/home_screen.dart';
 
-class EditProfile extends StatelessWidget {
+class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
+
+  @override
+  State<EditProfile> createState() => _EditProfileState();
+}
+
+class _EditProfileState extends State<EditProfile> {
+  var newValue;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +34,17 @@ class EditProfile extends StatelessWidget {
             ),
           ),
         ),
+        actions: [
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => Homescreen()));
+              },
+              child: Text(
+                "Skip",
+                style: TextStyle(color: ColorConstant.primaryColor),
+              ))
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -145,10 +164,9 @@ class EditProfile extends StatelessWidget {
                   ),
                 ],
               ),
-              TextField(
-                decoration: InputDecoration(
-                  // hintText: "phone number",
-                  prefix: Container(
+              Row(
+                children: [
+                  Container(
                     width: 80,
                     height: 50,
                     // color: Colors.red,
@@ -182,6 +200,44 @@ class EditProfile extends StatelessWidget {
                       // alignLeft: true,
                     ),
                   ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.65,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "phone number",
+                        border: InputBorder.none,
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(30)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(30)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              //
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 7, bottom: 6),
+                    child: Text(
+                      'Enter Address',
+                      style: TextStyle(fontSize: 13),
+                    ),
+                  ),
+                ],
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: "address",
                   border: InputBorder.none,
                   enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey),

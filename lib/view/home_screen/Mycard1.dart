@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rent_cruise/view/product_detail_screen/product_detail_screen.dart';
 
 class Mycard1 extends StatefulWidget {
   const Mycard1({super.key});
@@ -11,6 +12,7 @@ class _Mycard1State extends State<Mycard1> {
   bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
+
     return Card(
       elevation: 5,
       shape: RoundedRectangleBorder(
@@ -87,6 +89,74 @@ class _Mycard1State extends State<Mycard1> {
             ),
           ),
         ],
+
+     Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ProductDetailsScreen(
+                    itemIndex: 1,
+                  )));
+        },
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                Container(
+                  height: 150,
+                  // decoration: BoxDecoration(
+                  //   color: Colors.brown,
+                  // ),
+                  child: Center(
+                    child: Image.network(
+                        "https://i.pinimg.com/564x/1c/45/95/1c4595c91503c3bd6ac4dfa75bbb8068.jpg"),
+                  ),
+                ),
+                Row(
+                  children: [
+                    Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(Icons.favorite, color: Colors.red),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Text(
+                    "ITEM NAME",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Spacer(),
+                  Icon(
+                    Icons.star,
+                    color: const Color.fromARGB(255, 238, 218, 33),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  )
+                ],
+              ),
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Text(
+                    "ITEM PRICE",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+
       ),
     );
   }
