@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => LocationProvider()),
         ChangeNotifierProvider(create: (context) => SearchController())
       ],
-      child: MaterialApp(
-          debugShowCheckedModeBanner: false, home: LocationScreen()),
+      child:
+          MaterialApp(debugShowCheckedModeBanner: false, home: SplashScreen()),
     );
   }
 }
