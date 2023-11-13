@@ -4,6 +4,7 @@ import 'package:rent_cruise/view/Profile/profile..dart';
 import 'package:rent_cruise/controller/login_controller/login_controller.dart';
 
 import 'package:provider/provider.dart';
+import 'package:rent_cruise/view/home_screen/home_screen.dart';
 import 'package:rent_cruise/view/splash_screen/splash_screen.dart';
 
 void main() {
@@ -19,8 +20,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => LoginScreenController())
       ],
-      child:
-          MaterialApp(debugShowCheckedModeBanner: false, home: SplashScreen()),
+      child: MaterialApp(debugShowCheckedModeBanner: false, home: Profile()),
     );
   }
 }

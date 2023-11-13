@@ -6,6 +6,7 @@ import 'package:rent_cruise/view/Profile/helpCenter.dart';
 import 'package:rent_cruise/view/Profile/payement_method.dart';
 import 'package:rent_cruise/view/Profile/privacy.dart';
 import 'package:rent_cruise/view/Profile/settings.dart';
+import 'package:rent_cruise/view/Profile/yourProfile.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key});
@@ -103,7 +104,14 @@ class _ProfileState extends State<Profile> {
               child: ListView(children: [
                 Divider(),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => YourProfile(),
+                      ),
+                    );
+                  },
                   child: ListTile(
                     trailing: Icon(Icons.arrow_forward),
                     title: Text("Your Profile"),
