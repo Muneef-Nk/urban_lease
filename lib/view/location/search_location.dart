@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 
 class SearchLocation extends StatelessWidget {
