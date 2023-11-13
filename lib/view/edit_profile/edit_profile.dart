@@ -35,12 +35,15 @@ class _EditProfileState extends State<EditProfile> {
           ),
         ),
         actions: [
-          IconButton(
+          TextButton(
               onPressed: () {
-                Navigator.of(context).push(
+                Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) => Homescreen()));
               },
-              icon: Icon(Icons.skip_next))
+              child: Text(
+                "Skip",
+                style: TextStyle(color: ColorConstant.primaryColor),
+              ))
         ],
       ),
       body: Padding(
@@ -217,36 +220,33 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                 ],
               ),
+              SizedBox(
+                height: 10,
+              ),
               //
-              DropdownButton(
-                  items: [
-                    DropdownMenuItem<String>(
-                      value: newValue,
-                      child: Text(
-                        "Gender",
-                        selectionColor: Colors.black,
-                      ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 7, bottom: 6),
+                    child: Text(
+                      'Enter Address',
+                      style: TextStyle(fontSize: 13),
                     ),
-                    DropdownMenuItem<String>(
-                      value: newValue,
-                      child: Text(
-                        "Male",
-                        selectionColor: Colors.black,
-                      ),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: newValue,
-                      child: Text(
-                        "Female",
-                        selectionColor: Colors.black,
-                      ),
-                    ),
-                  ],
-                  onChanged: (e) {
-                    setState(() {
-                      newValue = e;
-                    });
-                  })
+                  ),
+                ],
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: "address",
+                  border: InputBorder.none,
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(30)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(30)),
+                ),
+              ),
             ],
           ),
         ),
