@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:rent_cruise/view/home_screen/All_Category.dart';
 import 'package:rent_cruise/view/home_screen/Full_list.dart';
 import 'package:rent_cruise/view/home_screen/Mycard1.dart';
+import 'package:rent_cruise/view/location/search_location.dart';
+import 'package:rent_cruise/view/notification_screen/notification_screen.dart';
+import 'package:rent_cruise/view/search_screen/search_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Homescreen extends StatefulWidget {
@@ -62,87 +65,89 @@ class _HomescreenState extends State<Homescreen> {
                       ),
                       IconButton(
                         onPressed: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (context) {
-                              return StatefulBuilder(
-                                builder: (context, setState) {
-                                  return Container(
-                                    height: MediaQuery.sizeOf(context).height *
-                                        0.32,
-                                    child: Column(
-                                      children: [
-                                        ListTile(
-                                          trailing: IconButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              icon: Icon(
-                                                Icons.close,
-                                                color: Colors.black,
-                                              )),
-                                          leading: Icon(
-                                            Icons.location_on,
-                                            color: Colors.black,
-                                          ),
-                                          title: Text(
-                                            "Choose location",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Text(
-                                              "choose a delivery location to see product availability and delivery option"),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Container(
-                                            width: MediaQuery.sizeOf(context)
-                                                .width,
-                                            child: TextFormField(
-                                              controller: locationController,
-                                              decoration: InputDecoration(
-                                                border: OutlineInputBorder(),
-                                                hintText: "Enter Pincode",
-                                                labelText: "Enter pincode",
-                                                suffix: InkWell(
-                                                  onTap: () {
-                                                    setState(
-                                                      () {
-                                                        islocation =
-                                                            !islocation;
-                                                      },
-                                                    );
-                                                  },
-                                                  child: islocation
-                                                      ? Text("Submit")
-                                                      : Text("Change"),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Spacer(),
-                                        ListTile(
-                                          leading: Icon(
-                                            Icons.location_on,
-                                            color: Colors.brown,
-                                          ),
-                                          title: Text(
-                                            "Use your current location",
-                                            style:
-                                                TextStyle(color: Colors.brown),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                          );
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => SearchLocation()));
+                          // showModalBottomSheet(
+                          //   context: context,
+                          //   builder: (context) {
+                          //     return StatefulBuilder(
+                          //       builder: (context, setState) {
+                          //         return Container(
+                          //           height: MediaQuery.sizeOf(context).height *
+                          //               0.32,
+                          //           child: Column(
+                          //             children: [
+                          //               ListTile(
+                          //                 trailing: IconButton(
+                          //                     onPressed: () {
+                          //                       Navigator.pop(context);
+                          //                     },
+                          //                     icon: Icon(
+                          //                       Icons.close,
+                          //                       color: Colors.black,
+                          //                     )),
+                          //                 leading: Icon(
+                          //                   Icons.location_on,
+                          //                   color: Colors.black,
+                          //                 ),
+                          //                 title: Text(
+                          //                   "Choose location",
+                          //                   style: TextStyle(
+                          //                       fontWeight: FontWeight.bold),
+                          //                 ),
+                          //               ),
+                          //               Padding(
+                          //                 padding: const EdgeInsets.all(8.0),
+                          //                 child: Text(
+                          //                     "choose a delivery location to see product availability and delivery option"),
+                          //               ),
+                          //               Padding(
+                          //                 padding: const EdgeInsets.all(8.0),
+                          //                 child: Container(
+                          //                   width: MediaQuery.sizeOf(context)
+                          //                       .width,
+                          //                   child: TextFormField(
+                          //                     controller: locationController,
+                          //                     decoration: InputDecoration(
+                          //                       border: OutlineInputBorder(),
+                          //                       hintText: "Enter Pincode",
+                          //                       labelText: "Enter pincode",
+                          //                       suffix: InkWell(
+                          //                         onTap: () {
+                          //                           setState(
+                          //                             () {
+                          //                               islocation =
+                          //                                   !islocation;
+                          //                             },
+                          //                           );
+                          //                         },
+                          //                         child: islocation
+                          //                             ? Text("Submit")
+                          //                             : Text("Change"),
+                          //                       ),
+                          //                     ),
+                          //                   ),
+                          //                 ),
+                          //               ),
+                          //               Spacer(),
+                          //               ListTile(
+                          //                 leading: Icon(
+                          //                   Icons.location_on,
+                          //                   color: Colors.brown,
+                          //                 ),
+                          //                 title: Text(
+                          //                   "Use your current location",
+                          //                   style:
+                          //                       TextStyle(color: Colors.brown),
+                          //                 ),
+                          //               )
+                          //             ],
+                          //           ),
+                          //         );
+                          //       },
+                          //     );
+                          //   },
+                          // );
                         },
                         icon: Icon(
                           Icons.expand_more,
@@ -150,12 +155,19 @@ class _HomescreenState extends State<Homescreen> {
                         ),
                       ),
                       Spacer(),
-                      CircleAvatar(
-                        child: Icon(
-                          Icons.notifications,
-                          color: Colors.brown,
+                      GestureDetector(
+                        onTap: () {
+                          //
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => NotificationScreen()));
+                        },
+                        child: CircleAvatar(
+                          child: Icon(
+                            Icons.notifications,
+                            color: Colors.brown,
+                          ),
+                          backgroundColor: Color.fromARGB(255, 231, 231, 231),
                         ),
-                        backgroundColor: Color.fromARGB(255, 231, 231, 231),
                       ),
                     ],
                   ),
@@ -177,11 +189,17 @@ class _HomescreenState extends State<Homescreen> {
                         ),
                       ),
                       Spacer(),
-                      CircleAvatar(
-                        backgroundColor: Color(0xFF704F38),
-                        child: Icon(
-                          Icons.tune,
-                          color: Colors.white,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => search_screen()));
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Color(0xFF704F38),
+                          child: Icon(
+                            Icons.tune,
+                            color: Colors.white,
+                          ),
                         ),
                       )
                     ],
