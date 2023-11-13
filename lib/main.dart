@@ -20,7 +20,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => LoginScreenController())
       ],
-      child: MaterialApp(debugShowCheckedModeBanner: false, home: Profile()),
+      child:
+          MaterialApp(debugShowCheckedModeBanner: false, home: SplashScreen()),
     );
   }
 }
