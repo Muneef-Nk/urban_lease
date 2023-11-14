@@ -190,7 +190,7 @@ class _HomescreenState extends State<Homescreen> {
                   ),
                   SizedBox(height: 15),
                   SizedBox(
-                    height: 150,
+                    height: MediaQuery.sizeOf(context).height * 0.2,
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
@@ -284,7 +284,7 @@ class _HomescreenState extends State<Homescreen> {
                         ),
                       ),
                       SizedBox(
-                        height: 150,
+                        height: MediaQuery.sizeOf(context).height * .19,
                         child: ListView.builder(
                           itemCount: 4,
                           scrollDirection: Axis.horizontal,
@@ -355,7 +355,8 @@ class _HomescreenState extends State<Homescreen> {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisExtent: 250, crossAxisCount: 2),
+                    mainAxisExtent: MediaQuery.sizeOf(context).height * .36,
+                    crossAxisCount: 2),
                 itemBuilder: (context, index) => Mycard1(),
               ),
             ),

@@ -38,31 +38,12 @@ class _order_screenState extends State<order_screen> {
                 )
               ]),
         ),
-
-        body: SingleChildScrollView(
-          child: TabBarView(
-            children: [
-              Column(
-                children: [
-                  ListView.builder(
-                    itemBuilder: (context, index) {
-                      return null;
-
-                      // return
-                    },
-                  )
-                ],
-              )
-            ],
-          ),
-
         body: TabBarView(
           children: [
             active_screen(),
             Completed_screen(),
             Cancelled_screen(),
           ],
-
         ),
       ),
     );
