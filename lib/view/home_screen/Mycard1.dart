@@ -24,7 +24,7 @@ class _Mycard1State extends State<Mycard1> {
         height: 300,
         // margin: EdgeInsets.all(5),
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.black),
+            border: Border.all(color: Colors.grey.shade300),
             borderRadius: BorderRadius.circular(20)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -33,7 +33,9 @@ class _Mycard1State extends State<Mycard1> {
               Container(
                 decoration: BoxDecoration(
                     color: Colors.black12,
-                    borderRadius: BorderRadius.circular(15)),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20))),
                 height: MediaQuery.sizeOf(context).height * .233,
                 width: double.infinity,
                 child: Image.network(

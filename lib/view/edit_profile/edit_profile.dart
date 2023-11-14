@@ -90,7 +90,7 @@ class _EditProfileState extends State<EditProfile> {
                         color: ColorConstant.primaryColor,
                       ),
                       child: Icon(
-                        Icons.edit,
+                        Icons.camera_alt,
                         color: Colors.white,
                         size: 15,
                       ),
@@ -246,6 +246,27 @@ class _EditProfileState extends State<EditProfile> {
                       borderSide: BorderSide(color: Colors.grey),
                       borderRadius: BorderRadius.circular(30)),
                 ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: 100,
+                height: 50,
+                decoration: BoxDecoration(
+                    color: ColorConstant.primaryColor,
+                    borderRadius: BorderRadius.circular(30)),
+                child: Center(
+                    child: Text(
+                  "Done",
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                )),
+              ),
+              SizedBox(
+                height: 10,
               ),
             ],
           ),
