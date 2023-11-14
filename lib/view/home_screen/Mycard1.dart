@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 
+
+import 'package:rent_cruise/view/product_detail_screen/product_detail_screen.dart';
+
+
 class Mycard1 extends StatefulWidget {
   const Mycard1({super.key});
 
@@ -12,53 +16,64 @@ class _Mycard1State extends State<Mycard1> {
   bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Stack(
-            alignment: Alignment.topRight,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
-                child: Container(
-                  height: MediaQuery.sizeOf(context).height * .233,
-                  width: double.infinity,
-                  child: Image.network(
-                      "https://i1.adis.ws/i/canon/eos-r5_front_rf24-105mmf4lisusm_32c26ad194234d42b3cd9e582a21c99b"),
-                ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ProductDetailsScreen(
+                  itemIndex: 1,
+                )));
+      },
+      child: Container(
+        height: 300,
+        // margin: EdgeInsets.all(5),
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.black),
+            borderRadius: BorderRadius.circular(20)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Stack(children: [
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.black12,
+                    borderRadius: BorderRadius.circular(15)),
+                height: MediaQuery.sizeOf(context).height * .233,
+                width: double.infinity,
+                child: Image.network(
+                    "https://i1.adis.ws/i/canon/eos-r5_front_rf24-105mmf4lisusm_32c26ad194234d42b3cd9e582a21c99b"),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: IconButton(
-                  icon: Icon(
-                    isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: isFavorite ? Colors.red : null,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      isFavorite = !isFavorite;
-                    });
-                  },
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "ITEM NAME",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+              Positioned(top: 8, right: 8, child: Icon(Icons.favorite))
+            ]),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                  "Dolore anim in in velit qui consequat eu cupidatat Lorem dolor."),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Row(
+                children: [
+                  Text(
+                    "₹500",
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  Spacer(),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      Text(
+                        "4.5",
+                        style: TextStyle(fontSize: 17),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -127,6 +142,53 @@ class _Mycard1State extends State<Mycard1> {
             ],
           ),
         ],
+
+            SizedBox(
+              height: 8,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 80,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: Colors.black.withOpacity(0.7)),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                        child: Text(
+                      "Add to Cart",
+                      style: TextStyle(
+                          color: ColorConstant.primaryColor,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold),
+                    )),
+                  ),
+                  Container(
+                    width: 80,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        color: ColorConstant.primaryColor,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                        child: Text(
+                      "Rent Now",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold),
+                    )),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+
       ),
     );
   }
