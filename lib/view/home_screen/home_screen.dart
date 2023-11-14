@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/home_screen/All_Category.dart';
 import 'package:rent_cruise/view/home_screen/Full_list.dart';
 import 'package:rent_cruise/view/home_screen/Mycard1.dart';
@@ -57,7 +58,7 @@ class _HomescreenState extends State<Homescreen> {
                     children: [
                       Icon(
                         Icons.location_on,
-                        color: Color.fromARGB(255, 167, 128, 100),
+                        color: ColorConstant.primaryColor,
                       ),
                       Text(
                         "Choose your location",
@@ -65,8 +66,11 @@ class _HomescreenState extends State<Homescreen> {
                       ),
                       IconButton(
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => SearchLocation()));
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => SearchLocation(),
+                            ),
+                          );
                         },
                         icon: Icon(
                           Icons.expand_more,
@@ -83,7 +87,7 @@ class _HomescreenState extends State<Homescreen> {
                         child: CircleAvatar(
                           child: Icon(
                             Icons.notifications,
-                            color: Colors.brown,
+                            color: ColorConstant.primaryColor,
                           ),
                           backgroundColor: Color.fromARGB(255, 231, 231, 231),
                         ),
@@ -114,7 +118,7 @@ class _HomescreenState extends State<Homescreen> {
                               builder: (context) => search_screen()));
                         },
                         child: CircleAvatar(
-                          backgroundColor: Color(0xFF704F38),
+                          backgroundColor: ColorConstant.primaryColor,
                           child: Icon(
                             Icons.tune,
                             color: Colors.white,
@@ -277,6 +281,8 @@ class _HomescreenState extends State<Homescreen> {
                   child: Text(
                     "See All",
                     style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                       color: Color(0xFF704F38),
                     ),
                   ),
@@ -290,7 +296,7 @@ class _HomescreenState extends State<Homescreen> {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisExtent: MediaQuery.sizeOf(context).height * .36,
+                    mainAxisExtent: MediaQuery.sizeOf(context).height * .40,
                     crossAxisCount: 2),
                 itemBuilder: (context, index) => Mycard1(),
               ),
