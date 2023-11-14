@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
+import 'package:rent_cruise/view/bottom_navigation/bottom_navigation.dart';
 
 class SearchLocation extends StatelessWidget {
   SearchLocation({super.key});
@@ -56,9 +57,15 @@ class SearchLocation extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          ListTile(
-            leading: Icon(Icons.near_me, color: ColorConstant.primaryColor),
-            title: Text("Use my current location"),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => BottomNav()));
+            },
+            child: ListTile(
+              leading: Icon(Icons.near_me, color: ColorConstant.primaryColor),
+              title: Text("Use my current location"),
+            ),
           ),
           Divider(),
           Padding(

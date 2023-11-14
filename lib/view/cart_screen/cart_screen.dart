@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/cart_screen/widgets/cart_container.dart';
+import 'package:rent_cruise/view/checkout_screen/checkout_screen.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -28,28 +29,8 @@ class CartScreen extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                // showModalBottomSheet(
-                //     backgroundColor: Colors.transparent,
-                //     context: context,
-                //     builder: (context) {
-                //       return Container(
-                //         padding: EdgeInsets.only(top: 20, left: 20, right: 20),
-                //         height: 250,
-                //         decoration: BoxDecoration(
-                //             color: Colors.white,
-                //             borderRadius: BorderRadius.only(
-                //                 topRight: Radius.circular(30),
-                //                 topLeft: Radius.circular(30))),
-                //         child: Column(children: [
-                //           Row(
-                //             children: [
-                //               Text("Sub "),
-                //               Text("fdkjnsvkfndsmvdsgfdbdfjgnfdkj"),
-                //             ],
-                //           )
-                //         ]),
-                //       );
-                //     });
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => checkout_screen()));
               },
               child: Container(
                 width: 150,

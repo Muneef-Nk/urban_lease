@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/Profile/profile..dart';
 import 'package:rent_cruise/view/cart_screen/cart_screen.dart';
-import 'package:rent_cruise/view/chat/chat_screen.dart';
 import 'package:rent_cruise/view/home_screen/All_Category.dart';
 import 'package:rent_cruise/view/home_screen/home_screen.dart';
 
@@ -18,7 +17,9 @@ class _BottomNavState extends State<BottomNav> {
   int _currentIndex = 0;
   List screens = [
     Homescreen(),
-    ChatScreen(),
+    Center(
+      child: Text("chat screen "),
+    ),
     AllCategory(),
     CartScreen(),
     Profile(),

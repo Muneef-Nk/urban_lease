@@ -3,10 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rent_cruise/view/Profile/helpCenter.dart';
+import 'package:rent_cruise/view/Profile/invitesFriends.dart';
 import 'package:rent_cruise/view/Profile/payement_method.dart';
 import 'package:rent_cruise/view/Profile/privacy.dart';
 import 'package:rent_cruise/view/Profile/settings.dart';
 import 'package:rent_cruise/view/Profile/yourProfile.dart';
+import 'package:rent_cruise/view/order_screen/order_screen.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key});
@@ -134,10 +136,16 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
                 Divider(),
-                ListTile(
-                  trailing: Icon(Icons.arrow_forward),
-                  title: Text("My Orders"),
-                  leading: Icon(Icons.tab),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => order_screen()));
+                  },
+                  child: ListTile(
+                    trailing: Icon(Icons.arrow_forward),
+                    title: Text("My Orders"),
+                    leading: Icon(Icons.tab),
+                  ),
                 ),
                 Divider(),
                 InkWell(
@@ -185,10 +193,20 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
                 Divider(),
-                ListTile(
-                  trailing: Icon(Icons.arrow_forward),
-                  title: Text("Invites Friends"),
-                  leading: Icon(Icons.share),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InvitesFriends(),
+                      ),
+                    );
+                  },
+                  child: ListTile(
+                    trailing: Icon(Icons.arrow_forward),
+                    title: Text("Invites Friends"),
+                    leading: Icon(Icons.share),
+                  ),
                 ),
                 Divider(),
                 InkWell(

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/home_screen/All_Category.dart';
 import 'package:rent_cruise/view/home_screen/Full_list.dart';
 import 'package:rent_cruise/view/home_screen/Mycard1.dart';
+import 'package:rent_cruise/view/location/search_location.dart';
+import 'package:rent_cruise/view/notification_screen/notification_screen.dart';
+import 'package:rent_cruise/view/search_screen/search_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Homescreen extends StatefulWidget {
@@ -38,9 +42,7 @@ class _HomescreenState extends State<Homescreen> {
         'name': 'ELECTRONICS',
       },
     ];
-    bool islocation = false;
-    TextEditingController searchController = TextEditingController();
-    TextEditingController locationController = TextEditingController();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -54,7 +56,7 @@ class _HomescreenState extends State<Homescreen> {
                     children: [
                       Icon(
                         Icons.location_on,
-                        color: Color.fromARGB(255, 167, 128, 100),
+                        color: ColorConstant.primaryColor,
                       ),
                       Text(
                         "Choose your location",
@@ -62,86 +64,10 @@ class _HomescreenState extends State<Homescreen> {
                       ),
                       IconButton(
                         onPressed: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (context) {
-                              return StatefulBuilder(
-                                builder: (context, setState) {
-                                  return Container(
-                                    height: MediaQuery.sizeOf(context).height *
-                                        0.32,
-                                    child: Column(
-                                      children: [
-                                        ListTile(
-                                          trailing: IconButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              icon: Icon(
-                                                Icons.close,
-                                                color: Colors.black,
-                                              )),
-                                          leading: Icon(
-                                            Icons.location_on,
-                                            color: Colors.black,
-                                          ),
-                                          title: Text(
-                                            "Choose location",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Text(
-                                              "choose a delivery location to see product availability and delivery option"),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Container(
-                                            width: MediaQuery.sizeOf(context)
-                                                .width,
-                                            child: TextFormField(
-                                              controller: locationController,
-                                              decoration: InputDecoration(
-                                                border: OutlineInputBorder(),
-                                                hintText: "Enter Pincode",
-                                                labelText: "Enter pincode",
-                                                suffix: InkWell(
-                                                  onTap: () {
-                                                    setState(
-                                                      () {
-                                                        islocation =
-                                                            !islocation;
-                                                      },
-                                                    );
-                                                  },
-                                                  child: islocation
-                                                      ? Text("Submit")
-                                                      : Text("Change"),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Spacer(),
-                                        ListTile(
-                                          leading: Icon(
-                                            Icons.location_on,
-                                            color: Colors.brown,
-                                          ),
-                                          title: Text(
-                                            "Use your current location",
-                                            style:
-                                                TextStyle(color: Colors.brown),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  );
-                                },
-                              );
-                            },
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => SearchLocation(),
+                            ),
                           );
                         },
                         icon: Icon(
@@ -150,12 +76,19 @@ class _HomescreenState extends State<Homescreen> {
                         ),
                       ),
                       Spacer(),
-                      CircleAvatar(
-                        child: Icon(
-                          Icons.notifications,
-                          color: Colors.brown,
+                      GestureDetector(
+                        onTap: () {
+                          //
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => NotificationScreen()));
+                        },
+                        child: CircleAvatar(
+                          child: Icon(
+                            Icons.notifications,
+                            color: ColorConstant.primaryColor,
+                          ),
+                          backgroundColor: Color.fromARGB(255, 231, 231, 231),
                         ),
-                        backgroundColor: Color.fromARGB(255, 231, 231, 231),
                       ),
                     ],
                   ),
@@ -167,7 +100,7 @@ class _HomescreenState extends State<Homescreen> {
                       Container(
                         width: MediaQuery.sizeOf(context).width * .75,
                         child: TextField(
-                          controller: searchController,
+                          // controller: searchController,ß
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15)),
@@ -177,18 +110,24 @@ class _HomescreenState extends State<Homescreen> {
                         ),
                       ),
                       Spacer(),
-                      CircleAvatar(
-                        backgroundColor: Color(0xFF704F38),
-                        child: Icon(
-                          Icons.tune,
-                          color: Colors.white,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => search_screen()));
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: ColorConstant.primaryColor,
+                          child: Icon(
+                            Icons.tune,
+                            color: Colors.white,
+                          ),
                         ),
                       )
                     ],
                   ),
                   SizedBox(height: 15),
                   SizedBox(
-                    height: 150,
+                    height: MediaQuery.sizeOf(context).height * 0.2,
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
@@ -282,7 +221,7 @@ class _HomescreenState extends State<Homescreen> {
                         ),
                       ),
                       SizedBox(
-                        height: 150,
+                        height: MediaQuery.sizeOf(context).height * .19,
                         child: ListView.builder(
                           itemCount: 4,
                           scrollDirection: Axis.horizontal,
@@ -340,6 +279,8 @@ class _HomescreenState extends State<Homescreen> {
                   child: Text(
                     "See All",
                     style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                       color: Color(0xFF704F38),
                     ),
                   ),
@@ -347,13 +288,21 @@ class _HomescreenState extends State<Homescreen> {
                 SizedBox(width: 5)
               ],
             ),
-            SizedBox(
+            Container(
+              padding: EdgeInsets.all(9),
               child: GridView.builder(
                 itemCount: 10,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisExtent: 250, crossAxisCount: 2),
+
+                    mainAxisExtent: MediaQuery.sizeOf(context).height * .40,
+
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 20,
+                    mainAxisExtent: MediaQuery.sizeOf(context).height * .43,
+
+                    crossAxisCount: 2),
                 itemBuilder: (context, index) => Mycard1(),
               ),
             ),
