@@ -41,9 +41,6 @@ class _HomescreenState extends State<Homescreen> {
         'name': 'ELECTRONICS',
       },
     ];
-    bool islocation = false;
-    TextEditingController searchController = TextEditingController();
-    TextEditingController locationController = TextEditingController();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -179,7 +176,7 @@ class _HomescreenState extends State<Homescreen> {
                       Container(
                         width: MediaQuery.sizeOf(context).width * .75,
                         child: TextField(
-                          controller: searchController,
+                          // controller: searchController,ß
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15)),
