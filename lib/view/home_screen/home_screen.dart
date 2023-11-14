@@ -41,6 +41,9 @@ class _HomescreenState extends State<Homescreen> {
         'name': 'ELECTRONICS',
       },
     ];
+
+    TextEditingController searchController = TextEditingController();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -64,87 +67,6 @@ class _HomescreenState extends State<Homescreen> {
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => SearchLocation()));
-                          // showModalBottomSheet(
-                          //   context: context,
-                          //   builder: (context) {
-                          //     return StatefulBuilder(
-                          //       builder: (context, setState) {
-                          //         return Container(
-                          //           height: MediaQuery.sizeOf(context).height *
-                          //               0.32,
-                          //           child: Column(
-                          //             children: [
-                          //               ListTile(
-                          //                 trailing: IconButton(
-                          //                     onPressed: () {
-                          //                       Navigator.pop(context);
-                          //                     },
-                          //                     icon: Icon(
-                          //                       Icons.close,
-                          //                       color: Colors.black,
-                          //                     )),
-                          //                 leading: Icon(
-                          //                   Icons.location_on,
-                          //                   color: Colors.black,
-                          //                 ),
-                          //                 title: Text(
-                          //                   "Choose location",
-                          //                   style: TextStyle(
-                          //                       fontWeight: FontWeight.bold),
-                          //                 ),
-                          //               ),
-                          //               Padding(
-                          //                 padding: const EdgeInsets.all(8.0),
-                          //                 child: Text(
-                          //                     "choose a delivery location to see product availability and delivery option"),
-                          //               ),
-                          //               Padding(
-                          //                 padding: const EdgeInsets.all(8.0),
-                          //                 child: Container(
-                          //                   width: MediaQuery.sizeOf(context)
-                          //                       .width,
-                          //                   child: TextFormField(
-                          //                     controller: locationController,
-                          //                     decoration: InputDecoration(
-                          //                       border: OutlineInputBorder(),
-                          //                       hintText: "Enter Pincode",
-                          //                       labelText: "Enter pincode",
-                          //                       suffix: InkWell(
-                          //                         onTap: () {
-                          //                           setState(
-                          //                             () {
-                          //                               islocation =
-                          //                                   !islocation;
-                          //                             },
-                          //                           );
-                          //                         },
-                          //                         child: islocation
-                          //                             ? Text("Submit")
-                          //                             : Text("Change"),
-                          //                       ),
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //               ),
-                          //               Spacer(),
-                          //               ListTile(
-                          //                 leading: Icon(
-                          //                   Icons.location_on,
-                          //                   color: Colors.brown,
-                          //                 ),
-                          //                 title: Text(
-                          //                   "Use your current location",
-                          //                   style:
-                          //                       TextStyle(color: Colors.brown),
-                          //                 ),
-                          //               )
-                          //             ],
-                          //           ),
-                          //         );
-                          //       },
-                          //     );
-                          //   },
-                          // );
                         },
                         icon: Icon(
                           Icons.expand_more,
