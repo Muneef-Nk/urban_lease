@@ -42,8 +42,6 @@ class _HomescreenState extends State<Homescreen> {
       },
     ];
 
-    TextEditingController searchController = TextEditingController();
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -284,13 +282,16 @@ class _HomescreenState extends State<Homescreen> {
                 SizedBox(width: 5)
               ],
             ),
-            SizedBox(
+            Container(
+              padding: EdgeInsets.all(9),
               child: GridView.builder(
                 itemCount: 10,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisExtent: MediaQuery.sizeOf(context).height * .36,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 20,
+                    mainAxisExtent: MediaQuery.sizeOf(context).height * .43,
                     crossAxisCount: 2),
                 itemBuilder: (context, index) => Mycard1(),
               ),
