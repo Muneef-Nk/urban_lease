@@ -25,7 +25,7 @@ class _Mycard1State extends State<Mycard1> {
         height: 300,
         // margin: EdgeInsets.all(5),
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.black),
+            border: Border.all(color: Colors.grey.shade300),
             borderRadius: BorderRadius.circular(20)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -34,7 +34,9 @@ class _Mycard1State extends State<Mycard1> {
               Container(
                 decoration: BoxDecoration(
                     color: Colors.black12,
-                    borderRadius: BorderRadius.circular(15)),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20))),
                 height: MediaQuery.sizeOf(context).height * .233,
                 width: double.infinity,
                 child: Image.network(
@@ -71,72 +73,7 @@ class _Mycard1State extends State<Mycard1> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "ITEM PRICE",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.brown,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.star,
-                        color: const Color.fromARGB(255, 238, 218, 33),
-                      ),
-                      Text(
-                        "4.5",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: MediaQuery.sizeOf(context).height * 0.02,
-            ),
-            Row(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(),
-                      borderRadius: BorderRadius.circular(5)),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Colors.white),
-                    ),
-                    onPressed: () {},
-                    child: Text(
-                      "Add to Cart",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                ),
-                Spacer(),
-                Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(),
-                      borderRadius: BorderRadius.circular(5)),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStatePropertyAll(ColorConstant.primaryColor),
-                    ),
-                    onPressed: () {},
-                    child: Text(
-                      "Buy Now",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+
             SizedBox(
               height: 8,
             ),
