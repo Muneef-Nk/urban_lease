@@ -295,13 +295,9 @@ class _HomescreenState extends State<Homescreen> {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-
-                    mainAxisExtent: MediaQuery.sizeOf(context).height * .40,
-
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 20,
                     mainAxisExtent: MediaQuery.sizeOf(context).height * .43,
-
                     crossAxisCount: 2),
                 itemBuilder: (context, index) => Mycard1(),
               ),
