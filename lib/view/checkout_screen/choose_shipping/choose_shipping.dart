@@ -9,6 +9,7 @@ class ChooseShipping extends StatefulWidget {
 
 class _ChooseShippingState extends State<ChooseShipping> {
   List shipping = ["Economy", "Regular", "Cargo", "Friend's House"];
+  int selectedAddress = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +54,8 @@ class _ChooseShippingState extends State<ChooseShipping> {
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: Text(
                     shipping[index],
-                    style:
-                        TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -71,15 +72,16 @@ class _ChooseShippingState extends State<ChooseShipping> {
                 ),
               ),
               trailing: Radio(
-                  value: 1,
-                  groupValue: index,
-                  onChanged: (value) {
-                    setState(() {
-                      value = index;
-                    });
-                  }),
+                value: index,
+                groupValue: selectedAddress,
+                onChanged: (value) {
+                  setState(() {
+                    selectedAddress = value as int;
+                  });
+                },
+              ),
             ),
-             Divider(
+            Divider(
               thickness: 1,
               color: Colors.grey,
             )

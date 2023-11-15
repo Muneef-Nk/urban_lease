@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rent_cruise/view/checkout_screen/choose_shipping/choose_shipping.dart';
-import 'package:rent_cruise/view/checkout_screen/order_list/order_list.dart';
+
 import 'package:rent_cruise/view/checkout_screen/payment_methods_screen/payment_methods_screen.dart';
 import 'package:rent_cruise/view/checkout_screen/shipping_address_screen/shipping_address_screen.dart';
 
@@ -176,11 +176,52 @@ class _checkout_screenState extends State<checkout_screen> {
               height: 10,
             ),
             Container(
-              height: 100,
+              height: 400,
               child: ListView.builder(
-                itemCount: 5,
-                scrollDirection: Axis.vertical,
-                itemBuilder: (context, index) => order_list(),
+                itemCount: 10,
+                itemBuilder: (context, index) => Container(
+                  height: 120,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 90,
+                        width: 90,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(35)),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(35),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image.network(
+                                "https://i.pinimg.com/564x/49/54/c8/4954c88ff4aadb23137332c8733ba79d.jpg",
+                                fit: BoxFit.cover,
+                              ),
+                            )),
+                      ),
+                      SizedBox(
+                        width: 25,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "DSLR Camera",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18),
+                          ),
+                          Text(
+                            "400 Rs./day",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ],
