@@ -1,3 +1,4 @@
+import 'package:animated_indicators/animated_indicators.dart';
 import 'package:flutter/material.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/home_screen/All_Category.dart';
@@ -7,6 +8,7 @@ import 'package:rent_cruise/view/location/search_location.dart';
 import 'package:rent_cruise/view/notification_screen/notification_screen.dart';
 import 'package:rent_cruise/view/search_screen/search_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -16,9 +18,11 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
-  final controller1 = PageController();
-
+  final PageController controller1 = PageController(viewportFraction: 0.8);
+  CarouselController buttonCarouselController = CarouselController();
   @override
+  int activeIndex = 0;
+
   Widget build(BuildContext context) {
     List<Map<String, String>> categories = [
       {
@@ -41,6 +45,15 @@ class _HomescreenState extends State<Homescreen> {
             'https://img1.wsimg.com/isteam/ip/119e2d1b-0ed9-4a03-a51a-334684501753/news12_5.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=h:1000,cg:true',
         'name': 'ELECTRONICS',
       },
+    ];
+
+    List imgList = [
+      'https://www.themobileindian.com/wp-content/uploads/2022/04/Furlenco-1024x576.jpg',
+      'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
+      'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+      'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
+      'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+      'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80',
     ];
 
     return Scaffold(
@@ -100,7 +113,6 @@ class _HomescreenState extends State<Homescreen> {
                       Container(
                         width: MediaQuery.sizeOf(context).width * .75,
                         child: TextField(
-                          // controller: searchController,ß
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15)),
@@ -126,61 +138,58 @@ class _HomescreenState extends State<Homescreen> {
                     ],
                   ),
                   SizedBox(height: 15),
-                  SizedBox(
-                    height: MediaQuery.sizeOf(context).height * 0.2,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.transparent,
-                            Colors.transparent,
-                          ],
+                  Column(
+                    children: [
+                      CarouselSlider.builder(
+                        carouselController: buttonCarouselController,
+                        options: CarouselOptions(
+                          height: 300,
+                          aspectRatio: 16 / 9,
+                          viewportFraction: 0.8,
+                          initialPage: 0,
+                          enableInfiniteScroll: true,
+                          reverse: false,
+                          autoPlay: true,
+                          autoPlayInterval: Duration(seconds: 3),
+                          autoPlayAnimationDuration:
+                              Duration(milliseconds: 800),
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          enlargeCenterPage: true,
+                          enlargeFactor: 0.3,
+                          scrollDirection: Axis.horizontal,
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              activeIndex = index;
+                              print(activeIndex);
+                            });
+                          },
                         ),
-                        // borderRadius: BorderRadius.circular(15),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
+                        itemCount: imgList.length,
+                        itemBuilder: (context, index, realIndex) {
+                          final urlImages = imgList[index];
+                          return Container(
+                            width: double.infinity,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15),
+                                bottomLeft: Radius.circular(15),
+                                bottomRight: Radius.circular(15),
+                              ),
+                              child: Image.network(
+                                urlImages,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                      child: PageView(
-                        controller: controller1,
-                        children: [
-                          Image.network(
-                            "https://c8.alamy.com/comp/W0T52Y/medical-staff-with-tablets-vector-illustration-young-nurse-and-physician-with-futuristic-gadgets-cartoon-characters-innovative-technologies-in-medicine-doctors-working-with-interactive-displays-W0T52Y.jpg",
-                            fit: BoxFit.fill,
-                          ),
-                          Image.network(
-                            "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX24122004.jpg",
-                            fit: BoxFit.fill,
-                          ),
-                          Image.network(
-                            "http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRqTGjtLDcivySsgR-m4koBthDiv9bg2wTgENt1gymSmlc7mC-taFQKalKPh4HBz59aFjfqH__ZnI5bLuucTBQ",
-                            fit: BoxFit.fill,
-                          ),
-                          Image.network(
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs4wyC9kYSY0emlVRJQEtBvKoUQE-eQO3sxA&usqp=CAU",
-                            fit: BoxFit.fill,
-                          ),
-                        ],
+                      SizedBox(height: 9),
+                      AnimatedSmoothIndicator(
+                        count: 6,
+                        activeIndex: activeIndex,
                       ),
-                    ),
-                  ),
-                  SizedBox(height: 9),
-                  SmoothPageIndicator(
-                    controller: controller1,
-                    count: 4,
-                    effect: SwapEffect(
-                        type: SwapType.yRotation,
-                        dotHeight: 10,
-                        dotWidth: 10,
-                        activeDotColor: Colors.black),
+                    ],
                   ),
                   SizedBox(height: 5),
                   SizedBox(
