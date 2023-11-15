@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/checkout_screen/choose_shipping/choose_shipping.dart';
 
 import 'package:rent_cruise/view/checkout_screen/payment_methods_screen/payment_methods_screen.dart';
@@ -24,7 +25,7 @@ class _checkout_screenState extends State<checkout_screen> {
       ),
       bottomNavigationBar: Container(
         height: 50,
-        color: Colors.brown,
+        color: ColorConstant.primaryColor,
         child: InkWell(
           onTap: () => Navigator.push(
               context,

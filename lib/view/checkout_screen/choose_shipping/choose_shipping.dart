@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 
 class ChooseShipping extends StatefulWidget {
   const ChooseShipping({super.key});
@@ -23,7 +24,7 @@ class _ChooseShippingState extends State<ChooseShipping> {
       ),
       bottomNavigationBar: Container(
         height: 50,
-        color: Colors.brown,
+        color: ColorConstant.primaryColor,
         child: InkWell(
           onTap: () {},
           child: Padding(

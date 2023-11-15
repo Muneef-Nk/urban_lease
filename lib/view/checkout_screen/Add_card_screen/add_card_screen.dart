@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 
 class AddCardScreen extends StatefulWidget {
   @override
@@ -99,9 +100,13 @@ class _AddCardScreenState extends State<AddCardScreen> {
                 // You might want to navigate back or perform other actions here
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.brown, // Set the button color to brown
+                backgroundColor:
+                    ColorConstant.primaryColor, // Set the button color to brown
               ),
-              child: Text('Add Card'),
+              child: Text(
+                'Add Card',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),
