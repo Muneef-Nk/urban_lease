@@ -67,23 +67,6 @@ class _ProfileState extends State<Profile> {
                             ),
                           ),
                         ),
-                        // Positioned(
-                        //   bottom: 0,
-                        //   right: 10,
-                        //   child: CircleAvatar(
-                        //     backgroundColor: Colors.brown,
-                        //     radius: 20,
-                        //     child: InkWell(
-                        //       onTap: () {
-                        //         pickImageFromGallery();
-                        //       },
-                        //       child: Icon(
-                        //         Icons.camera_alt_outlined,
-                        //         color: Colors.white,
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
                       ],
                     ),
                   ),
@@ -122,7 +105,19 @@ class _ProfileState extends State<Profile> {
                       child: ListTile(
                         trailing: Icon(Icons.arrow_forward),
                         title: Text("Your Profile"),
-                        leading: Icon(Icons.person),
+                        leading: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color.fromARGB(255, 238, 112, 217),
+                          ),
+                          height: 40,
+                          width: 40,
+                          child: Icon(
+                            Icons.person,
+                            color: Colors.white,
+                            size: 18,
+                          ),
+                        ),
                       ),
                     ),
                     Divider(),
@@ -137,7 +132,18 @@ class _ProfileState extends State<Profile> {
                       child: ListTile(
                         trailing: Icon(Icons.arrow_forward),
                         title: Text("Payment Method"),
-                        leading: Icon(Icons.payment),
+                        leading: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Color.fromARGB(255, 215, 85, 48)),
+                          height: 40,
+                          width: 40,
+                          child: Icon(
+                            Icons.payment,
+                            color: Colors.white,
+                            size: 18,
+                          ),
+                        ),
                       ),
                     ),
                     Divider(),
@@ -149,7 +155,19 @@ class _ProfileState extends State<Profile> {
                       child: ListTile(
                         trailing: Icon(Icons.arrow_forward),
                         title: Text("My Orders"),
-                        leading: Icon(Icons.tab),
+                        leading: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color.fromARGB(255, 112, 118, 238),
+                          ),
+                          height: 40,
+                          width: 40,
+                          child: Icon(
+                            Icons.tab,
+                            size: 18,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                     Divider(),
@@ -164,7 +182,19 @@ class _ProfileState extends State<Profile> {
                       child: ListTile(
                         trailing: Icon(Icons.arrow_forward),
                         title: Text("Settings"),
-                        leading: Icon(Icons.settings),
+                        leading: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color.fromARGB(255, 179, 238, 112),
+                          ),
+                          height: 40,
+                          width: 40,
+                          child: Icon(
+                            Icons.settings,
+                            size: 18,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                     Divider(),
@@ -179,7 +209,18 @@ class _ProfileState extends State<Profile> {
                       child: ListTile(
                         trailing: Icon(Icons.arrow_forward),
                         title: Text("Help Center"),
-                        leading: Icon(Icons.help),
+                        leading: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.amber),
+                          height: 40,
+                          width: 40,
+                          child: Icon(
+                            Icons.help,
+                            size: 18,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                     Divider(),
@@ -194,7 +235,19 @@ class _ProfileState extends State<Profile> {
                       child: ListTile(
                         trailing: Icon(Icons.arrow_forward),
                         title: Text("Privacy Policy"),
-                        leading: Icon(Icons.lock),
+                        leading: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color.fromARGB(255, 91, 232, 150),
+                          ),
+                          height: 40,
+                          width: 40,
+                          child: Icon(
+                            Icons.lock,
+                            size: 18,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                     Divider(),
@@ -210,7 +263,19 @@ class _ProfileState extends State<Profile> {
                       child: ListTile(
                         trailing: Icon(Icons.arrow_forward),
                         title: Text("Invites Friends"),
-                        leading: Icon(Icons.share),
+                        leading: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color.fromARGB(255, 98, 187, 214),
+                          ),
+                          height: 40,
+                          width: 40,
+                          child: Icon(
+                            Icons.share,
+                            size: 18,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                     Divider(),
@@ -219,7 +284,19 @@ class _ProfileState extends State<Profile> {
                       child: ListTile(
                         trailing: Icon(Icons.arrow_forward),
                         title: Text("Log Out"),
-                        leading: Icon(Icons.logout),
+                        leading: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color.fromARGB(255, 175, 112, 238),
+                          ),
+                          height: 40,
+                          width: 40,
+                          child: Icon(
+                            Icons.logout,
+                            size: 18,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                     Divider(),
