@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 
 class search_card extends StatefulWidget {
   const search_card({super.key});
@@ -35,7 +36,7 @@ class _search_cardState extends State<search_card> {
                     padding: const EdgeInsets.all(8.0),
                     child: CircleAvatar(
                         radius: 18,
-                        backgroundColor: Colors.brown,
+                        backgroundColor: ColorConstant.primaryColor,
                         child: Icon(
                           Icons.favorite_border,
                           color: Colors.white,

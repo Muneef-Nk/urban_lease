@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 
 class PaymentMethods extends StatefulWidget {
   const PaymentMethods({super.key});
@@ -20,7 +21,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
       ),
       bottomNavigationBar: Container(
         height: 50,
-        color: Colors.brown,
+        color: ColorConstant.primaryColor,
         child: InkWell(
           onTap: () {},
           child: Padding(
@@ -31,6 +32,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                 child: Text(
                   "Confirm Payment",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  
                 ),
               ),
               decoration: BoxDecoration(

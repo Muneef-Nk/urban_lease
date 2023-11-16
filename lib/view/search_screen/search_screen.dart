@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 
 class search_screen extends StatefulWidget {
   const search_screen({super.key});
@@ -47,7 +48,7 @@ class _search_screenState extends State<search_screen> {
                       Text(
                         "Clear All",
                         style: TextStyle(
-                            color: Colors.brown, fontWeight: FontWeight.bold),
+                            color: ColorConstant.primaryColor, fontWeight: FontWeight.bold),
                       )
                     ],
                   ),
@@ -66,7 +67,7 @@ class _search_screenState extends State<search_screen> {
                           Text("Mixer grinder"),
                           Icon(
                             Icons.cancel,
-                            color: Colors.brown,
+                            color: ColorConstant.primaryColor,
                           )
                         ]),
                   ),
