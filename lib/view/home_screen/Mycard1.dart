@@ -73,6 +73,7 @@ class _Mycard1State extends State<Mycard1> {
                 ],
               ),
             ),
+
             SizedBox(
               height: 8,
             ),
