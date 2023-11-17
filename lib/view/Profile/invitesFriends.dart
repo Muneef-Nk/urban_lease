@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
-import 'package:share_plus/share_plus.dart';
 
 class InvitesFriends extends StatefulWidget {
   const InvitesFriends({super.key});

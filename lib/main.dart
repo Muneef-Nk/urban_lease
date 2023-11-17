@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rent_cruise/controller/login_controller/login_controller.dart';
 import 'package:rent_cruise/service/location_service.dart';
-import 'package:rent_cruise/view/bottom_navigation/bottom_navigation.dart';
 import 'package:rent_cruise/view/splash_screen/splash_screen.dart';
-import 'package:rent_cruise/view/track_order/track_order.dart';
 
 void main() {
   runApp(const MyApp());

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
 class ShippingAddress extends StatefulWidget {
-  const ShippingAddress({super.key});
+  const ShippingAddress({Key? key}) : super(key: key);
 
   @override
   State<ShippingAddress> createState() => _ShippingAddressState();
 }
 
 class _ShippingAddressState extends State<ShippingAddress> {
-  List address = ["Home", "Office", "Parent's House", "Friend's House"];
+  int selectedAddress = -1; // Initialize with an invalid index
+
+  List<String> addresses = ["Home", "Office", "Parent's House", "Friend's House"];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +26,13 @@ class _ShippingAddressState extends State<ShippingAddress> {
         height: 50,
         color: Colors.brown,
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            // Handle the "Apply" button tap here
+            if (selectedAddress != -1) {
+              // Do something with the selected address, e.g., save it
+              print("Selected address: ${addresses[selectedAddress]}");
+            }
+          },
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: Container(
@@ -41,7 +50,7 @@ class _ShippingAddressState extends State<ShippingAddress> {
         ),
       ),
       body: ListView.builder(
-        itemCount: address.length,
+        itemCount: addresses.length,
         itemBuilder: (context, index) => Column(
           children: [
             ListTile(
@@ -51,7 +60,7 @@ class _ShippingAddressState extends State<ShippingAddress> {
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: Text(
-                    address[index],
+                    addresses[index],
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
@@ -70,13 +79,14 @@ class _ShippingAddressState extends State<ShippingAddress> {
                 ),
               ),
               trailing: Radio(
-                  value: 1,
-                  groupValue: index,
-                  onChanged: (value) {
-                    setState(() {
-                      value = index;
-                    });
-                  }),
+                value: index,
+                groupValue: selectedAddress,
+                onChanged: (value) {
+                  setState(() {
+                    selectedAddress = value as int;
+                  });
+                },
+              ),
             ),
             Divider(
               thickness: 1,
