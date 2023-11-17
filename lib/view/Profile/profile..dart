@@ -9,6 +9,7 @@ import 'package:rent_cruise/view/Profile/privacy.dart';
 import 'package:rent_cruise/view/Profile/settings.dart';
 import 'package:rent_cruise/view/Profile/yourProfile.dart';
 import 'package:rent_cruise/view/order_screen/order_screen.dart';
+import 'package:share_plus/share_plus.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key});
@@ -198,14 +199,19 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                     Divider(),
+                    Stepper(steps: [
+                      Step(
+                          title: Text("jkniun"),
+                          content: Text(
+                            "jhhnhn",
+                          ))
+                    ]),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => InvitesFriends(),
-                          ),
-                        );
+                        final String whatsappLink =
+                            "https://your-link-here.com";
+                        Share.share("Check out this link: $whatsappLink",
+                            subject: "Share Link");
                       },
                       child: ListTile(
                         trailing: Icon(Icons.arrow_forward),
