@@ -4,7 +4,9 @@ import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/location/location_screen.dart';
 
 class EditProfile extends StatefulWidget {
-  const EditProfile({super.key});
+  final Function() onPressed;
+  final bool isSkip;
+  EditProfile({super.key, required this.onPressed, required this.isSkip});
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -35,15 +37,16 @@ class _EditProfileState extends State<EditProfile> {
           ),
         ),
         actions: [
-          TextButton(
-              onPressed: () {
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => LocationScreen()));
-              },
-              child: Text(
-                "Skip",
-                style: TextStyle(color: ColorConstant.primaryColor),
-              ))
+          widget.isSkip
+              ? TextButton(
+                  onPressed: () {
+                    widget.onPressed();
+                  },
+                  child: Text(
+                    "Skip",
+                    style: TextStyle(color: ColorConstant.primaryColor),
+                  ))
+              : Text('')
         ],
       ),
       body: Padding(
@@ -255,8 +258,8 @@ class _EditProfileState extends State<EditProfile> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => LocationScreen()));
+                  widget.onPressed();
+                  print("clicked");
                 },
                 child: Container(
                   width: 100,

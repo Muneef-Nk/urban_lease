@@ -17,6 +17,15 @@ class _checkout_screenState extends State<checkout_screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        leading: InkWell(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: ColorConstant.primaryColor,
+            )),
         title: Text(
           "Check Out",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
@@ -24,28 +33,24 @@ class _checkout_screenState extends State<checkout_screen> {
         backgroundColor: Colors.white,
       ),
       bottomNavigationBar: Container(
-        height: 50,
-        color: ColorConstant.primaryColor,
+        margin: EdgeInsets.all(5),
+        height: 60,
+        decoration: BoxDecoration(
+            color: ColorConstant.primaryColor,
+            borderRadius: BorderRadius.circular(15)),
         child: InkWell(
           onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => PaymentMethods(),
               )),
-          child: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.9,
-              child: Center(
-                child: Text(
-                  "Continue To Payment",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                ),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
+          child: Center(
+            child: Text(
+              "Continue To Payment",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.white),
             ),
           ),
         ),
@@ -68,7 +73,10 @@ class _checkout_screenState extends State<checkout_screen> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.location_on_outlined),
+              leading: Icon(
+                Icons.location_on_outlined,
+                color: ColorConstant.primaryColor,
+              ),
               title: Container(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: Text(
@@ -82,7 +90,7 @@ class _checkout_screenState extends State<checkout_screen> {
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.6,
                   child: Text(
-                    " vedant road,Mumbai, Metropolitan ,Thane Maharashtra, 400615",
+                    "Vedant road,Mumbai, Metropolitan ,Thane Maharashtra, 400615",
                     style: TextStyle(
                       color: Colors.grey,
                     ),
@@ -98,7 +106,8 @@ class _checkout_screenState extends State<checkout_screen> {
                 child: Text(
                   " Change",
                   style: TextStyle(
-                      color: Colors.brown, fontWeight: FontWeight.bold),
+                      color: ColorConstant.primaryColor,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -121,7 +130,10 @@ class _checkout_screenState extends State<checkout_screen> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.lock_clock_outlined),
+              leading: Icon(
+                Icons.lock_clock_outlined,
+                color: ColorConstant.primaryColor,
+              ),
               title: Container(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: Text(
@@ -135,7 +147,7 @@ class _checkout_screenState extends State<checkout_screen> {
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.6,
                   child: Text(
-                    " Estimated Arrival 25 Aug 2023",
+                    "Estimated Arrival 25 Aug 2023",
                     style: TextStyle(
                       color: Colors.grey,
                     ),
@@ -151,7 +163,8 @@ class _checkout_screenState extends State<checkout_screen> {
                 child: Text(
                   " Change",
                   style: TextStyle(
-                      color: Colors.brown, fontWeight: FontWeight.bold),
+                      color: ColorConstant.primaryColor,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -173,55 +186,57 @@ class _checkout_screenState extends State<checkout_screen> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              height: 400,
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) => Container(
-                  height: 120,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 90,
-                        width: 90,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(35)),
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(35),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image.network(
-                                "https://i.pinimg.com/564x/49/54/c8/4954c88ff4aadb23137332c8733ba79d.jpg",
-                                fit: BoxFit.cover,
-                              ),
-                            )),
-                      ),
-                      SizedBox(
-                        width: 25,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "DSLR Camera",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18),
-                          ),
-                          Text(
-                            "400 Rs./day",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+            ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: 2,
+              itemBuilder: (context, index) => Container(
+                height: 100,
+                child: Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(left: 20),
+                      width: 100,
+                      height: 80,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(
+                            "https://i.pinimg.com/564x/49/54/c8/4954c88ff4aadb23137332c8733ba79d.jpg",
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    SizedBox(
+                      width: 25,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "DSLR Camera",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "400/day",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                    Spacer(),
+                    GestureDetector(
+                        onTap: () {
+                          //
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 20),
+                          child: Icon(Icons.delete_outline),
+                        ))
+                  ],
                 ),
               ),
             ),

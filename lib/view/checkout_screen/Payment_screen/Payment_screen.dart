@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
+import 'package:rent_cruise/view/bottom_navigation/bottom_navigation.dart';
+import 'package:rent_cruise/view/home_screen/home_screen.dart';
+import 'package:rent_cruise/view/order_screen/order_screen.dart';
 
 class Payment extends StatefulWidget {
   const Payment({super.key});
@@ -14,6 +17,16 @@ class _PaymentState extends State<Payment> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+        ),
+        elevation: 0,
         title: Text(
           "Payment",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
@@ -34,20 +47,27 @@ class _PaymentState extends State<Payment> {
           style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.greenAccent),
+              color: ColorConstant.primaryColor),
         )),
         SizedBox(
-          height: 30,
+          height: 50,
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => BottomNav()),
+                (route) => false);
+          },
           child: Container(
-            height: 40,
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
+            margin: EdgeInsets.only(left: 20, right: 20),
+            height: 50,
+            child: Center(
               child: Text(
-                "View Order",
-                style: TextStyle(color: Colors.white),
+                "Back Home",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold),
               ),
             ),
             decoration: BoxDecoration(

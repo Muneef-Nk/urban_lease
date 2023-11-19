@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
+import 'package:rent_cruise/view/checkout_screen/checkout_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({Key? key}) : super(key: key);
@@ -37,7 +39,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
               InkWell(
                 onTap: () {
-                  //
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => checkout_screen()));
                 },
                 child: Container(
                   height: 40,
@@ -205,15 +208,27 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            borderRadius: BorderRadius.circular(10)),
-                        child: IconButton(
-                            onPressed: () {},
-                            icon: Image.asset("assets/icons/chat.png")),
+                      GestureDetector(
+                        onTap: () {
+                          Uri(
+                            scheme: 'sms',
+                            path: '+916238747202',
+                            queryParameters: <String, String>{
+                              'body': Uri.encodeComponent(
+                                  'Example Subject & Symbols are allowed!'),
+                            },
+                          );
+                        },
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(10)),
+                          child: IconButton(
+                              onPressed: () {},
+                              icon: Image.asset("assets/icons/chat.png")),
+                        ),
                       ),
                       SizedBox(
                         width: 10,
@@ -225,8 +240,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             color: Colors.grey[300],
                             borderRadius: BorderRadius.circular(10)),
                         child: IconButton(
-                            onPressed: () {},
-                            icon: Image.asset("assets/icons/calll.png")),
+                            onPressed: () {
+                              final url = Uri.parse('tel:+916238747202');
+                              print(url);
+                              launchUrl(url);
+                            },
+                            icon: Icon(
+                              Icons.call,
+                              color: Colors.blue,
+                            )),
                       ),
                     ],
                   ),

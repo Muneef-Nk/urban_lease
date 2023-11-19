@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
+import 'package:rent_cruise/view/checkout_screen/checkout_screen.dart';
 
 class ShippingAddress extends StatefulWidget {
   const ShippingAddress({Key? key}) : super(key: key);
@@ -10,12 +12,30 @@ class ShippingAddress extends StatefulWidget {
 class _ShippingAddressState extends State<ShippingAddress> {
   int selectedAddress = -1; // Initialize with an invalid index
 
-  List<String> addresses = ["Home", "Office", "Parent's House", "Friend's House"];
+  List<String> addresses = [
+    "Home",
+    "Office",
+    "Parent's House",
+    "Friend's House"
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        leading: InkWell(
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => checkout_screen(),
+                  ));
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: ColorConstant.primaryColor,
+            )),
         title: Text(
           "Shipping Address",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
@@ -23,28 +43,31 @@ class _ShippingAddressState extends State<ShippingAddress> {
         backgroundColor: Colors.white,
       ),
       bottomNavigationBar: Container(
-        height: 50,
-        color: Colors.brown,
+        margin: EdgeInsets.all(5),
+        height: 60,
+        decoration: BoxDecoration(
+            color: ColorConstant.primaryColor,
+            borderRadius: BorderRadius.circular(15)),
         child: InkWell(
           onTap: () {
-            // Handle the "Apply" button tap here
-            if (selectedAddress != -1) {
-              // Do something with the selected address, e.g., save it
-              print("Selected address: ${addresses[selectedAddress]}");
-            }
+            Navigator.of(context).pop();
+
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.green,
+                closeIconColor: Colors.white,
+                showCloseIcon: true,
+                elevation: 0,
+                margin: EdgeInsets.all(10),
+                content: Text("Shipping Address changed")));
           },
-          child: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.9,
-              child: Center(
-                child: Text(
-                  "Apply",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                ),
-              ),
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
+          child: Center(
+            child: Text(
+              "Apply",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.white),
             ),
           ),
         ),
@@ -54,7 +77,10 @@ class _ShippingAddressState extends State<ShippingAddress> {
         itemBuilder: (context, index) => Column(
           children: [
             ListTile(
-              leading: Icon(Icons.location_on_outlined),
+              leading: Icon(
+                Icons.location_on_outlined,
+                color: ColorConstant.primaryColor,
+              ),
               title: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
@@ -71,7 +97,7 @@ class _ShippingAddressState extends State<ShippingAddress> {
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.6,
                   child: Text(
-                    " vedant road,Mumbai, Metropolitan ,Thane Maharashtra, 400615",
+                    "Vedant road,Mumbai, Metropolitan ,Thane Maharashtra, 400615",
                     style: TextStyle(
                       color: Colors.grey,
                     ),

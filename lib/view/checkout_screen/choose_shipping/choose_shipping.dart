@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
+import 'package:rent_cruise/view/checkout_screen/checkout_screen.dart';
+import 'package:rent_cruise/view/checkout_screen/payment_methods_screen/payment_methods_screen.dart';
 
 class ChooseShipping extends StatefulWidget {
   const ChooseShipping({super.key});
@@ -16,6 +18,19 @@ class _ChooseShippingState extends State<ChooseShipping> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        leading: InkWell(
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => checkout_screen(),
+                  ));
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: ColorConstant.primaryColor,
+            )),
         title: Text(
           "Choose Shipping",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
@@ -23,22 +38,24 @@ class _ChooseShippingState extends State<ChooseShipping> {
         backgroundColor: Colors.white,
       ),
       bottomNavigationBar: Container(
-        height: 50,
-        color: ColorConstant.primaryColor,
+        margin: EdgeInsets.all(5),
+        height: 60,
+        decoration: BoxDecoration(
+            color: ColorConstant.primaryColor,
+            borderRadius: BorderRadius.circular(15)),
         child: InkWell(
-          onTap: () {},
-          child: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.9,
-              child: Center(
-                child: Text(
-                  "Apply",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                ),
-              ),
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
+          onTap: () => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PaymentMethods(),
+              )),
+          child: Center(
+            child: Text(
+              "Continue To Payment",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.white),
             ),
           ),
         ),
@@ -48,7 +65,10 @@ class _ChooseShippingState extends State<ChooseShipping> {
         itemBuilder: (context, index) => Column(
           children: [
             ListTile(
-              leading: Icon(Icons.lock_clock_outlined),
+              leading: Icon(
+                Icons.lock_clock_outlined,
+                color: ColorConstant.primaryColor,
+              ),
               title: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(

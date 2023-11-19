@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
-import 'package:rent_cruise/view/edit_profile/edit_profile.dart';
+import 'package:rent_cruise/shared/pages/edit_profile/edit_profile.dart';
 
 class YourProfile extends StatefulWidget {
   const YourProfile({super.key});
@@ -36,8 +36,13 @@ class _YourProfileState extends State<YourProfile> {
           TextButton(
               onPressed: () {
                 //
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => EditProfile()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => EditProfile(
+                          isSkip: false,
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        )));
               },
               child: Text(
                 "Edit",
@@ -79,7 +84,7 @@ class _YourProfileState extends State<YourProfile> {
                       height: 60,
                     ),
                     Text(
-                      "Muneef",
+                      "Brandon",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -89,7 +94,7 @@ class _YourProfileState extends State<YourProfile> {
                       height: 5,
                     ),
                     Text(
-                      "+91 666666666",
+                      "+1 5638-2828-28282",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
@@ -99,7 +104,7 @@ class _YourProfileState extends State<YourProfile> {
                       height: 5,
                     ),
                     Text(
-                      "Muneeftgf@gmail.com",
+                      "Brandon33@gmail.com",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
@@ -109,7 +114,7 @@ class _YourProfileState extends State<YourProfile> {
                       height: 5,
                     ),
                     Text(
-                      "Kochi",
+                      "Washington, D.C.",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
@@ -144,7 +149,8 @@ class _YourProfileState extends State<YourProfile> {
                   margin: EdgeInsets.symmetric(horizontal: 5),
                   height: 60,
                   decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    border: Border.all(color: Colors.grey.shade400),
+                    color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
@@ -152,17 +158,18 @@ class _YourProfileState extends State<YourProfile> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Rent",
+                          "Rent Out",
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
                           height: 5,
                         ),
-                        Text(
-                          "6",
-                          style: TextStyle(fontSize: 15),
-                        ),
+                        Text("4",
+                            style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500)),
                       ]),
                 ),
               ),
@@ -171,14 +178,15 @@ class _YourProfileState extends State<YourProfile> {
                   margin: EdgeInsets.symmetric(horizontal: 5),
                   height: 60,
                   decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      border: Border.all(color: Colors.grey.shade400),
+                      color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(10)),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Rent",
+                          "Bookings",
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
@@ -188,8 +196,9 @@ class _YourProfileState extends State<YourProfile> {
                         Text(
                           "6",
                           style: TextStyle(
-                            fontSize: 15,
-                          ),
+                              fontStyle: FontStyle.italic,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500),
                         ),
                       ]),
                 ),
@@ -199,7 +208,8 @@ class _YourProfileState extends State<YourProfile> {
                   margin: EdgeInsets.symmetric(horizontal: 5),
                   height: 60,
                   decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      border: Border.all(color: Colors.grey.shade400),
+                      color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(10)),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -213,10 +223,11 @@ class _YourProfileState extends State<YourProfile> {
                         SizedBox(
                           height: 5,
                         ),
-                        Text(
-                          "5.0 ",
-                          style: TextStyle(fontSize: 15),
-                        ),
+                        Text("5.0 ",
+                            style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500)),
                       ]),
                 ),
               )
@@ -245,12 +256,13 @@ class _YourProfileState extends State<YourProfile> {
             ],
           ),
         ),
+        //map
         Container(
           margin: EdgeInsets.all(20),
           width: double.infinity,
           height: 200,
           decoration: BoxDecoration(
-              color: Colors.red[300], borderRadius: BorderRadius.circular(20)),
+              color: Colors.grey[200], borderRadius: BorderRadius.circular(20)),
         )
       ]),
     );
