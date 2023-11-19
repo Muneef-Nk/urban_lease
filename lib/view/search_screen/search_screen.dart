@@ -13,9 +13,19 @@ class _search_screenState extends State<search_screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+        ),
         title: Text(
           "Search",
-          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.white,
       ),
@@ -48,7 +58,8 @@ class _search_screenState extends State<search_screen> {
                       Text(
                         "Clear All",
                         style: TextStyle(
-                            color: ColorConstant.primaryColor, fontWeight: FontWeight.bold),
+                            color: ColorConstant.primaryColor,
+                            fontWeight: FontWeight.bold),
                       )
                     ],
                   ),

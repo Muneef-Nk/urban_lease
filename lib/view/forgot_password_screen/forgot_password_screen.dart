@@ -30,6 +30,9 @@ class ForgotPasswordScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
+            SizedBox(
+              height: 40,
+            ),
             Text(
               "New Password",
               style: TextStyle(color: ColorConstant.primaryColor, fontSize: 30),
@@ -42,7 +45,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               style: TextStyle(fontSize: 15, color: Colors.grey[700]),
             ),
             SizedBox(
-              height: 30,
+              height: 70,
             ),
             Row(
               children: [

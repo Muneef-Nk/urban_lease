@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rent_cruise/service/location_service.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
+import 'package:rent_cruise/view/bottom_navigation/bottom_navigation.dart';
+import 'package:rent_cruise/view/home_screen/home_screen.dart';
 import 'package:rent_cruise/view/location/search_location.dart';
 
 class LocationScreen extends StatelessWidget {
@@ -22,7 +24,7 @@ class LocationScreen extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 30,
           ),
           Text(
             "What is your location?",
@@ -48,6 +50,8 @@ class LocationScreen extends StatelessWidget {
             onTap: () {
               Provider.of<LocationProvider>(context, listen: false)
                   .determinePosition();
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => BottomNav()));
             },
             child: Container(
               width: 300,

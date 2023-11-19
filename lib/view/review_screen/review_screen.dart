@@ -15,6 +15,13 @@ class _ReviewScreenState extends State<ReviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+            onPressed: () => Navigator.of(context).pop()),
         title: Text(
           "Leave Review",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
@@ -26,12 +33,13 @@ class _ReviewScreenState extends State<ReviewScreen> {
         color: Colors.white,
         child: InkWell(
           onTap: () {},
-          child: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 10),
                   width: MediaQuery.of(context).size.width * 0.4,
                   child: Center(
                     child: Text(
@@ -44,7 +52,13 @@ class _ReviewScreenState extends State<ReviewScreen> {
                       color: const Color.fromARGB(255, 208, 206, 206),
                       borderRadius: BorderRadius.circular(20)),
                 ),
-                Container(
+              ),
+              GestureDetector(
+                onTap: () {
+                  //
+                },
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 10),
                   width: MediaQuery.of(context).size.width * 0.4,
                   child: Center(
                     child: Text(
@@ -59,8 +73,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
                       color: ColorConstant.primaryColor,
                       borderRadius: BorderRadius.circular(20)),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

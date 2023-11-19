@@ -1,4 +1,4 @@
-import 'package:animated_indicators/animated_indicators.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/home_screen/All_Category.dart';
@@ -8,7 +8,6 @@ import 'package:rent_cruise/view/location/search_location.dart';
 import 'package:rent_cruise/view/notification_screen/notification_screen.dart';
 import 'package:rent_cruise/view/search_screen/search_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -20,9 +19,9 @@ class Homescreen extends StatefulWidget {
 class _HomescreenState extends State<Homescreen> {
   final PageController controller1 = PageController(viewportFraction: 0.8);
   CarouselController buttonCarouselController = CarouselController();
-  @override
   int activeIndex = 0;
 
+  @override
   Widget build(BuildContext context) {
     List<Map<String, String>> categories = [
       {
@@ -43,7 +42,7 @@ class _HomescreenState extends State<Homescreen> {
       {
         'image':
             'https://img1.wsimg.com/isteam/ip/119e2d1b-0ed9-4a03-a51a-334684501753/news12_5.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=h:1000,cg:true',
-        'name': 'ELECTRONICS',
+        'name': 'Electronics',
       },
     ];
 
@@ -65,77 +64,100 @@ class _HomescreenState extends State<Homescreen> {
               padding: const EdgeInsets.only(left: 20, top: 30, right: 10),
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.location_on,
-                        color: ColorConstant.primaryColor,
-                      ),
-                      Text(
-                        "Choose your location",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => SearchLocation(),
-                            ),
-                          );
-                        },
-                        icon: Icon(
-                          Icons.expand_more,
-                          size: 30,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => SearchLocation(),
                         ),
-                      ),
-                      Spacer(),
-                      GestureDetector(
-                        onTap: () {
-                          //
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => NotificationScreen()));
-                        },
-                        child: CircleAvatar(
-                          child: Icon(
-                            Icons.notifications,
-                            color: ColorConstant.primaryColor,
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.location_on,
+                          size: 27,
+                          color: ColorConstant.primaryColor,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "Choose your location",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 17),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.expand_more,
+                            size: 30,
                           ),
-                          backgroundColor: Color.fromARGB(255, 231, 231, 231),
                         ),
-                      ),
-                    ],
+                        Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            //
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => NotificationScreen()));
+                          },
+                          child: CircleAvatar(
+                            child: Icon(
+                              Icons.notifications,
+                              color: ColorConstant.primaryColor,
+                            ),
+                            backgroundColor: Color.fromARGB(255, 231, 231, 231),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  Row(
-                    children: [
-                      Container(
-                        width: MediaQuery.sizeOf(context).width * .75,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            labelText: 'Search',
-                            prefixIcon: Icon(Icons.search),
-                          ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => search_screen()));
+                    },
+                    child: Container(
+                      height: 55,
+                      width: MediaQuery.sizeOf(context).width * .95,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: Colors.grey.shade400)),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Row(
+                          children: [
+                            Icon(Icons.search),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            CarouselSlider.builder(
+                              carouselController: buttonCarouselController,
+                              options: CarouselOptions(
+                                initialPage: 0,
+                                aspectRatio: 4,
+                                enlargeCenterPage: true,
+                                autoPlay: true,
+                                autoPlayInterval: Duration(seconds: 3),
+                                autoPlayAnimationDuration:
+                                    Duration(milliseconds: 800),
+                                scrollDirection: Axis.vertical,
+                              ),
+                              itemCount: categories.length,
+                              itemBuilder: (context, index, realIndex) {
+                                return Text(
+                                    "Search ${categories[index]['name']}",
+                                    style: TextStyle(
+                                        color: ColorConstant.primaryColor));
+                              },
+                            )
+                          ],
                         ),
                       ),
-                      Spacer(),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => search_screen()));
-                        },
-                        child: CircleAvatar(
-                          backgroundColor: ColorConstant.primaryColor,
-                          child: Icon(
-                            Icons.tune,
-                            color: Colors.white,
-                          ),
-                        ),
-                      )
-                    ],
+                    ),
                   ),
                   SizedBox(height: 15),
                   Column(
@@ -143,9 +165,9 @@ class _HomescreenState extends State<Homescreen> {
                       CarouselSlider.builder(
                         carouselController: buttonCarouselController,
                         options: CarouselOptions(
-                          height: 300,
+                          height: 200,
                           aspectRatio: 16 / 9,
-                          viewportFraction: 0.8,
+                          viewportFraction: 1,
                           initialPage: 0,
                           enableInfiniteScroll: true,
                           reverse: false,
@@ -184,21 +206,19 @@ class _HomescreenState extends State<Homescreen> {
                           );
                         },
                       ),
-                      SizedBox(height: 9),
+                      SizedBox(height: 15),
                       AnimatedSmoothIndicator(
                         count: 6,
                         activeIndex: activeIndex,
                       ),
                     ],
                   ),
-                  SizedBox(height: 5),
-                  SizedBox(
-                    height: 5,
-                  ),
+                  SizedBox(height: 20),
                   Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 15, top: 5),
+                        padding: const EdgeInsets.only(
+                            bottom: 15, top: 5, right: 10),
                         child: Row(
                           children: [
                             Text(
@@ -206,7 +226,7 @@ class _HomescreenState extends State<Homescreen> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
-                                color: Colors.brown,
+                                color: ColorConstant.primaryColor,
                               ),
                             ),
                             Spacer(),
@@ -220,7 +240,7 @@ class _HomescreenState extends State<Homescreen> {
                               child: Text(
                                 "See All",
                                 style: TextStyle(
-                                  color: Color(0xFF704F38),
+                                  color: ColorConstant.primaryColor,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -232,7 +252,7 @@ class _HomescreenState extends State<Homescreen> {
                       SizedBox(
                         height: MediaQuery.sizeOf(context).height * .19,
                         child: ListView.builder(
-                          itemCount: 4,
+                          itemCount: categories.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             return Padding(
@@ -240,7 +260,7 @@ class _HomescreenState extends State<Homescreen> {
                               child: Column(
                                 children: [
                                   CircleAvatar(
-                                    radius: 45,
+                                    radius: 40,
                                     backgroundImage: NetworkImage(
                                       categories[index]['image'].toString(),
                                     ),
@@ -251,8 +271,8 @@ class _HomescreenState extends State<Homescreen> {
                                     categories[index]['name'].toString(),
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 8,
-                                      color: Colors.black87,
+                                      fontSize: 10,
+                                      color: ColorConstant.primaryColor,
                                     ),
                                   ),
                                 ],
@@ -273,7 +293,7 @@ class _HomescreenState extends State<Homescreen> {
                   child: Text(
                     "Flash Sale",
                     style: TextStyle(
-                        color: Colors.brown,
+                        color: ColorConstant.primaryColor,
                         fontWeight: FontWeight.bold,
                         fontSize: 20),
                   ),
@@ -285,12 +305,15 @@ class _HomescreenState extends State<Homescreen> {
                       MaterialPageRoute(
                         builder: (context) => FullList(),
                       )),
-                  child: Text(
-                    "See All",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF704F38),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 15),
+                    child: Text(
+                      "See All",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: ColorConstant.primaryColor,
+                      ),
                     ),
                   ),
                 ),
@@ -306,7 +329,7 @@ class _HomescreenState extends State<Homescreen> {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 20,
-                    mainAxisExtent: MediaQuery.sizeOf(context).height * .43,
+                    mainAxisExtent: MediaQuery.sizeOf(context).height * .40,
                     crossAxisCount: 2),
                 itemBuilder: (context, index) => Mycard1(),
               ),

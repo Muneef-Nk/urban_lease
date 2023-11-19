@@ -35,8 +35,9 @@ class _AllCategoryState extends State<AllCategory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text(
-          "CATEGORIES",
+          "Categories",
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.white,

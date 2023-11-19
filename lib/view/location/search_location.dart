@@ -17,28 +17,37 @@ class SearchLocation extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
         elevation: 0,
-        leading: Container(
-          margin: EdgeInsets.all(5),
-          width: 40,
-          height: 40,
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: Colors.grey.shade300)),
-          child: Icon(
-            Icons.arrow_back,
-            color: ColorConstant.primaryColor,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: Container(
+            margin: EdgeInsets.all(5),
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.grey.shade300)),
+            child: Icon(
+              Icons.arrow_back,
+              color: ColorConstant.primaryColor,
+            ),
           ),
         ),
       ),
       body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
             child: TextField(
+              autofocus: true,
               controller: _searchController,
               decoration: InputDecoration(
                   border: InputBorder.none,
                   enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide(color: Colors.grey.shade400)),
+                  focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide(color: Colors.grey.shade400)),
                   hintText: "Search",
@@ -59,8 +68,8 @@ class SearchLocation extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => BottomNav()));
+              // Navigator.of(context)
+              //     .push(MaterialPageRoute(builder: (context) => BottomNav()));
             },
             child: ListTile(
               leading: Icon(Icons.near_me, color: ColorConstant.primaryColor),

@@ -16,13 +16,11 @@ class _Mycard1State extends State<Mycard1> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => ProductDetailsScreen(
-                  itemIndex: 1,
-                )));
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => ProductDetailsScreen()));
       },
       child: Container(
-        height: 300,
+        // height: 400,
         // margin: EdgeInsets.all(5),
         decoration: BoxDecoration(
             border: Border.all(color: Colors.grey.shade300),
@@ -50,7 +48,7 @@ class _Mycard1State extends State<Mycard1> {
                   "Dolore anim in in velit qui consequat eu cupidatat Lorem dolor."),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
+              padding: const EdgeInsets.only(left: 5, right: 7),
               child: Row(
                 children: [
                   Text(
@@ -73,50 +71,49 @@ class _Mycard1State extends State<Mycard1> {
                 ],
               ),
             ),
-
             SizedBox(
               height: 8,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 80,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        border:
-                            Border.all(color: Colors.black.withOpacity(0.7)),
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Center(
-                        child: Text(
-                      "Add to Cart",
-                      style: TextStyle(
-                          color: ColorConstant.primaryColor,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold),
-                    )),
-                  ),
-                  Container(
-                    width: 80,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        color: ColorConstant.primaryColor,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Center(
-                        child: Text(
-                      "Rent Now",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold),
-                    )),
-                  ),
-                ],
-              ),
-            )
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 5),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       Container(
+            //         width: 80,
+            //         height: 40,
+            //         decoration: BoxDecoration(
+            //             border:
+            //                 Border.all(color: Colors.black.withOpacity(0.7)),
+            //             color: Colors.white,
+            //             borderRadius: BorderRadius.circular(10)),
+            //         child: Center(
+            //             child: Text(
+            //           "Add to Cart",
+            //           style: TextStyle(
+            //               color: ColorConstant.primaryColor,
+            //               fontSize: 12,
+            //               fontWeight: FontWeight.bold),
+            //         )),
+            //       ),
+            //       Container(
+            //         width: 80,
+            //         height: 40,
+            //         decoration: BoxDecoration(
+            //             color: ColorConstant.primaryColor,
+            //             borderRadius: BorderRadius.circular(10)),
+            //         child: Center(
+            //             child: Text(
+            //           "Rent Now",
+            //           style: TextStyle(
+            //               color: Colors.white,
+            //               fontSize: 12,
+            //               fontWeight: FontWeight.bold),
+            //         )),
+            //       ),
+            //     ],
+            //   ),
+            // )
           ],
         ),
       ),

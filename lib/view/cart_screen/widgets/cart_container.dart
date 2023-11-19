@@ -11,17 +11,12 @@ class CartContainer extends StatelessWidget {
         Container(
           margin: EdgeInsets.all(8),
           width: 130,
-          height: 150,
+          height: 130,
           decoration: BoxDecoration(
               color: Color.fromARGB(255, 207, 207, 205),
               borderRadius: BorderRadius.circular(15)),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
-            // child: Image.network(
-            //   provider.card[index].image,
-            //   // product[index].image,
-            //   fit: BoxFit.cover,
-            // ),
           ),
         ),
         SizedBox(
@@ -42,7 +37,7 @@ class CartContainer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'bubhbbhhb',
+                      'name',
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.black,
@@ -234,10 +229,11 @@ class CartContainer extends StatelessWidget {
                           width: 30,
                           height: 30,
                           decoration: BoxDecoration(
-                              color: Colors.black, shape: BoxShape.circle),
+                              border: Border.all(),
+                              borderRadius: BorderRadius.circular(5)),
                           child: Icon(
                             Icons.remove,
-                            color: Colors.white,
+                            color: Colors.black,
                             size: 15,
                           ),
                         )),
@@ -260,10 +256,11 @@ class CartContainer extends StatelessWidget {
                           width: 30,
                           height: 30,
                           decoration: BoxDecoration(
-                              color: Colors.black, shape: BoxShape.circle),
+                              border: Border.all(),
+                              borderRadius: BorderRadius.circular(5)),
                           child: Icon(
                             Icons.add,
-                            color: Colors.white,
+                            color: Colors.black,
                             size: 15,
                           ),
                         ))

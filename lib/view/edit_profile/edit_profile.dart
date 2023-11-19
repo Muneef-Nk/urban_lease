@@ -51,6 +51,9 @@ class _EditProfileState extends State<EditProfile> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              SizedBox(
+                height: 30,
+              ),
               Text(
                 "Completed your profile",
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.w400),
@@ -248,25 +251,31 @@ class _EditProfileState extends State<EditProfile> {
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 20,
               ),
-              Container(
-                width: 100,
-                height: 50,
-                decoration: BoxDecoration(
-                    color: ColorConstant.primaryColor,
-                    borderRadius: BorderRadius.circular(30)),
-                child: Center(
-                    child: Text(
-                  "Done",
-                  style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                )),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => LocationScreen()));
+                },
+                child: Container(
+                  width: 100,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      color: ColorConstant.primaryColor,
+                      borderRadius: BorderRadius.circular(30)),
+                  child: Center(
+                      child: Text(
+                    "Done",
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  )),
+                ),
               ),
               SizedBox(
-                height: 10,
+                height: 20,
               ),
             ],
           ),

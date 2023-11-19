@@ -20,7 +20,7 @@ class WelcomeScreen extends StatelessWidget {
         Align(
             alignment: Alignment(-0.6, -0.6),
             child: Text(
-              "Everything \nOn \nRent...",
+              "Everything On \nRent...",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 35,

@@ -27,7 +27,7 @@ class _ProfileState extends State<Profile> {
         elevation: 0,
         leading: InkWell(
           onTap: () {
-            Navigator.pop(context);
+            // Navigator.pop(context);
           },
           child: Icon(
             Icons.arrow_back,
@@ -251,13 +251,6 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                     Divider(),
-                    Stepper(steps: [
-                      Step(
-                          title: Text("jkniun"),
-                          content: Text(
-                            "jhhnhn",
-                          ))
-                    ]),
                     InkWell(
                       onTap: () {
                         final String whatsappLink =

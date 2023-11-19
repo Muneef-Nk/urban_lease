@@ -60,7 +60,7 @@ class CartScreen extends StatelessWidget {
               width: double.infinity,
               height: 160,
               decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 216, 216, 215),
+                  color: Colors.grey[100],
                   borderRadius: BorderRadius.circular(15)),
               child: CartContainer(),
             );
