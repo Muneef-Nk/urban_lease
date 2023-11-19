@@ -1,6 +1,8 @@
 import 'package:animated_indicators/animated_indicators.dart';
 import 'package:flutter/material.dart';
+import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
+import 'package:rent_cruise/view/home_screen/hiddenDrawer.dart';
 import 'package:rent_cruise/view/home_screen/All_Category.dart';
 import 'package:rent_cruise/view/home_screen/Full_list.dart';
 import 'package:rent_cruise/view/home_screen/Mycard1.dart';
@@ -20,9 +22,9 @@ class Homescreen extends StatefulWidget {
 class _HomescreenState extends State<Homescreen> {
   final PageController controller1 = PageController(viewportFraction: 0.8);
   CarouselController buttonCarouselController = CarouselController();
-  @override
   int activeIndex = 0;
-
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  @override
   Widget build(BuildContext context) {
     List<Map<String, String>> categories = [
       {
@@ -57,263 +59,473 @@ class _HomescreenState extends State<Homescreen> {
     ];
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 30, right: 10),
-              child: Column(
-                children: [
-                  Row(
+        key: scaffoldKey,
+        // appBar: AppBar(
+        //   toolbarHeight: 29,
+        //   elevation: 0,
+        //   backgroundColor: Color.fromARGB(255, 253, 247, 247),
+        //   leading: InkWell(
+        //     onTap: () {
+        //       scaffoldKey.currentState?.openDrawer();
+        //     },
+        //     child: InkWell(
+        //       onTap: () {
+        //         Navigator.push(
+        //             context,
+        //             MaterialPageRoute(
+        //               builder: (context) => HiddenDrawer(),
+        //             ));
+        //       },
+        //       child: Icon(
+        //         Icons.density_medium,
+        //         color: Colors.black,
+        //       ),
+        //     ),
+        //   ),
+        // ),
+        // drawer: Drawer(
+        //   child: Container(
+        //     color: ColorConstant.primaryColor,
+        //     height: MediaQuery.sizeOf(context).height,
+        //     child: Column(
+        //       children: [
+        //         Container(
+        //           child: Row(
+        //             children: [
+        //               Padding(
+        //                 padding: const EdgeInsets.all(15.0),
+        //                 child: CircleAvatar(
+        //                   radius: 45,
+        //                   backgroundColor: Colors.white,
+        //                   child: Image.asset(
+        //                     "assets/images/profile.jpeg",
+        //                     fit: BoxFit.cover,
+        //                   ),
+        //                 ),
+        //               ),
+        //               Column(
+        //                 crossAxisAlignment: CrossAxisAlignment.start,
+        //                 children: [
+        //                   Padding(
+        //                     padding: const EdgeInsets.only(top: 8.0),
+        //                     child: Text(
+        //                       "Ashna Sathar",
+        //                       style: TextStyle(
+        //                           color: Colors.white,
+        //                           fontWeight: FontWeight.bold,
+        //                           fontSize: 18),
+        //                     ),
+        //                   ),
+        //                   Padding(
+        //                     padding: const EdgeInsets.only(top: 2),
+        //                     child: Text(
+        //                       "ashnasathar@gmail.com",
+        //                       style: TextStyle(
+        //                         color: Colors.white,
+        //                       ),
+        //                     ),
+        //                   )
+        //                 ],
+        //               ),
+        //             ],
+        //           ),
+        //         ),
+        //         ListTile(
+        //           trailing: Icon(
+        //             Icons.arrow_forward,
+        //             color: Colors.white38,
+        //           ),
+        //           leading: Icon(
+        //             Icons.home,
+        //             color: Colors.white,
+        //           ),
+        //           title: Text(
+        //             "Home",
+        //             style: TextStyle(color: Colors.white54),
+        //           ),
+        //         ),
+        //         Divider(
+        //           color: Colors.white10,
+        //         ),
+        //         ListTile(
+        //           trailing: Icon(
+        //             Icons.arrow_forward,
+        //             color: Colors.white38,
+        //           ),
+        //           leading: Icon(
+        //             Icons.person,
+        //             color: Colors.white,
+        //           ),
+        //           title: Text(
+        //             "Profile",
+        //             style: TextStyle(color: Colors.white54),
+        //           ),
+        //         ),
+        //         Divider(
+        //           color: Colors.white10,
+        //         ),
+        //         ListTile(
+        //           trailing: Icon(
+        //             Icons.arrow_forward,
+        //             color: Colors.white38,
+        //           ),
+        //           leading: Icon(
+        //             Icons.bookmark,
+        //             color: Colors.white,
+        //           ),
+        //           title: Text(
+        //             "Bookmark",
+        //             style: TextStyle(color: Colors.white54),
+        //           ),
+        //         ),
+        //         Divider(
+        //           color: Colors.white10,
+        //         ),
+        //         ListTile(
+        //           trailing: Icon(
+        //             Icons.arrow_forward,
+        //             color: Colors.white38,
+        //           ),
+        //           leading: Icon(
+        //             Icons.notifications,
+        //             color: Colors.white,
+        //           ),
+        //           title: Text(
+        //             "Notification",
+        //             style: TextStyle(color: Colors.white54),
+        //           ),
+        //         ),
+        //         Divider(
+        //           color: Colors.white10,
+        //         ),
+        //         ListTile(
+        //           trailing: Icon(
+        //             Icons.arrow_forward,
+        //             color: Colors.white38,
+        //           ),
+        //           leading: Icon(
+        //             Icons.message,
+        //             color: Colors.white,
+        //           ),
+        //           title: Text(
+        //             "Message",
+        //             style: TextStyle(color: Colors.white54),
+        //           ),
+        //         ),
+        //         Divider(
+        //           color: Colors.white10,
+        //         ),
+        //         ListTile(
+        //           trailing: Icon(
+        //             Icons.arrow_forward,
+        //             color: Colors.white38,
+        //           ),
+        //           leading: Icon(
+        //             Icons.settings,
+        //             color: Colors.white,
+        //           ),
+        //           title: Text(
+        //             "Settings",
+        //             style: TextStyle(color: Colors.white54),
+        //           ),
+        //         ),
+        //         Divider(
+        //           color: Colors.white10,
+        //         ),
+        //         ListTile(
+        //           trailing: Icon(
+        //             Icons.arrow_forward,
+        //             color: Colors.white38,
+        //           ),
+        //           leading: Icon(
+        //             Icons.help,
+        //             color: Colors.white,
+        //           ),
+        //           title: Text(
+        //             "Help",
+        //             style: TextStyle(color: Colors.white54),
+        //           ),
+        //         ),
+        //         Divider(
+        //           color: Colors.white10,
+        //         ),
+        //         ListTile(
+        //           trailing: Icon(
+        //             Icons.arrow_forward,
+        //             color: Colors.white38,
+        //           ),
+        //           leading: Icon(
+        //             Icons.logout,
+        //             color: Colors.white,
+        //           ),
+        //           title: Text(
+        //             "Logout",
+        //             style: TextStyle(color: Colors.white54),
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 30, right: 10),
+                  child: Column(
                     children: [
-                      Icon(
-                        Icons.location_on,
-                        color: ColorConstant.primaryColor,
-                      ),
-                      Text(
-                        "Choose your location",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => SearchLocation(),
-                            ),
-                          );
-                        },
-                        icon: Icon(
-                          Icons.expand_more,
-                          size: 30,
-                        ),
-                      ),
-                      Spacer(),
-                      GestureDetector(
-                        onTap: () {
-                          //
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => NotificationScreen()));
-                        },
-                        child: CircleAvatar(
-                          child: Icon(
-                            Icons.notifications,
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.location_on,
                             color: ColorConstant.primaryColor,
                           ),
-                          backgroundColor: Color.fromARGB(255, 231, 231, 231),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        width: MediaQuery.sizeOf(context).width * .75,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            labelText: 'Search',
-                            prefixIcon: Icon(Icons.search),
+                          Text(
+                            "Choose your location",
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           ),
-                        ),
-                      ),
-                      Spacer(),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => search_screen()));
-                        },
-                        child: CircleAvatar(
-                          backgroundColor: ColorConstant.primaryColor,
-                          child: Icon(
-                            Icons.tune,
-                            color: Colors.white,
+                          IconButton(
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => SearchLocation(),
+                                ),
+                              );
+                            },
+                            icon: Icon(
+                              Icons.expand_more,
+                              size: 30,
+                            ),
                           ),
-                        ),
+                          Spacer(),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => NotificationScreen()));
+                            },
+                            child: CircleAvatar(
+                              child: Icon(
+                                Icons.notifications,
+                                color: ColorConstant.primaryColor,
+                              ),
+                              backgroundColor:
+                                  Color.fromARGB(255, 231, 231, 231),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            width: MediaQuery.sizeOf(context).width * .75,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                                labelText: 'Search',
+                                prefixIcon: Icon(Icons.search),
+                              ),
+                            ),
+                          ),
+                          Spacer(),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => search_screen()));
+                            },
+                            child: CircleAvatar(
+                              backgroundColor: ColorConstant.primaryColor,
+                              child: Icon(
+                                Icons.tune,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 15),
+                      Column(
+                        children: [
+                          CarouselSlider.builder(
+                            carouselController: buttonCarouselController,
+                            options: CarouselOptions(
+                              height: 300,
+                              aspectRatio: 16 / 9,
+                              viewportFraction: 0.8,
+                              initialPage: 0,
+                              enableInfiniteScroll: true,
+                              reverse: false,
+                              autoPlay: true,
+                              autoPlayInterval: Duration(seconds: 3),
+                              autoPlayAnimationDuration:
+                                  Duration(milliseconds: 800),
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                              enlargeCenterPage: true,
+                              enlargeFactor: 0.3,
+                              scrollDirection: Axis.horizontal,
+                              onPageChanged: (index, reason) {
+                                setState(() {
+                                  activeIndex = index;
+                                  print(activeIndex);
+                                });
+                              },
+                            ),
+                            itemCount: imgList.length,
+                            itemBuilder: (context, index, realIndex) {
+                              final urlImages = imgList[index];
+                              return Container(
+                                width: double.infinity,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(15),
+                                    topRight: Radius.circular(15),
+                                    bottomLeft: Radius.circular(15),
+                                    bottomRight: Radius.circular(15),
+                                  ),
+                                  child: Image.network(
+                                    urlImages,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          SizedBox(height: 9),
+                          AnimatedSmoothIndicator(
+                            count: 6,
+                            activeIndex: activeIndex,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 15, top: 5),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Category",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: Colors.brown,
+                                  ),
+                                ),
+                                Spacer(),
+                                InkWell(
+                                  onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => AllCategory(),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    "See All",
+                                    style: TextStyle(
+                                      color: Color(0xFF704F38),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: MediaQuery.sizeOf(context).height * .19,
+                            child: ListView.builder(
+                              itemCount: 4,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Column(
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 45,
+                                        backgroundImage: NetworkImage(
+                                          categories[index]['image'].toString(),
+                                        ),
+                                        backgroundColor: Colors.transparent,
+                                      ),
+                                      SizedBox(height: 8),
+                                      Text(
+                                        categories[index]['name'].toString(),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 8,
+                                          color: Colors.black87,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
                       )
                     ],
                   ),
-                  SizedBox(height: 15),
-                  Column(
-                    children: [
-                      CarouselSlider.builder(
-                        carouselController: buttonCarouselController,
-                        options: CarouselOptions(
-                          height: 300,
-                          aspectRatio: 16 / 9,
-                          viewportFraction: 0.8,
-                          initialPage: 0,
-                          enableInfiniteScroll: true,
-                          reverse: false,
-                          autoPlay: true,
-                          autoPlayInterval: Duration(seconds: 3),
-                          autoPlayAnimationDuration:
-                              Duration(milliseconds: 800),
-                          autoPlayCurve: Curves.fastOutSlowIn,
-                          enlargeCenterPage: true,
-                          enlargeFactor: 0.3,
-                          scrollDirection: Axis.horizontal,
-                          onPageChanged: (index, reason) {
-                            setState(() {
-                              activeIndex = index;
-                              print(activeIndex);
-                            });
-                          },
-                        ),
-                        itemCount: imgList.length,
-                        itemBuilder: (context, index, realIndex) {
-                          final urlImages = imgList[index];
-                          return Container(
-                            width: double.infinity,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(15),
-                                topRight: Radius.circular(15),
-                                bottomLeft: Radius.circular(15),
-                                bottomRight: Radius.circular(15),
-                              ),
-                              child: Image.network(
-                                urlImages,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      SizedBox(height: 9),
-                      AnimatedSmoothIndicator(
-                        count: 6,
-                        activeIndex: activeIndex,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 5),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 15, top: 5),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Category",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Colors.brown,
-                              ),
-                            ),
-                            Spacer(),
-                            InkWell(
-                              onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => AllCategory(),
-                                ),
-                              ),
-                              child: Text(
-                                "See All",
-                                style: TextStyle(
-                                  color: Color(0xFF704F38),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.sizeOf(context).height * .19,
-                        child: ListView.builder(
-                          itemCount: 4,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Column(
-                                children: [
-                                  CircleAvatar(
-                                    radius: 45,
-                                    backgroundImage: NetworkImage(
-                                      categories[index]['image'].toString(),
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                  ),
-                                  SizedBox(height: 8),
-                                  Text(
-                                    categories[index]['name'].toString(),
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 8,
-                                      color: Colors.black87,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, bottom: 15, top: 5),
-                  child: Text(
-                    "Flash Sale",
-                    style: TextStyle(
-                        color: Colors.brown,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
-                  ),
                 ),
-                Spacer(),
-                InkWell(
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => FullList(),
-                      )),
-                  child: Text(
-                    "See All",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF704F38),
+                Row(
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20, bottom: 15, top: 5),
+                      child: Text(
+                        "Flash Sale",
+                        style: TextStyle(
+                            color: Colors.brown,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      ),
                     ),
+                    Spacer(),
+                    InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FullList(),
+                          )),
+                      child: Text(
+                        "See All",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF704F38),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 5)
+                  ],
+                ),
+                Container(
+                  padding: EdgeInsets.all(9),
+                  child: GridView.builder(
+                    itemCount: 10,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 20,
+                        mainAxisExtent: MediaQuery.sizeOf(context).height * .43,
+                        crossAxisCount: 2),
+                    itemBuilder: (context, index) => Mycard1(),
                   ),
                 ),
-                SizedBox(width: 5)
               ],
             ),
-            Container(
-              padding: EdgeInsets.all(9),
-              child: GridView.builder(
-                itemCount: 10,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 20,
-                    mainAxisExtent: MediaQuery.sizeOf(context).height * .43,
-                    crossAxisCount: 2),
-                itemBuilder: (context, index) => Mycard1(),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }

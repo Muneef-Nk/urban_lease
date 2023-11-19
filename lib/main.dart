@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:provider/provider.dart';
 import 'package:rent_cruise/controller/login_controller/login_controller.dart';
 import 'package:rent_cruise/service/location_service.dart';
+import 'package:rent_cruise/view/home_screen/hiddenDrawer.dart';
+import 'package:rent_cruise/view/home_screen/home_screen.dart';
 import 'package:rent_cruise/view/splash_screen/splash_screen.dart';
 
 void main() {
@@ -21,7 +24,7 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: SplashScreen(),
+          home: HiddenDrawer(),
         ));
   }
 }

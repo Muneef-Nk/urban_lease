@@ -25,15 +25,15 @@ class _HelpCenterState extends State<HelpCenter>
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          leading: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            ),
-          ),
+          // leading: InkWell(
+          //   onTap: () {
+          //     Navigator.pop(context);
+          //   },
+          //   child: Icon(
+          //     Icons.arrow_back,
+          //     color: Colors.black,
+          //   ),
+          // ),
           backgroundColor: Colors.white,
           title: Center(
             child: Text(

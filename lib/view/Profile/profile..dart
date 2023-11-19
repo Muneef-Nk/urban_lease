@@ -23,24 +23,24 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: Text(
-          "Profile",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        ),
-      ),
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   leading: InkWell(
+      //     onTap: () {
+      //       Navigator.pop(context);
+      //     },
+      //     child: Icon(
+      //       Icons.arrow_back,
+      //       color: Colors.black,
+      //     ),
+      //   ),
+      //   backgroundColor: Colors.white,
+      //   centerTitle: true,
+      //   title: Text(
+      //     "Profile",
+      //     style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+      //   ),
+      // ),
       body: SingleChildScrollView(
         child: Column(
           children: [

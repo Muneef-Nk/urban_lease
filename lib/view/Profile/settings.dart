@@ -12,24 +12,24 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        title: Center(
-          child: Text(
-            "Settings",
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   leading: InkWell(
+      //     onTap: () {
+      //       Navigator.pop(context);
+      //     },
+      //     child: Icon(
+      //       Icons.arrow_back,
+      //       color: Colors.black,
+      //     ),
+      //   ),
+      //   backgroundColor: Colors.white,
+      //   title: Center(
+      //     child: Text(
+      //       "Settings",
+      //       style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+      //     ),
+      //   ),
+      // ),
       body: Column(
         children: [
           Expanded(
