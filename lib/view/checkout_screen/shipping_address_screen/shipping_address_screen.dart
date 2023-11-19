@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
+import 'package:rent_cruise/view/checkout_screen/checkout_screen.dart';
 
 class ShippingAddress extends StatefulWidget {
   const ShippingAddress({Key? key}) : super(key: key);
@@ -10,12 +12,30 @@ class ShippingAddress extends StatefulWidget {
 class _ShippingAddressState extends State<ShippingAddress> {
   int selectedAddress = -1; // Initialize with an invalid index
 
-  List<String> addresses = ["Home", "Office", "Parent's House", "Friend's House"];
+  List<String> addresses = [
+    "Home",
+    "Office",
+    "Parent's House",
+    "Friend's House"
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        leading: InkWell(
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => checkout_screen(),
+                  ));
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: ColorConstant.primaryColor,
+            )),
         title: Text(
           "Shipping Address",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
@@ -24,7 +44,7 @@ class _ShippingAddressState extends State<ShippingAddress> {
       ),
       bottomNavigationBar: Container(
         height: 50,
-        color: Colors.brown,
+        color: ColorConstant.primaryColor,
         child: InkWell(
           onTap: () {
             // Handle the "Apply" button tap here

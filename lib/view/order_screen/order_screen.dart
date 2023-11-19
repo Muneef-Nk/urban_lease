@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/order_screen/active_screen/active_screen.dart';
 import 'package:rent_cruise/view/order_screen/cancelled_screen/cancelled_screen.dart';
 import 'package:rent_cruise/view/order_screen/completed_screen/completed_screen.dart';
@@ -17,15 +18,18 @@ class _order_screenState extends State<order_screen> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
+          leading: InkWell(onTap: (){},
+            child: Icon(Icons.arrow_back)),
           title: Text(
             "My Orders",
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
           ),
+          elevation: 0,
           backgroundColor: Colors.white,
           bottom: TabBar(
-              labelColor: Colors.brown,
-              dividerColor: Colors.brown,
-              indicatorColor: Colors.brown,
+              labelColor: ColorConstant.primaryColor,
+              dividerColor: ColorConstant.primaryColor,
+              indicatorColor: ColorConstant.primaryColor,
               tabs: [
                 Tab(
                   text: "Active",

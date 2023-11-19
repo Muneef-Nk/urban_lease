@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
+import 'package:rent_cruise/view/checkout_screen/checkout_screen.dart';
 
 class ChooseShipping extends StatefulWidget {
   const ChooseShipping({super.key});
@@ -15,7 +16,17 @@ class _ChooseShippingState extends State<ChooseShipping> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(elevation: 0,
+        leading: InkWell(
+            onTap: () { Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => checkout_screen(),
+                  ));},
+            child: Icon(
+              Icons.arrow_back,
+              color: ColorConstant.primaryColor,
+            )),
         title: Text(
           "Choose Shipping",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),

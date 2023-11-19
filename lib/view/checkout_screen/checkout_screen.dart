@@ -16,7 +16,13 @@ class _checkout_screenState extends State<checkout_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(elevation: 0,
+        leading:  InkWell(
+            onTap: () {},
+            child: Icon(
+              Icons.arrow_back,
+              color: ColorConstant.primaryColor,
+            )),
         title: Text(
           "Check Out",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
@@ -27,7 +33,7 @@ class _checkout_screenState extends State<checkout_screen> {
         height: 50,
         color: ColorConstant.primaryColor,
         child: InkWell(
-          onTap: () => Navigator.push(
+          onTap: () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => PaymentMethods(),
@@ -90,7 +96,7 @@ class _checkout_screenState extends State<checkout_screen> {
                 ),
               ),
               trailing: InkWell(
-                onTap: () => Navigator.push(
+                onTap: () => Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => ShippingAddress(),
@@ -98,7 +104,8 @@ class _checkout_screenState extends State<checkout_screen> {
                 child: Text(
                   " Change",
                   style: TextStyle(
-                      color: Colors.brown, fontWeight: FontWeight.bold),
+                      color: ColorConstant.primaryColor,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -143,7 +150,7 @@ class _checkout_screenState extends State<checkout_screen> {
                 ),
               ),
               trailing: InkWell(
-                onTap: () => Navigator.push(
+                onTap: () => Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => ChooseShipping(),
@@ -151,7 +158,8 @@ class _checkout_screenState extends State<checkout_screen> {
                 child: Text(
                   " Change",
                   style: TextStyle(
-                      color: Colors.brown, fontWeight: FontWeight.bold),
+                      color: ColorConstant.primaryColor,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
