@@ -13,6 +13,7 @@ class _search_result_screenState extends State<search_result_screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text(
           "Search",
           style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),

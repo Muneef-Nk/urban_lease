@@ -42,6 +42,7 @@ class _Cancelled_screenState extends State<Cancelled_screen> {
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "DSLR Camera",
