@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 
-import 'package:rent_cruise/view/checkout_screen/payment_methods_screen/payment_methods_screen.dart';
-
 class AddCardScreen extends StatefulWidget {
   @override
   _AddCardScreenState createState() => _AddCardScreenState();

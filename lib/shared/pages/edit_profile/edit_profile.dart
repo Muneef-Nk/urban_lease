@@ -1,7 +1,6 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
-import 'package:rent_cruise/view/location/location_screen.dart';
 
 class EditProfile extends StatefulWidget {
   final Function() onPressed;
