@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:rent_cruise/service/location_service.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/bottom_navigation/bottom_navigation.dart';
-import 'package:rent_cruise/view/home_screen/home_screen.dart';
 import 'package:rent_cruise/view/location/search_location.dart';
 
 class LocationScreen extends StatelessWidget {

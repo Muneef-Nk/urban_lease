@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
-
 import 'package:rent_cruise/view/product_detail_screen/product_detail_screen.dart';
 
 class Mycard1 extends StatefulWidget {

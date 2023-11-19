@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/bottom_navigation/bottom_navigation.dart';
-import 'package:rent_cruise/view/home_screen/home_screen.dart';
-import 'package:rent_cruise/view/order_screen/order_screen.dart';
 
 class Payment extends StatefulWidget {
   const Payment({super.key});

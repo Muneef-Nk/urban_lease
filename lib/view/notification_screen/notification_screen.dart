@@ -12,25 +12,25 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        title: Center(
-          child: Text(
-            "Notifications ",
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   leading: InkWell(
+      //     onTap: () {
+      //       Navigator.pop(context);
+      //     },
+      //     child: Icon(
+      //       Icons.arrow_back,
+      //       color: Colors.black,
+      //     ),
+      //   ),
+      //   backgroundColor: Colors.white,
+      //   title: Center(
+      //     child: Text(
+      //       "Notifications ",
+      //       style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+      //     ),
+      //   ),
+      // ),
       body: Column(
         children: [
           Row(

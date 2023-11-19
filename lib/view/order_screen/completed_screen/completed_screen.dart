@@ -52,7 +52,7 @@ class _Completed_screenState extends State<Completed_screen> {
                     height: 5,
                   ),
                   Text(
-                    "Successfully rent out",
+                    "2 weeks ago",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.red),
                   ),

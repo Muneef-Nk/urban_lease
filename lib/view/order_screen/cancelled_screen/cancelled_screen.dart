@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rent_cruise/view/checkout_screen/checkout_screen.dart';
 
 import '../../../utils/color_constant.dart/color_constant.dart';
 
@@ -51,7 +52,7 @@ class _Cancelled_screenState extends State<Cancelled_screen> {
                     height: 5,
                   ),
                   Text(
-                    "Canceld",
+                    "Cancelled 5 days ago",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.orange),
                   ),
@@ -59,21 +60,27 @@ class _Cancelled_screenState extends State<Cancelled_screen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: 40,
-                  width: 100,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: ColorConstant.primaryColor),
-                  child: Padding(
-                    padding: const EdgeInsets.all(7.0),
-                    child: Center(
-                      child: Text(
-                        "Re-Order",
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => checkout_screen()));
+                  },
+                  child: Container(
+                    height: 40,
+                    width: 100,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: ColorConstant.primaryColor),
+                    child: Padding(
+                      padding: const EdgeInsets.all(7.0),
+                      child: Center(
+                        child: Text(
+                          "Re-Order",
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
                       ),
                     ),
                   ),

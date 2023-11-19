@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 
 class PrivacyPolicy extends StatefulWidget {
   const PrivacyPolicy({super.key});
@@ -39,7 +40,8 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                 title: Text(
                   "Cancelation Policy",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.brown),
+                      fontWeight: FontWeight.bold,
+                      color: ColorConstant.primaryColor),
                 ),
                 children: [
                   Text(
@@ -52,7 +54,8 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                 title: Text(
                   "Terms \$ Condition",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.brown),
+                      fontWeight: FontWeight.bold,
+                      color: ColorConstant.primaryColor),
                 ),
                 children: [
                   Text(
@@ -65,7 +68,8 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                 title: Text(
                   "Advertisement",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.brown),
+                      fontWeight: FontWeight.bold,
+                      color: ColorConstant.primaryColor),
                 ),
                 children: [
                   Text(
@@ -78,7 +82,8 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                 title: Text(
                   "Your Rights",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.brown),
+                      fontWeight: FontWeight.bold,
+                      color: ColorConstant.primaryColor),
                 ),
                 children: [
                   Text(
@@ -91,7 +96,8 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                 title: Text(
                   "Security Precautions",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.brown),
+                      fontWeight: FontWeight.bold,
+                      color: ColorConstant.primaryColor),
                 ),
                 children: [
                   Text(

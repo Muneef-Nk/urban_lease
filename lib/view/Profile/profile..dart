@@ -25,15 +25,7 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        leading: InkWell(
-          onTap: () {
-            // Navigator.pop(context);
-          },
-          child: Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-        ),
+        leadingWidth: 0,
         backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(

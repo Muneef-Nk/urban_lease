@@ -4,6 +4,7 @@ import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/home_screen/All_Category.dart';
 import 'package:rent_cruise/view/home_screen/Full_list.dart';
 import 'package:rent_cruise/view/home_screen/Mycard1.dart';
+import 'package:rent_cruise/view/home_screen/hiddenDrawer.dart';
 import 'package:rent_cruise/view/location/search_location.dart';
 import 'package:rent_cruise/view/notification_screen/notification_screen.dart';
 import 'package:rent_cruise/view/search_screen/search_screen.dart';
@@ -20,7 +21,8 @@ class _HomescreenState extends State<Homescreen> {
   final PageController controller1 = PageController(viewportFraction: 0.8);
   CarouselController buttonCarouselController = CarouselController();
   int activeIndex = 0;
-
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  @override
   @override
   Widget build(BuildContext context) {
     List<Map<String, String>> categories = [
@@ -56,6 +58,7 @@ class _HomescreenState extends State<Homescreen> {
     ];
 
     return Scaffold(
+      drawer: HiddenDrawer(),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -315,10 +318,40 @@ class _HomescreenState extends State<Homescreen> {
                         color: ColorConstant.primaryColor,
                       ),
                     ),
+                    // Spacer(),
+                    // InkWell(
+                    //   onTap: () => Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => FullList(),
+                    //       )),
+                    //   child: Text(
+                    //     "See All",
+                    //     style: TextStyle(
+                    //       fontSize: 16,
+                    //       fontWeight: FontWeight.bold,
+                    //       color: Color(0xFF704F38),
+                    //     ),
+                    //   ),
+                    // ),
+                    // SizedBox(width: 5),
                   ),
-                ),
-                SizedBox(width: 5)
+                )
               ],
+            ),
+            Container(
+              padding: EdgeInsets.all(9),
+              child: GridView.builder(
+                itemCount: 10,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 20,
+                    mainAxisExtent: MediaQuery.sizeOf(context).height * .43,
+                    crossAxisCount: 2),
+                itemBuilder: (context, index) => Mycard1(),
+              ),
             ),
             Container(
               padding: EdgeInsets.all(9),
