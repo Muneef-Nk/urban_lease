@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final int itemIndex;
-  const ProductDetailsScreen({super.key, required this.itemIndex});
+
+  const ProductDetailsScreen({Key? key, required this.itemIndex})
+      : super(key: key);
 
   @override
-  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
+  _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  TextEditingController startdatecontroller = TextEditingController();
-  TextEditingController enddatecontroller = TextEditingController();
+  int selectedNumber = 1;
+  String selectedDurationUnit = 'day';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +26,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           children: [
             Text(
               "2000 Rs./day",
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             InkWell(
               onTap: () {},
@@ -40,8 +46,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   ),
                 ),
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10)),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
             )
           ],
@@ -60,8 +67,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       height: 300,
                       width: MediaQuery.of(context).size.width * 0.9,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.amber),
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.amber,
+                      ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Image.network(
@@ -78,10 +86,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   child: CircleAvatar(
                     radius: 20,
                     child: Center(
-                        child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    )),
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white,
+                      ),
+                    ),
                     backgroundColor: Colors.brown,
                   ),
                 ),
@@ -91,10 +100,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   child: CircleAvatar(
                     radius: 20,
                     child: Center(
-                        child: Icon(
-                      Icons.shopping_cart,
-                      color: Colors.white,
-                    )),
+                      child: Icon(
+                        Icons.shopping_cart,
+                        color: Colors.white,
+                      ),
+                    ),
                     backgroundColor: Colors.brown,
                   ),
                 ),
@@ -110,7 +120,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     backgroundColor: Colors.brown,
                   ),
                 ),
-                
                 Positioned(
                   bottom: 15,
                   right: 40,
@@ -138,84 +147,96 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               child: Text(
                 "Washing machine",
                 style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(9.0),
               child: Text(
-                  "Washing machines are appliances that help you clean your clothes and other fabrics. There are different types and features of washing machines that you can choose from depending on your needs and preferences."),
+                "Washing machines are appliances that help you clean your clothes and other fabrics. There are different types and features of washing machines that you can choose from depending on your needs and preferences.",
+              ),
             ),
+            Divider(
+              color: Colors.grey,
+              thickness: 0.1,
+            ),
+            ListTile(
+              leading: CircleAvatar(
+                  radius: 26,
+                  backgroundImage: NetworkImage(
+                      "https://i.pinimg.com/564x/9d/db/5c/9ddb5c50fc1b25019921343128339ea3.jpg")),
+              title: Text(
+                "Luffy",
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+              ),
+              subtitle: Text(
+                "Owner",
+                style: TextStyle(color: Colors.grey),
+              ),
+              trailing: IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.chat_sharp,
+                    color: ColorConstant.primaryColor,
+                    size: 24,
+                  )),
+            ),
+            Divider(
+              color: Colors.grey,
+              thickness: 0.1,
+            ),
+            SizedBox(height: 15),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "Start date:",
+                "Rent Duration:",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: startdatecontroller,
-                decoration: InputDecoration(
-                  hintText: "Start Date",
-                  suffixIcon: IconButton(
-                    onPressed: () async {
-                      final DateTime? _date = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime(2070));
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DropdownButton<int>(
+                    value: selectedNumber,
+                    onChanged: (int? value) {
                       setState(() {
-                        startdatecontroller.text = _date.toString();
+                        selectedNumber = value ?? 1;
                       });
                     },
-                    icon: Icon(
-                      Icons.calendar_month_outlined,
-                      color: Colors.brown,
-                    ),
+                    items: List.generate(31, (index) {
+                      return DropdownMenuItem<int>(
+                        value: index + 1,
+                        child: Text((index + 1).toString()),
+                      );
+                    }),
                   ),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15)),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "End date:",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: enddatecontroller,
-                decoration: InputDecoration(
-                  hintText: "end Date",
-                  suffixIcon: IconButton(
-                    onPressed: () async {
-                      final DateTime? _date = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime(2070));
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DropdownButton<String>(
+                    value: selectedDurationUnit,
+                    onChanged: (String? value) {
                       setState(() {
-                        enddatecontroller.text = _date.toString();
+                        selectedDurationUnit = value ?? 'day';
                       });
                     },
-                    icon: Icon(
-                      Icons.calendar_month_outlined,
-                      color: Colors.brown,
-                    ),
+                    items: ['day', 'month', 'week'].map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
                   ),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15)),
                 ),
-              ),
-            )
+              ],
+            ),
           ],
         ),
       ),
