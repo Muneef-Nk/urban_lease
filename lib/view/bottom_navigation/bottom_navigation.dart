@@ -71,7 +71,7 @@ class _BottomNavState extends State<BottomNav> {
             _currentIndex = i;
           });
         },
-        padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+        padding: EdgeInsets.only(left: 7, right: 7, bottom: 7),
         cornerRadius: BorderRadius.only(
           topLeft: Radius.circular(8),
           topRight: Radius.circular(8),

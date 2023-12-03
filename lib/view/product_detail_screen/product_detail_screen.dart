@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rent_cruise/controller/card_screeen/card_screen_controller.dart';
+import 'package:rent_cruise/controller/checkout_controller/checkout_controller.dart';
+import 'package:rent_cruise/controller/product_details_provider/details_screen_controller.dart';
+import 'package:rent_cruise/model/checkout_card_model/checkout_card_model.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/checkout_screen/checkout_screen.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({Key? key}) : super(key: key);
-
-  @override
-  _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
-}
-
-class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  int selectedNumber = 1;
-  String selectedTimeUnit = 'days';
-  int totalDays = 0;
-
-  List<String> timeUnits = ['days', 'weeks', 'months'];
+class ProductDetailsScreen extends StatelessWidget {
+  final int index;
+  final List dataList;
+  ProductDetailsScreen({Key? key, required this.index, required this.dataList})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final checkoutController = Provider.of<CheckoutController>(context);
+    final cardController = Provider.of<CardScreenController>(context);
+    final detailController = Provider.of<ProductDetailsController>(context);
+
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: Container(
-          height: 70,
+          height: 65,
           decoration: BoxDecoration(
               color: ColorConstant.primaryColor,
               borderRadius: BorderRadius.only(
@@ -31,16 +34,34 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                "250 /day",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+                '${dataList[index].price} / day',
+                style: TextStyle(color: Colors.white, fontSize: 17),
               ),
               InkWell(
                 onTap: () {
+                  // totalPriceCalc(widget.index);
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => checkout_screen()));
+                      builder: (context) => Checkout_screen()));
+                  Provider.of<CheckoutController>(context, listen: false)
+                      .checkAmmount(detailController.totalPrice!);
+                  if (checkoutController.checkoutList
+                      .any((e) => e.id == index)) {
+                    print('already exist');
+                    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    //     backgroundColor: Colors.orange,
+                    //     content:
+                    //         Text("this item already selected for checkout")));
+                  } else {
+                    Provider.of<CheckoutController>(context, listen: false)
+                        .addProduct(CheckoutCartModel(
+                      id: index,
+                      img: dataList[index].img,
+                      name: dataList[index].name,
+                      totalPrice: detailController.totalPrice.toString(),
+                      selectedDays: detailController.totalDays.toString(),
+                      perdayprice: dataList[index].price.toString(),
+                    ));
+                  }
                 },
                 child: Container(
                   height: 40,
@@ -73,7 +94,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     height: 300,
                     width: double.infinity,
                     child: Image.network(
-                      "https://imgs.search.brave.com/HuJoeQ1uKXlVmznxW6fCkXAaQTo-2oX8kujxQeTGkXw/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE1/MDI5ODI3MjA3MDAt/YmZmZjk3ZjJlY2Fj/P3E9ODAmdz0xMDAw/JmF1dG89Zm9ybWF0/JmZpdD1jcm9wJml4/bGliPXJiLTQuMC4z/Jml4aWQ9TTN3eE1q/QTNmREI4TUh4elpX/RnlZMmg4TVRSOGZH/TmhiV1Z5WVh4bGJu/d3dmSHd3Zkh4OE1B/PT0",
+                      dataList[index].img,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -102,18 +123,72 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     top: 15,
                     child: GestureDetector(
                       onTap: () {
-                        //
+                        detailController.totalPriceCalc(index);
+
+                        Provider.of<CardScreenController>(context,
+                                listen: false)
+                            .addProductToCart(index,
+                                totalPrice:
+                                    detailController.totalPrice.toString(),
+                                selectedDays:
+                                    detailController.totalDays.toString(),
+                                price: dataList[index].price.toString());
+
+                        Provider.of<CardScreenController>(context,
+                                    listen: false)
+                                .exist
+                            ? showTopSnackBar(
+                                animationDuration: Duration(seconds: 1),
+                                displayDuration: Duration(milliseconds: 2),
+                                Overlay.of(context),
+                                CustomSnackBar.info(
+                                  message: "this item already have cart",
+                                ),
+                              )
+                            : showTopSnackBar(
+                                animationDuration: Duration(seconds: 1),
+                                displayDuration: Duration(milliseconds: 2),
+                                Overlay.of(context),
+                                CustomSnackBar.success(
+                                  message: "this item added your cart",
+                                ),
+                              );
+
+                        Provider.of<CardScreenController>(context,
+                                    listen: false)
+                                .exist
+                            ? 0
+                            : Provider.of<CardScreenController>(context,
+                                    listen: false)
+                                .calculateAllProductPrice();
                       },
-                      child: CircleAvatar(
-                        radius: 20,
-                        child: Center(
-                          child: Icon(
-                            Icons.shopping_cart,
-                            size: 20,
-                            color: Colors.white,
+                      child: Stack(
+                        children: [
+                          CircleAvatar(
+                            radius: 20,
+                            child: Center(
+                              child: Icon(Icons.shopping_cart,
+                                  size: 20, color: Colors.white),
+                            ),
+                            backgroundColor: ColorConstant.primaryColor,
                           ),
-                        ),
-                        backgroundColor: ColorConstant.primaryColor,
+                          Positioned(
+                            right: 0,
+                            child: Container(
+                              width: 18,
+                              height: 18,
+                              decoration: BoxDecoration(
+                                  color: Colors.red, shape: BoxShape.circle),
+                              child: Center(
+                                  child: Text(
+                                cardController.cardlist.length.toString(),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ),
@@ -279,33 +354,56 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(13),
+                      child: Image.network(
+                        dataList[index].gallery[0],
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(13),
+                      child: Image.network(
+                        dataList[index].gallery[1],
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(13),
+                      child: Image.network(
+                        dataList[index].gallery[2],
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                   Container(
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey),
-                  ),
-                  Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey),
-                  ),
-                  Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                            image: NetworkImage(dataList[index].gallery[3])),
                         color: Colors.grey),
                     child: Center(
                         child: Text(
                       "+1",
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 20, color: Colors.white),
                     )),
                   )
                 ],
@@ -330,7 +428,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           borderRadius: BorderRadius.circular(8)),
                       child: Center(
                           child: Text(
-                        "$totalDays Days",
+                        "${detailController.totalDays} Days",
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),
                       )),
@@ -358,14 +456,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         underline: Text(""),
                         iconEnabledColor: Colors.white,
                         iconSize: 28,
-                        value: selectedNumber,
+                        value: detailController.selectedNumber,
                         onChanged: (value) {
-                          setState(() {
-                            selectedNumber = value!;
-                            totalDays = calculateTotalDays(
-                                selectedNumber, selectedTimeUnit);
-                            print('Total days: $totalDays');
-                          });
+                          detailController.selectedNumber = value!;
+                          detailController.totalDays =
+                              Provider.of<ProductDetailsController>(context,
+                                      listen: false)
+                                  .calculateTotalDays();
+                          detailController.totalPriceCalc(index);
                         },
                         items: List.generate(10, (index) {
                           return DropdownMenuItem<int>(
@@ -398,16 +496,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         underline: Text(""),
                         iconEnabledColor: Colors.white,
                         iconSize: 28,
-                        value: selectedTimeUnit,
+                        value: detailController.selectedTimeUnit,
                         onChanged: (value) {
-                          setState(() {
-                            selectedTimeUnit = value!;
-                            totalDays = calculateTotalDays(
-                                selectedNumber, selectedTimeUnit);
-                            print('Total days: $totalDays');
-                          });
+                          detailController.selectedTimeUnit = value!;
+                          detailController.totalDays =
+                              Provider.of<ProductDetailsController>(context,
+                                      listen: false)
+                                  .calculateTotalDays();
+                          detailController.totalPriceCalc(index);
                         },
-                        items: timeUnits.map((unit) {
+                        items: detailController.timeUnits.map((unit) {
                           return DropdownMenuItem<String>(
                             value: unit,
                             child: Text(
@@ -422,8 +520,22 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   ),
                 ],
               ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20, left: 15),
+                child: Text(
+                  "Total Price: ₹${detailController.totalPrice ?? 0}",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+              ),
               SizedBox(
-                height: 30,
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, bottom: 5),
+                child: Text(
+                  "Location",
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
               Container(
                 margin: EdgeInsets.only(left: 15, right: 15),
@@ -440,20 +552,5 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ),
       ),
     );
-  }
-
-  int calculateTotalDays(int number, String timeUnit) {
-    switch (timeUnit) {
-      case 'hours':
-        return number * 24; // Assuming 1 day = 24 hours
-      case 'days':
-        return number;
-      case 'weeks':
-        return number * 7; // Assuming 1 week = 7 days
-      case 'months':
-        return number * 30; // Assuming 1 month = 30 days
-      default:
-        return 0;
-    }
   }
 }

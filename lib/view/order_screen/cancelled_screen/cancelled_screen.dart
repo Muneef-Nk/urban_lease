@@ -63,7 +63,7 @@ class _Cancelled_screenState extends State<Cancelled_screen> {
                 child: GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => checkout_screen()));
+                        builder: (context) => Checkout_screen()));
                   },
                   child: Container(
                     height: 40,

@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:panara_dialogs/panara_dialogs.dart';
+import 'package:provider/provider.dart';
+import 'package:rent_cruise/controller/card_screeen/card_screen_controller.dart';
+import 'package:rent_cruise/model/products_model.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/product_detail_screen/product_detail_screen.dart';
 
-class CartContainer extends StatefulWidget {
-  const CartContainer({super.key});
+class CartContainer extends StatelessWidget {
+  final int index;
 
-  @override
-  State<CartContainer> createState() => _CartContainerState();
-}
+  const CartContainer({super.key, required this.index});
 
-class _CartContainerState extends State<CartContainer> {
-  double rating = 3;
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<CardScreenController>(context);
+    print('Index: $index, cardlist length: ${provider.cardlist.length}');
+
     return Row(
       children: [
         GestureDetector(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => ProductDetailsScreen()));
+                builder: (context) => ProductDetailsScreen(
+                      index: index,
+                      dataList: [],
+                    )));
           },
           child: Container(
             margin: EdgeInsets.all(8),
@@ -30,6 +35,10 @@ class _CartContainerState extends State<CartContainer> {
                 borderRadius: BorderRadius.circular(15)),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15),
+              child: Image.network(
+                provider.cardlist[index].img,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
@@ -51,7 +60,7 @@ class _CartContainerState extends State<CartContainer> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'name',
+                      provider.cardlist[index].name,
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.black,
@@ -59,7 +68,34 @@ class _CartContainerState extends State<CartContainer> {
                     ),
                     GestureDetector(
                         onTap: () {
-                          showBottomSheet(context);
+                          //  showBottomSheet(context);
+                          PanaraConfirmDialog.show(
+                            context,
+                            imagePath: "assets/images/warning.png",
+                            title: "Hello",
+                            message:
+                                "Are you sure back to homescreen if confirm all product remove",
+                            confirmButtonText: "Confirm",
+                            cancelButtonText: "Cancel",
+                            onTapCancel: () {
+                              Navigator.pop(context);
+                            },
+                            onTapConfirm: () {
+                              Provider.of<CardScreenController>(context,
+                                      listen: false)
+                                  .calculateAfterDeletedProductPrice(
+                                      double.parse(
+                                          provider.cardlist[index].totalPrice));
+                              Provider.of<CardScreenController>(context,
+                                      listen: false)
+                                  .deleteProduct(index);
+
+                              Navigator.pop(context);
+                            },
+                            panaraDialogType: PanaraDialogType.error,
+                            barrierDismissible:
+                                false, // optional parameter (default is true)
+                          );
                         },
                         child: Icon(Icons.delete))
                   ],
@@ -68,44 +104,23 @@ class _CartContainerState extends State<CartContainer> {
                   height: 5,
                 ),
                 Text(
-                  '180/days',
+                  '${provider.cardlist[index].perdayprice}/day',
                   style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
+                    fontSize: 13,
+                    color: Colors.black,
+                  ),
                 ),
                 SizedBox(
                   height: 5,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    RatingBar.builder(
-                      initialRating: 3,
-                      itemSize: 18,
-                      minRating: 1,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                      itemBuilder: (context, _) => Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                        size: 10,
-                      ),
-                      onRatingUpdate: (rating) {
-                        print(rating);
-                        setState(() {
-                          rating = rating;
-                        });
-                      },
-                    ),
-                    Text(
-                      "$rating",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-                    )
-                  ],
+                Text(
+                  dataList[index].desc,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.black,
+                  ),
+                  textAlign: TextAlign.justify,
+                  maxLines: 3,
                 ),
                 SizedBox(
                   height: 5,
@@ -121,7 +136,7 @@ class _CartContainerState extends State<CartContainer> {
                           borderRadius: BorderRadius.circular(8)),
                       child: Center(
                         child: Text(
-                          '45 Days',
+                          '${provider.cardlist[index].selectedDays} days',
                           style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,
@@ -140,7 +155,7 @@ class _CartContainerState extends State<CartContainer> {
                           borderRadius: BorderRadius.circular(8)),
                       child: Center(
                         child: Text(
-                          '8,100',
+                          "₹${provider.cardlist[index].totalPrice}",
                           style: TextStyle(
                               fontSize: 16,
                               color: Colors.black,
@@ -213,7 +228,9 @@ class _CartContainerState extends State<CartContainer> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Maruthi Car',
+                            Provider.of<CardScreenController>(context)
+                                .cardlist[index]
+                                .name,
                             style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.black,
@@ -223,7 +240,14 @@ class _CartContainerState extends State<CartContainer> {
                             height: 10,
                           ),
                           Text(
-                            'Voluptate sit qui magna laborum incididunt voluptate.',
+                            '${Provider.of<CardScreenController>(context).cardlist[index].perdayprice}/day',
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'you selected ${Provider.of<CardScreenController>(context).cardlist[index].selectedDays}',
                             style: TextStyle(
                                 fontSize: 15,
                                 color: Colors.black,
@@ -241,35 +265,47 @@ class _CartContainerState extends State<CartContainer> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
-                    width: 150,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Center(
-                        child: Text(
-                      "Cancel",
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
-                    )),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      width: 150,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Center(
+                          child: Text(
+                        "Cancel",
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      )),
+                    ),
                   ),
-                  Container(
-                    width: 150,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: ColorConstant.primaryColor,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Center(
-                        child: Text(
-                      "Yes, remove",
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    )),
+                  GestureDetector(
+                    onTap: () {
+                      Provider.of<CardScreenController>(context, listen: false)
+                          .deleteProduct(index);
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      width: 150,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          color: ColorConstant.primaryColor,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Center(
+                          child: Text(
+                        "Yes, remove",
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      )),
+                    ),
                   )
                 ],
               )

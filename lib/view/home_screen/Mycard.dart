@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:rent_cruise/model/products_model.dart';
 import 'package:rent_cruise/view/product_detail_screen/product_detail_screen.dart';
 
-class Mycard1 extends StatefulWidget {
-  const Mycard1({super.key});
+class Mycard extends StatefulWidget {
+  const Mycard({super.key, required this.index});
+  final int index;
 
   @override
-  State<Mycard1> createState() => _Mycard1State();
+  State<Mycard> createState() => _MycardState();
 }
 
-class _Mycard1State extends State<Mycard1> {
+class _MycardState extends State<Mycard> {
   bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => ProductDetailsScreen()));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ProductDetailsScreen(
+                  index: widget.index,
+                  dataList: [],
+                )));
       },
       child: Container(
         // height: 400,
@@ -35,22 +40,41 @@ class _Mycard1State extends State<Mycard1> {
                         topRight: Radius.circular(20))),
                 height: MediaQuery.sizeOf(context).height * .233,
                 width: double.infinity,
-                child: Image.network(
-                    "https://i1.adis.ws/i/canon/eos-r5_front_rf24-105mmf4lisusm_32c26ad194234d42b3cd9e582a21c99b"),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20)),
+                  child: Image.network(
+                    dataList[widget.index].img,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
               Positioned(top: 8, right: 8, child: Icon(Icons.favorite))
             ]),
             Padding(
+              padding: const EdgeInsets.only(top: 5, left: 10),
+              child: Text(
+                dataList[widget.index].name,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.justify,
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                  "Dolore anim in in velit qui consequat eu cupidatat Lorem dolor."),
+                dataList[widget.index].desc,
+                style: TextStyle(),
+                textAlign: TextAlign.justify,
+                maxLines: 4,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 5, right: 7),
               child: Row(
                 children: [
                   Text(
-                    "₹500",
+                    "₹ ${dataList[widget.index].price}",
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
@@ -61,7 +85,7 @@ class _Mycard1State extends State<Mycard1> {
                         color: Colors.amber,
                       ),
                       Text(
-                        "4.5",
+                        dataList[widget.index].rating,
                         style: TextStyle(fontSize: 17),
                       )
                     ],

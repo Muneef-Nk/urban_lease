@@ -70,7 +70,10 @@ class _active_screenState extends State<active_screen> {
                 child: GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ProductDetailsScreen()));
+                        builder: (context) => ProductDetailsScreen(
+                              index: 0,
+                              dataList: [],
+                            )));
                   },
                   child: Container(
                     height: 40,

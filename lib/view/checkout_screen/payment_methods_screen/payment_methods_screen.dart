@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/checkout_screen/Add_card_screen/add_card_screen.dart';
+import 'package:rent_cruise/controller/add_card/add_card_controller.dart';
 import 'package:rent_cruise/view/checkout_screen/Payment_screen/Payment_screen.dart';
 
 class PaymentMethods extends StatefulWidget {
@@ -13,8 +15,10 @@ class PaymentMethods extends StatefulWidget {
 class _PaymentMethodsState extends State<PaymentMethods> {
   int _selectedPaymentOption = 1; // Initialize with the default value
 
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AddCardController>(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -54,7 +58,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
           ),
         ),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
@@ -81,7 +85,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                       ),
                     ),
                     title: Text(
-                      "Add Card",
+                      "Create New Card",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     trailing: Icon(
@@ -105,7 +109,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
               ),
             ),
             Container(
-              height: 210,
+              height: 280,
               width: MediaQuery.of(context).size.width * 0.9,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -190,9 +194,93 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                       },
                     ),
                   ),
+                  Divider(
+                    thickness: 0.5,
+                    color: Colors.grey,
+                  ),
+                  ListTile(
+                    leading: Container(
+                      height: 30,
+                      width: 30,
+                      child: Image.network(
+                        "https://cdn.icon-icons.com/icons2/836/PNG/512/Google_icon-icons.com_66793.png",
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    title: Text(
+                      "Phone Pay",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    trailing: Radio(
+                      value: 4,
+                      groupValue: _selectedPaymentOption,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedPaymentOption = value as int;
+                        });
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              height: 50,
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: Text(
+                "Recectly added cards",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            ListView.builder(
+                shrinkWrap: true,
+                reverse: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: provider.cardList.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                    height: 60,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.grey),
+                    ),
+                    child: InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddCardScreen(),
+                          )),
+                      child: Center(
+                        child: GestureDetector(
+                          onDoubleTap: () {
+                            //
+                          },
+                          child: RadioListTile(
+                            value: index,
+                            groupValue: selectedIndex,
+                            onChanged: (value) {
+                              setState(() {
+                                selectedIndex = value!;
+                              });
+                            },
+                            activeColor: Colors.red,
+                            title: Text(
+                              provider.cardList[index].bankName,
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            secondary:
+                                Image.asset("assets/images/atm_cart.png"),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                })
           ],
         ),
       ),
