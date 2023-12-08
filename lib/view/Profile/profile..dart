@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rent_cruise/shared/pages/payment_methods_screen/payment_methods_screen.dart';
 import 'package:rent_cruise/view/Profile/helpCenter.dart';
-import 'package:rent_cruise/view/Profile/payement_method.dart';
 import 'package:rent_cruise/view/Profile/privacy.dart';
 import 'package:rent_cruise/view/Profile/settings.dart';
 import 'package:rent_cruise/view/Profile/yourProfile.dart';
@@ -11,7 +11,8 @@ import 'package:rent_cruise/view/order_screen/order_screen.dart';
 import 'package:share_plus/share_plus.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({Key? key});
+  const Profile({Key? key, this.isBack = false});
+  final bool isBack;
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -25,7 +26,14 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        leadingWidth: 0,
+        leading: IconButton(
+            onPressed: () {
+              widget.isBack ? Navigator.of(context).pop() : SizedBox();
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            )),
         backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
@@ -118,7 +126,7 @@ class _ProfileState extends State<Profile> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PaymentMethod(),
+                              builder: (context) => PaymentMethods(),
                             ));
                       },
                       child: ListTile(

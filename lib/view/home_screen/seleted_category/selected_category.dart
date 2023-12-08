@@ -1,16 +1,30 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:rent_cruise/database/db.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/product_detail_screen/product_detail_screen.dart';
 
-class SelectedCategory extends StatelessWidget {
-  final int selectedIndex;
+class SelectedCategory extends StatefulWidget {
+  int selectedIndex;
+
   SelectedCategory({Key? key, required this.selectedIndex}) : super(key: key);
+  // int get getCategoryIndex => selectedIndex;
+  // set setCategoryIndex(int index) {
+  //   selectedIndex = index;
+  // }
 
   @override
+  State<SelectedCategory> createState() => _SelectedCategoryState();
+}
+
+class _SelectedCategoryState extends State<SelectedCategory> {
+  @override
   Widget build(BuildContext context) {
-    List<dynamic> datalist = Database.categories[selectedIndex]["details"]!;
+    int selectedCategoryIndex = widget.selectedIndex;
+
+    List<dynamic> datalist =
+        Database.categories[widget.selectedIndex]["details"] ?? [];
 
     return Scaffold(
       appBar: AppBar(
@@ -42,19 +56,45 @@ class SelectedCategory extends StatelessWidget {
                 itemCount: Database.categories.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.only(left: 10),
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: ColorConstant.primaryColor),
-                    child: Center(
-                      child: Text(
-                        Database.categories[index]["categoryName"],
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                    ),
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedCategoryIndex = index;
+                        widget.selectedIndex = index;
+                      });
+                    },
+                    child: selectedCategoryIndex == index
+                        ? Container(
+                            margin: EdgeInsets.only(left: 10),
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: ColorConstant.primaryColor),
+                            child: Center(
+                              child: Text(
+                                Database.categories[index]["categoryName"],
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          )
+                        : Container(
+                            margin: EdgeInsets.only(left: 10),
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border:
+                                    Border.all(color: Colors.grey.shade300)),
+                            child: Center(
+                              child: Text(
+                                Database.categories[index]["categoryName"],
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
                   );
                 },
               ),
@@ -83,12 +123,13 @@ class SelectedCategory extends StatelessWidget {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
+                    print(index);
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ProductDetailsScreen(
-                          index: index,
-                          dataList: Database.categories[selectedIndex]
-                              ["details"]),
-                    ));
+                        builder: (context) => ProductDetailsScreen(
+                              index: index,
+                              categoryIndex: widget.selectedIndex,
+                              isDirecthome: false,
+                            )));
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.90,
@@ -111,41 +152,41 @@ class SelectedCategory extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Image.asset(
-                            datalist[index].imagePng,
-                            width: 100,
+                            datalist[index].image_png,
+                            width: 150,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                datalist[index].name,
+                                datalist[index].productName,
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              RatingBar.builder(
-                                initialRating:
-                                    double.parse(datalist[index].rating),
-                                minRating: 1,
-                                direction: Axis.horizontal,
-                                allowHalfRating: true,
-                                itemCount: 5,
-                                itemSize: 20,
-                                itemPadding:
-                                    EdgeInsets.symmetric(horizontal: 2.0),
-                                itemBuilder: (context, _) => Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                ),
-                                onRatingUpdate: (rating) {
-                                  print(rating);
-                                },
+                              Row(
+                                children: [
+                                  Text(
+                                    datalist[index].rating,
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                    size: 20,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                ],
                               ),
                               Text(
-                                datalist[index].price.toString(),
+                                "${datalist[index].price ?? 560} / Days",
                                 style: TextStyle(
                                   fontSize: 19,
                                   color: Colors.black,
@@ -154,7 +195,11 @@ class SelectedCategory extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Icon(Icons.more_vert),
+                          GestureDetector(
+                              onTap: () {
+                                //
+                              },
+                              child: Icon(Icons.more_vert)),
                         ],
                       ),
                     ),

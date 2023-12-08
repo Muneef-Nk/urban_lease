@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rent_cruise/model/products_model.dart';
+import 'package:rent_cruise/database/db.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProductDetailsController with ChangeNotifier {
   int selectedNumber = 1;
@@ -11,7 +12,7 @@ class ProductDetailsController with ChangeNotifier {
   double? totalPrice;
 
   totalPriceCalc(int index) {
-    totalPrice = totalDays * dataList[index].price.toDouble();
+    totalPrice = totalDays * Database.random[index].price.toDouble();
     notifyListeners();
   }
 
@@ -30,6 +31,15 @@ class ProductDetailsController with ChangeNotifier {
         return selectedNumber * 30; // Assuming 1 month = 30 days
       default:
         return 0;
+    }
+  }
+
+  void launchWhatsapp({required number, required name}) async {
+    String message =
+        'Hi, I am $name. I need urgent roadside assistance. Please help me.';
+    String url = "whatsapp://send?phone=$number&text=$message";
+    if (!await launchUrl(Uri.parse(url))) {
+      throw ('Can\'t open whatsapp');
     }
   }
 }

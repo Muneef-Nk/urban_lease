@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:provider/provider.dart';
 import 'package:rent_cruise/controller/checkout_controller/checkout_controller.dart';
-import 'package:rent_cruise/model/products_model.dart';
+import 'package:rent_cruise/database/db.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/bottom_navigation/bottom_navigation.dart';
-import 'package:rent_cruise/view/checkout_screen/payment_methods_screen/payment_methods_screen.dart';
+import 'package:rent_cruise/shared/pages/payment_methods_screen/payment_methods_screen.dart';
 
 class Checkout_screen extends StatelessWidget {
   @override
@@ -100,14 +100,15 @@ class Checkout_screen extends StatelessWidget {
               shrinkWrap: true,
               itemCount: provider.checkoutList.length,
               itemBuilder: (context, index) => Container(
-                height: 100,
+                // color: Colors.amber,
+                height: 120,
                 child: Row(
                   children: [
                     Container(
                       padding: EdgeInsets.only(left: 20),
                       margin: EdgeInsets.only(bottom: 10),
                       width: 130,
-                      height: 100,
+                      height: 110,
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.network(
@@ -122,13 +123,17 @@ class Checkout_screen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          dataList[index].name,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.49,
+                          child: Text(
+                            Database.random[index].productName,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                         Text(
-                          "${dataList[index].price} / Day",
+                          "${Database.random[index].price} / Day",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
@@ -141,7 +146,7 @@ class Checkout_screen extends StatelessWidget {
                               color: Colors.grey[700]),
                         ),
                         Text(
-                          "Total: ${provider.checkoutList[index].totalPrice} / product",
+                          "Total: ₹${provider.checkoutList[index].totalPrice}",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.black,

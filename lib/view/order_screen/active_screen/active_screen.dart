@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rent_cruise/view/product_detail_screen/product_detail_screen.dart';
 
 import '../../../utils/color_constant.dart/color_constant.dart';
 
@@ -69,11 +68,11 @@ class _active_screenState extends State<active_screen> {
                 padding: const EdgeInsets.only(left: 0, right: 0),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ProductDetailsScreen(
-                              index: 0,
-                              dataList: [],
-                            )));
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (context) => ProductDetailsScreen(
+                    //           index: 0,
+                    //           dataList: [],
+                    //         )));
                   },
                   child: Container(
                     height: 40,

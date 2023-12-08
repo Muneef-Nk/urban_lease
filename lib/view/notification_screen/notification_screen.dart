@@ -12,25 +12,25 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   elevation: 0,
-      //   leading: InkWell(
-      //     onTap: () {
-      //       Navigator.pop(context);
-      //     },
-      //     child: Icon(
-      //       Icons.arrow_back,
-      //       color: Colors.black,
-      //     ),
-      //   ),
-      //   backgroundColor: Colors.white,
-      //   title: Center(
-      //     child: Text(
-      //       "Notifications ",
-      //       style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-      //     ),
-      //   ),
-      // ),
+      appBar: AppBar(
+        elevation: 0,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        title: Center(
+          child: Text(
+            "Notifications ",
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+          ),
+        ),
+      ),
       body: Column(
         children: [
           Row(
@@ -59,7 +59,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             title: Row(
               children: [
                 Text(
-                  "Order Shipped",
+                  "Added New Products",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
@@ -78,7 +78,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             leading: CircleAvatar(
               backgroundColor: Color.fromARGB(255, 230, 226, 226),
               child: Icon(
-                Icons.local_shipping,
+                Icons.notification_add,
                 color: ColorConstant.primaryColor,
               ),
             ),

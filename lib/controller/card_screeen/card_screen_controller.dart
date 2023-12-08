@@ -1,14 +1,17 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+
 import 'package:rent_cruise/model/checkout_card_model/checkout_card_model.dart';
-import 'package:rent_cruise/model/products_model.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
+
+import '../../database/db.dart';
 
 class CardScreenController with ChangeNotifier {
   List<CheckoutCartModel> cardlist = [];
   bool exist = false;
   double sum = 0;
-  List result = [];
 
   final _cartController = StreamController<List<CheckoutCartModel>>.broadcast();
 
@@ -16,27 +19,54 @@ class CardScreenController with ChangeNotifier {
 
   void dispose() {
     super.dispose();
-
     _cartController.close();
   }
 
 // if product already have list product not saved if no product added to the list
-  addProductToCart(int index,
-      {required String totalPrice,
-      required String selectedDays,
-      required String price}) {
-    exist = cardlist.any((element) => element.id == index);
+  addProductToCart({
+    required String id,
+    required int index,
+    required BuildContext context,
+    required int categoryIndex,
+    required bool isDirectHome,
+    required String totalPrice,
+    required String selectedDays,
+    required String price,
+  }) {
+    final product = Database.random[index];
+    final ctProducts = Database.categories[categoryIndex]["details"][index];
+    exist = cardlist.isNotEmpty && cardlist.any((element) => element.id == id);
+
     if (exist) {
-      // cardlist.removeAt(index);
-      // notifyListeners();
+      showTopSnackBar(
+        animationDuration: Duration(seconds: 1),
+        displayDuration: Duration(milliseconds: 2),
+        Overlay.of(context),
+        CustomSnackBar.info(
+          message: " Product Already Added to Cart",
+        ),
+      );
+      notifyListeners();
     } else {
       cardlist.add(CheckoutCartModel(
-          id: index,
-          img: dataList[index].img,
-          name: dataList[index].name,
-          totalPrice: totalPrice,
-          selectedDays: selectedDays,
-          perdayprice: price));
+        id: id,
+        img: isDirectHome ? product.imgMain : ctProducts.imgMain,
+        name: isDirectHome ? product.productName : ctProducts.productName,
+        totalPrice: totalPrice,
+        selectedDays: selectedDays,
+        perdayprice: price,
+      ));
+
+      showTopSnackBar(
+        animationDuration: Duration(seconds: 1),
+        displayDuration: Duration(milliseconds: 2),
+        Overlay.of(context),
+        CustomSnackBar.success(
+          message: "Product Successfully Added to Cart",
+        ),
+      );
+
+      calculateAllProductPrice();
       notifyListeners();
     }
     notifyListeners();

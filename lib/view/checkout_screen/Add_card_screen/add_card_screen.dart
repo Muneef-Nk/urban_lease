@@ -357,7 +357,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                     child: Center(
                         child: provider.isLoading
                             ? Padding(
-                                padding: const EdgeInsets.all(12),
+                                padding: const EdgeInsets.all(10),
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -395,7 +395,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
   }
 
   onSubmit() {
-    final provider = Provider.of<AddCardController>(context);
+    final provider = Provider.of<AddCardController>(context, listen: false);
     if (_formKey.currentState!.validate()) {
       if (provider.selectedBankName == '') {
         ShowMToast toast = ShowMToast(context);

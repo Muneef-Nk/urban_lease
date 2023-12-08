@@ -25,22 +25,20 @@ class _HelpCenterState extends State<HelpCenter>
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          // leading: InkWell(
-          //   onTap: () {
-          //     Navigator.pop(context);
-          //   },
-          //   child: Icon(
-          //     Icons.arrow_back,
-          //     color: Colors.black,
-          //   ),
-          // ),
-          backgroundColor: Colors.white,
-          title: Center(
-            child: Text(
-              "Help Center",
-              style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+          centerTitle: true,
+          leading: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
             ),
+          ),
+          backgroundColor: Colors.white,
+          title: Text(
+            "Help Center",
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
           ),
           bottom: TabBar(
             indicatorColor: Colors.brown,
@@ -65,7 +63,7 @@ class _HelpCenterState extends State<HelpCenter>
                 controller: searchController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5)),
+                      borderRadius: BorderRadius.circular(15)),
                   labelText: 'Search',
                   prefixIcon: Icon(Icons.search),
                 ),
@@ -343,16 +341,3 @@ class _HelpCenterState extends State<HelpCenter>
     );
   }
 }
-// Text(
-//                             "Can I track my order's delivery status?",
-//                             style: TextStyle(fontWeight: FontWeight.bold),
-//                           ),
-//                           Spacer(),
-//                           IconButton(
-//                             onPressed: () {
-//                               setState(() {
-//                                 isExpanded = !isExpanded;
-//                               });
-//                             },
-//                             icon: Icon(Icons.more),
-//                           // ),

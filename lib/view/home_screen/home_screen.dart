@@ -1,15 +1,22 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rent_cruise/controller/home_controller/homecontroller.dart';
 import 'package:rent_cruise/database/db.dart';
-import 'package:rent_cruise/model/products_model.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
+import 'package:rent_cruise/view/Profile/helpCenter.dart';
+import 'package:rent_cruise/view/Profile/privacy.dart';
+import 'package:rent_cruise/view/Profile/profile..dart';
+import 'package:rent_cruise/view/favourite_screen/favourite_screen.dart';
 import 'package:rent_cruise/view/home_screen/All_Category.dart';
 import 'package:rent_cruise/view/home_screen/Mycard.dart';
 import 'package:rent_cruise/view/home_screen/seleted_category/selected_category.dart';
-import 'package:rent_cruise/view/location/search_location.dart';
+import 'package:rent_cruise/view/login_screen/login_scrren.dart';
 import 'package:rent_cruise/view/notification_screen/notification_screen.dart';
+import 'package:rent_cruise/view/order_screen/order_screen.dart';
 import 'package:rent_cruise/view/search_screen/search_screen.dart';
+import 'package:share_plus/share_plus.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -23,11 +30,208 @@ class _HomescreenState extends State<Homescreen> {
   CarouselController buttonCarouselController = CarouselController();
   int activeIndex = 0;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<HomeController>(context);
+
     return SafeArea(
       child: Scaffold(
-        drawer: Drawer(),
+        key: scaffoldKey,
+        appBar: AppBar(
+          leading: GestureDetector(
+            onTap: () {
+              scaffoldKey.currentState!.openDrawer();
+              // Scaffold.of(context).openDrawer();
+            },
+            child: Icon(
+              Icons.menu,
+              color: Colors.black,
+            ),
+          ),
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: Text(
+            "Urban Lease",
+            style: TextStyle(
+                color: ColorConstant.primaryColor,
+                fontSize: 25,
+                fontWeight: FontWeight.bold),
+          ),
+          actions: [
+            GestureDetector(
+              onTap: () {
+                //
+              },
+              child: Icon(
+                Icons.location_on,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            GestureDetector(
+              onTap: () {
+                //
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => NotificationScreen()));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: CircleAvatar(
+                  child: Icon(
+                    Icons.notifications_none,
+                    color: ColorConstant.primaryColor,
+                  ),
+                  backgroundColor: Color.fromARGB(255, 231, 231, 231),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 20,
+            )
+          ],
+        ),
+        drawer: Drawer(
+            backgroundColor: Colors.white,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 50),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundImage:
+                            AssetImage("assets/images/profile.png"),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Muneef Nk',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Text(
+                            'muneef@gmail.com',
+                            style: TextStyle(fontSize: 12),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                // SizedBox(height: 30),
+                Container(
+                  padding: EdgeInsets.all(25),
+                  child: Wrap(
+                    runSpacing: 8,
+                    children: [
+                      ListTile(
+                        leading: Icon(
+                          Icons.account_circle_outlined,
+                          color: ColorConstant.primaryColor,
+                        ),
+                        title: Text("Profile"),
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => Profile(
+                                    isBack: true,
+                                  )));
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.bookmark_add_outlined,
+                          color: ColorConstant.primaryColor,
+                        ),
+                        title: Text("Saved"),
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => favourite_screeen()));
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.sell_outlined,
+                          color: ColorConstant.primaryColor,
+                        ),
+                        title: Text("My Orders"),
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => order_screen()));
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.group_add_outlined,
+                          color: ColorConstant.primaryColor,
+                        ),
+                        title: Text("Invites Friends"),
+                        onTap: () {
+                          final String whatsappLink =
+                              "https://your-link-here.com";
+                          Share.share("Check out this link: $whatsappLink",
+                              subject: "Share Link");
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.info_outline,
+                          color: ColorConstant.primaryColor,
+                        ),
+                        title: Text("Help Center"),
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => HelpCenter()));
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.security_outlined,
+                          color: ColorConstant.primaryColor,
+                        ),
+                        title: Text("Privacy Policy"),
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => PrivacyPolicy()));
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.logout_outlined,
+                          color: ColorConstant.primaryColor,
+                        ),
+                        title: Text("logout"),
+                        onTap: () {
+                          Navigator.of(context).pop();
+
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (context) => LoginScreen()),
+                              (route) => false);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            )),
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -36,72 +240,19 @@ class _HomescreenState extends State<Homescreen> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => SearchLocation(),
-                        ),
-                      );
-                    },
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Icon(
-                            Icons.location_on,
-                            size: 27,
-                            color: ColorConstant.primaryColor,
-                          ),
-                        ),
-                        Text(
-                          "Choose your location",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.expand_more,
-                            size: 30,
-                          ),
-                        ),
-                        Spacer(),
-                        GestureDetector(
-                          onTap: () {
-                            //
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => NotificationScreen()));
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CircleAvatar(
-                              child: Icon(
-                                Icons.notifications,
-                                color: ColorConstant.primaryColor,
-                              ),
-                              backgroundColor:
-                                  Color.fromARGB(255, 231, 231, 231),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  GestureDetector(
-                    onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => search_screen()));
                     },
                     child: Container(
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       height: 55,
                       width: MediaQuery.sizeOf(context).width * .95,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           border: Border.all(color: Colors.grey.shade400)),
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 10),
+                        padding: const EdgeInsets.only(left: 15),
                         child: Row(
                           children: [
                             Icon(Icons.search),
@@ -115,16 +266,15 @@ class _HomescreenState extends State<Homescreen> {
                                 aspectRatio: 4,
                                 enlargeCenterPage: true,
                                 autoPlay: true,
-                                autoPlayInterval: Duration(seconds: 3),
+                                autoPlayInterval: Duration(seconds: 10),
                                 autoPlayAnimationDuration:
                                     Duration(milliseconds: 800),
                                 scrollDirection: Axis.vertical,
                               ),
-                              itemCount: 5,
+                              itemCount: provider.searchSlider.length,
                               itemBuilder: (context, index, realIndex) {
                                 return Text(
-                                    // "Search ${categoriessssssss[index]['name']}",
-                                    "jj",
+                                    "Search ${provider.searchSlider[index]}",
                                     style: TextStyle(
                                         color: ColorConstant.primaryColor));
                               },
@@ -139,57 +289,57 @@ class _HomescreenState extends State<Homescreen> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        // child: CarouselSlider.builder(
-                        //   carouselController: buttonCarouselController,
-                        //   options: CarouselOptions(
-                        //     height: 200,
-                        //     aspectRatio: 16 / 9,
-                        //     viewportFraction: 1,
-                        //     initialPage: 0,
-                        //     enableInfiniteScroll: true,
-                        //     reverse: false,
-                        //     autoPlay: true,
-                        //     autoPlayInterval: Duration(seconds: 3),
-                        //     autoPlayAnimationDuration:
-                        //         Duration(milliseconds: 800),
-                        //     autoPlayCurve: Curves.fastOutSlowIn,
-                        //     enlargeCenterPage: true,
-                        //     enlargeFactor: 0.3,
-                        //     scrollDirection: Axis.horizontal,
-                        //     onPageChanged: (index, reason) {
-                        //       setState(() {
-                        //         activeIndex = index;
-                        //         print(activeIndex);
-                        //       });
-                        //     },
-                        //   ),
-                        //   itemCount: 5
-                        // itemBuilder: (context, index, realIndex) {
-                        //   final urlImages = imgList[index];
-                        //   return Container(
-                        //     width: double.infinity,
-                        //     child: ClipRRect(
-                        //       borderRadius: BorderRadius.circular(20),
-                        //       child: Image.network(
-                        //         urlImages,
-                        //         fit: BoxFit.fill,
-                        //       ),
-                        //     ),
-                        //   );
-                        // },
-                        //   ),
-                        // ),
-                        // Positioned(
-                        //   left: 0,
-                        //   right: 0,
-                        //   bottom: 20,
-                        //   child: DotsIndicator(
-                        //     decorator: DotsDecorator(
-                        //         activeColor: ColorConstant.primaryColor,
-                        //         size: Size(10, 10)),
-                        //     // dotsCount: imgList.length,
-                        //     position: activeIndex,
-                        //   ),
+                        child: CarouselSlider.builder(
+                          carouselController: buttonCarouselController,
+                          options: CarouselOptions(
+                            height: 200,
+                            aspectRatio: 16 / 9,
+                            viewportFraction: 1,
+                            initialPage: 0,
+                            enableInfiniteScroll: true,
+                            reverse: false,
+                            autoPlay: true,
+                            autoPlayInterval: Duration(seconds: 3),
+                            autoPlayAnimationDuration:
+                                Duration(milliseconds: 800),
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            enlargeCenterPage: true,
+                            enlargeFactor: 0.3,
+                            scrollDirection: Axis.horizontal,
+                            onPageChanged: (index, reason) {
+                              setState(() {
+                                activeIndex = index;
+                                print(activeIndex);
+                              });
+                            },
+                          ),
+                          itemCount: provider.sliderImages.length,
+                          itemBuilder: (context, index, realIndex) {
+                            final urlImages = provider.sliderImages[index];
+                            return Container(
+                              width: double.infinity,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.asset(
+                                  urlImages,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      Positioned(
+                        left: 0,
+                        right: 0,
+                        bottom: 20,
+                        child: DotsIndicator(
+                          decorator: DotsDecorator(
+                              activeColor: ColorConstant.primaryColor,
+                              size: Size(20, 10)),
+                          dotsCount: provider.sliderImages.length,
+                          position: activeIndex,
+                        ),
                       ),
                     ],
                   ),
@@ -230,29 +380,27 @@ class _HomescreenState extends State<Homescreen> {
                         ),
                       ),
                       SizedBox(
-                        height: 100,
+                        height: 120,
                         child: ListView.builder(
                           itemCount: Database.categories.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => SelectedCategory(
-                                            selectedIndex: index,
-                                          )));
-                                },
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => SelectedCategory(
+                                          selectedIndex: index,
+                                        )));
+                              },
+                              child: Container(
+                                width: 100,
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     CircleAvatar(
                                       radius: 38,
-                                      // backgroundImage: NetworkImage(
-                                      //   categories[index]['image'].toString(),
-                                      // ),
-                                      backgroundColor: Colors.amber,
+                                      backgroundImage: AssetImage(Database
+                                          .categories[index]["categoryImage"]),
                                     ),
                                     SizedBox(height: 8),
                                     Text(
@@ -263,6 +411,7 @@ class _HomescreenState extends State<Homescreen> {
                                         fontSize: 10,
                                         color: ColorConstant.primaryColor,
                                       ),
+                                      textAlign: TextAlign.center,
                                     ),
                                   ],
                                 ),
@@ -295,7 +444,7 @@ class _HomescreenState extends State<Homescreen> {
               Container(
                 padding: EdgeInsets.all(9),
                 child: GridView.builder(
-                  itemCount: dataList.length,
+                  itemCount: Database.random.length,
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

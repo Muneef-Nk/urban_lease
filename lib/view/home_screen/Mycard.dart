@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rent_cruise/model/products_model.dart';
+import 'package:rent_cruise/database/db.dart';
 import 'package:rent_cruise/view/product_detail_screen/product_detail_screen.dart';
 
 class Mycard extends StatefulWidget {
@@ -16,20 +16,20 @@ class _MycardState extends State<Mycard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        print(widget.index);
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => ProductDetailsScreen(
                   index: widget.index,
-                  dataList: [],
+                  categoryIndex: 0,
+                  isDirecthome: true,
                 )));
       },
       child: Container(
-        // height: 400,
-        // margin: EdgeInsets.all(5),
         decoration: BoxDecoration(
             border: Border.all(color: Colors.grey.shade300),
             borderRadius: BorderRadius.circular(20)),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(children: [
               Container(
@@ -38,35 +38,37 @@ class _MycardState extends State<Mycard> {
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20))),
-                height: MediaQuery.sizeOf(context).height * .233,
+                height: MediaQuery.sizeOf(context).height * .210,
                 width: double.infinity,
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20)),
                   child: Image.network(
-                    dataList[widget.index].img,
+                    Database.random[widget.index].imgMain,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-              Positioned(top: 8, right: 8, child: Icon(Icons.favorite))
+              Positioned(top: 10, right: 10, child: Icon(Icons.favorite))
             ]),
             Padding(
               padding: const EdgeInsets.only(top: 5, left: 10),
               child: Text(
-                dataList[widget.index].name,
+                Database.random[widget.index].productName,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.justify,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                dataList[widget.index].desc,
-                style: TextStyle(),
+                Database.random[widget.index].desc,
+                style: TextStyle(fontSize: 13),
                 textAlign: TextAlign.justify,
-                maxLines: 4,
+                maxLines: 2,
               ),
             ),
             Padding(
@@ -74,7 +76,7 @@ class _MycardState extends State<Mycard> {
               child: Row(
                 children: [
                   Text(
-                    "₹ ${dataList[widget.index].price}",
+                    "₹ ${Database.random[widget.index].price}",
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
@@ -85,7 +87,7 @@ class _MycardState extends State<Mycard> {
                         color: Colors.amber,
                       ),
                       Text(
-                        dataList[widget.index].rating,
+                        Database.random[widget.index].rating,
                         style: TextStyle(fontSize: 17),
                       )
                     ],
@@ -93,49 +95,6 @@ class _MycardState extends State<Mycard> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 8,
-            ),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 5),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       Container(
-            //         width: 80,
-            //         height: 40,
-            //         decoration: BoxDecoration(
-            //             border:
-            //                 Border.all(color: Colors.black.withOpacity(0.7)),
-            //             color: Colors.white,
-            //             borderRadius: BorderRadius.circular(10)),
-            //         child: Center(
-            //             child: Text(
-            //           "Add to Cart",
-            //           style: TextStyle(
-            //               color: ColorConstant.primaryColor,
-            //               fontSize: 12,
-            //               fontWeight: FontWeight.bold),
-            //         )),
-            //       ),
-            //       Container(
-            //         width: 80,
-            //         height: 40,
-            //         decoration: BoxDecoration(
-            //             color: ColorConstant.primaryColor,
-            //             borderRadius: BorderRadius.circular(10)),
-            //         child: Center(
-            //             child: Text(
-            //           "Rent Now",
-            //           style: TextStyle(
-            //               color: Colors.white,
-            //               fontSize: 12,
-            //               fontWeight: FontWeight.bold),
-            //         )),
-            //       ),
-            //     ],
-            //   ),
-            // )
           ],
         ),
       ),

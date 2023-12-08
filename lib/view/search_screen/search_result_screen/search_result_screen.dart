@@ -16,7 +16,7 @@ class _search_result_screenState extends State<search_result_screen> {
         elevation: 0,
         title: Text(
           "Search",
-          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.white,
       ),

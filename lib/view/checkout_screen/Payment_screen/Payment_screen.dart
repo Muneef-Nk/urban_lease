@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
+import 'package:rent_cruise/controller/profile_screen_controller/profile_screen_controller.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/bottom_navigation/bottom_navigation.dart';
 
@@ -55,6 +57,10 @@ class _PaymentState extends State<Payment> {
             Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => BottomNav()),
                 (route) => false);
+
+            Provider.of<ProfileScreenController>(context, listen: false)
+                .changeBookingNumber();
+            setState(() {});
           },
           child: Container(
             margin: EdgeInsets.only(left: 20, right: 20),

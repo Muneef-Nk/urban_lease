@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         child: Center(
             child: Text(
-          "Rent Cruise",
+          "Urban Lease",
           style: TextStyle(
               color: ColorConstant.primaryColor,
               fontSize: 30,

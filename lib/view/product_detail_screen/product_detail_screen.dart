@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:rent_cruise/controller/card_screeen/card_screen_controller.dart';
 import 'package:rent_cruise/controller/checkout_controller/checkout_controller.dart';
 import 'package:rent_cruise/controller/product_details_provider/details_screen_controller.dart';
+import 'package:rent_cruise/database/db.dart';
 import 'package:rent_cruise/model/checkout_card_model/checkout_card_model.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/checkout_screen/checkout_screen.dart';
@@ -10,80 +11,35 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ProductDetailsScreen extends StatelessWidget {
+class ProductDetailsScreen extends StatefulWidget {
   final int index;
-  final List dataList;
-  ProductDetailsScreen({Key? key, required this.index, required this.dataList})
+  final int categoryIndex;
+  final bool isDirecthome;
+
+  ProductDetailsScreen(
+      {Key? key,
+      required this.index,
+      required this.categoryIndex,
+      required this.isDirecthome})
       : super(key: key);
 
+  @override
+  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
+}
+
+class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final checkoutController = Provider.of<CheckoutController>(context);
     final cardController = Provider.of<CardScreenController>(context);
     final detailController = Provider.of<ProductDetailsController>(context);
 
+    final product = Database.random[widget.index];
+    final ctProducts =
+        Database.categories[widget.categoryIndex]["details"][widget.index];
+
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: Container(
-          height: 65,
-          decoration: BoxDecoration(
-              color: ColorConstant.primaryColor,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15), topRight: Radius.circular(15))),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                '${dataList[index].price} / day',
-                style: TextStyle(color: Colors.white, fontSize: 17),
-              ),
-              InkWell(
-                onTap: () {
-                  // totalPriceCalc(widget.index);
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => Checkout_screen()));
-                  Provider.of<CheckoutController>(context, listen: false)
-                      .checkAmmount(detailController.totalPrice!);
-                  if (checkoutController.checkoutList
-                      .any((e) => e.id == index)) {
-                    print('already exist');
-                    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    //     backgroundColor: Colors.orange,
-                    //     content:
-                    //         Text("this item already selected for checkout")));
-                  } else {
-                    Provider.of<CheckoutController>(context, listen: false)
-                        .addProduct(CheckoutCartModel(
-                      id: index,
-                      img: dataList[index].img,
-                      name: dataList[index].name,
-                      totalPrice: detailController.totalPrice.toString(),
-                      selectedDays: detailController.totalDays.toString(),
-                      perdayprice: dataList[index].price.toString(),
-                    ));
-                  }
-                },
-                child: Container(
-                  height: 40,
-                  width: 120,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(
-                      child: Text(
-                        "Rent Now",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,7 +50,9 @@ class ProductDetailsScreen extends StatelessWidget {
                     height: 300,
                     width: double.infinity,
                     child: Image.network(
-                      dataList[index].img,
+                      widget.isDirecthome
+                          ? product.imgMain
+                          : ctProducts.imgMain,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -123,36 +81,25 @@ class ProductDetailsScreen extends StatelessWidget {
                     top: 15,
                     child: GestureDetector(
                       onTap: () {
-                        detailController.totalPriceCalc(index);
-
+                        detailController.totalPriceCalc(widget.index);
+                        print("cliced");
                         Provider.of<CardScreenController>(context,
                                 listen: false)
-                            .addProductToCart(index,
-                                totalPrice:
-                                    detailController.totalPrice.toString(),
+                            .addProductToCart(
+                                index: widget.index,
+                                id: widget.isDirecthome
+                                    ? product.id.toString()
+                                    : ctProducts.id.toString(),
+                                isDirectHome: widget.isDirecthome,
+                                context: context,
+                                price: widget.isDirecthome
+                                    ? product.price.toString()
+                                    : ctProducts.price.toString(),
                                 selectedDays:
                                     detailController.totalDays.toString(),
-                                price: dataList[index].price.toString());
-
-                        Provider.of<CardScreenController>(context,
-                                    listen: false)
-                                .exist
-                            ? showTopSnackBar(
-                                animationDuration: Duration(seconds: 1),
-                                displayDuration: Duration(milliseconds: 2),
-                                Overlay.of(context),
-                                CustomSnackBar.info(
-                                  message: "this item already have cart",
-                                ),
-                              )
-                            : showTopSnackBar(
-                                animationDuration: Duration(seconds: 1),
-                                displayDuration: Duration(milliseconds: 2),
-                                Overlay.of(context),
-                                CustomSnackBar.success(
-                                  message: "this item added your cart",
-                                ),
-                              );
+                                totalPrice:
+                                    detailController.totalPrice.toString(),
+                                categoryIndex: widget.categoryIndex);
 
                         Provider.of<CardScreenController>(context,
                                     listen: false)
@@ -197,7 +144,13 @@ class ProductDetailsScreen extends StatelessWidget {
                     top: 15,
                     child: GestureDetector(
                       onTap: () {
-                        //
+                        showTopSnackBar(
+                            animationDuration: Duration(seconds: 1),
+                            displayDuration: Duration(milliseconds: 2),
+                            Overlay.of(context),
+                            CustomSnackBar.success(
+                              message: " Product  saved",
+                            ));
                       },
                       child: CircleAvatar(
                         radius: 20,
@@ -220,12 +173,18 @@ class ProductDetailsScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "Washing machine",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child: Text(
+                        widget.isDirecthome
+                            ? product.productName
+                            : ctProducts.productName,
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     Padding(
@@ -238,7 +197,9 @@ class ProductDetailsScreen extends StatelessWidget {
                             color: Colors.amber,
                           ),
                           Text(
-                            "4.5",
+                            widget.isDirecthome
+                                ? product.rating
+                                : ctProducts.rating,
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 18,
@@ -253,7 +214,7 @@ class ProductDetailsScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(9.0),
                 child: Text(
-                  "Washing machines are appliances that help you clean your clothes and other fabrics. There are different types and features of washing machines that you can choose from depending on your needs and preferences.",
+                  widget.isDirecthome ? product.desc : ctProducts.desc,
                   style: TextStyle(fontSize: 14),
                   textAlign: TextAlign.justify,
                 ),
@@ -266,16 +227,21 @@ class ProductDetailsScreen extends StatelessWidget {
                 leading: CircleAvatar(
                     radius: 26,
                     backgroundImage: NetworkImage(
-                        "https://i.pinimg.com/564x/9d/db/5c/9ddb5c50fc1b25019921343128339ea3.jpg")),
+                      widget.isDirecthome
+                          ? product.profilePic
+                          : ctProducts.profilePic,
+                    )),
                 title: Text(
-                  "Luffy",
+                  widget.isDirecthome
+                      ? product.profileName
+                      : ctProducts.profileName,
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.black),
                 ),
                 subtitle: Text(
-                  "place",
+                  widget.isDirecthome ? product.place : ctProducts.place,
                   style: TextStyle(color: Colors.grey),
                 ),
                 trailing: Container(
@@ -285,14 +251,12 @@ class ProductDetailsScreen extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Uri(
-                            scheme: 'sms',
-                            path: '+916238747202',
-                            queryParameters: <String, String>{
-                              'body': Uri.encodeComponent(
-                                  'Example Subject & Symbols are allowed!'),
-                            },
-                          );
+                          Provider.of<ProductDetailsController>(context,
+                                  listen: false)
+                              .launchWhatsapp(
+                                  number: '+916238747202',
+                                  name:
+                                      "Hi there, I'm [Your Name]. I'm interested in booking a rental and would appreciate more information about the process, availability, and any requirements. Thank you for your assistance!");
                         },
                         child: Container(
                           width: 40,
@@ -302,7 +266,7 @@ class ProductDetailsScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10)),
                           child: IconButton(
                               onPressed: () {},
-                              icon: Image.asset("assets/icons/chat.png")),
+                              icon: Image.asset("assets/icons/whatsapp.png")),
                         ),
                       ),
                       SizedBox(
@@ -359,7 +323,9 @@ class ProductDetailsScreen extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(13),
                       child: Image.network(
-                        dataList[index].gallery[0],
+                        widget.isDirecthome
+                            ? product.gallery[0]
+                            : ctProducts.gallery[0],
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -373,7 +339,9 @@ class ProductDetailsScreen extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(13),
                       child: Image.network(
-                        dataList[index].gallery[1],
+                        widget.isDirecthome
+                            ? product.gallery[1]
+                            : ctProducts.gallery[1],
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -387,7 +355,9 @@ class ProductDetailsScreen extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(13),
                       child: Image.network(
-                        dataList[index].gallery[2],
+                        widget.isDirecthome
+                            ? product.gallery[2]
+                            : ctProducts.gallery[2],
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -398,7 +368,11 @@ class ProductDetailsScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                            image: NetworkImage(dataList[index].gallery[3])),
+                            image: NetworkImage(
+                          widget.isDirecthome
+                              ? product.gallery[3]
+                              : ctProducts.gallery[3],
+                        )),
                         color: Colors.grey),
                     child: Center(
                         child: Text(
@@ -421,7 +395,7 @@ class ProductDetailsScreen extends StatelessWidget {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Container(
-                      width: 100,
+                      width: 90,
                       height: 40,
                       decoration: BoxDecoration(
                           color: Colors.grey[300],
@@ -463,7 +437,7 @@ class ProductDetailsScreen extends StatelessWidget {
                               Provider.of<ProductDetailsController>(context,
                                       listen: false)
                                   .calculateTotalDays();
-                          detailController.totalPriceCalc(index);
+                          detailController.totalPriceCalc(widget.index);
                         },
                         items: List.generate(10, (index) {
                           return DropdownMenuItem<int>(
@@ -503,7 +477,7 @@ class ProductDetailsScreen extends StatelessWidget {
                               Provider.of<ProductDetailsController>(context,
                                       listen: false)
                                   .calculateTotalDays();
-                          detailController.totalPriceCalc(index);
+                          detailController.totalPriceCalc(widget.index);
                         },
                         items: detailController.timeUnits.map((unit) {
                           return DropdownMenuItem<String>(
@@ -534,18 +508,98 @@ class ProductDetailsScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 20, bottom: 5),
                 child: Text(
                   "Location",
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(left: 15, right: 15),
-                height: 190,
-                decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(20)),
+              GestureDetector(
+                onTap: () {
+                  //
+                  final url = Uri.parse(
+                      'https://www.google.com/maps/@9.9894452,76.2979403,15z/data=!5m1!1e1?entry=ttu');
+                  print(url);
+                  launchUrl(url);
+                },
+                child: Center(
+                  child: Container(
+                    margin: EdgeInsets.only(left: 13, right: 13),
+                    height: 190,
+                    decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.asset("assets/images/map.png")),
+                  ),
+                ),
               ),
               SizedBox(
                 height: 30,
+              )
+            ],
+          ),
+        ),
+        bottomNavigationBar: Container(
+          height: 65,
+          decoration: BoxDecoration(
+              color: ColorConstant.primaryColor,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                widget.isDirecthome
+                    ? '₹${product.price} / day'
+                    : '${ctProducts.price} / day',
+                style: TextStyle(color: Colors.white, fontSize: 17),
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Checkout_screen()));
+                  Provider.of<CheckoutController>(context, listen: false)
+                      .checkAmmount(detailController.totalPrice!);
+                  if (checkoutController.checkoutList
+                      .any((e) => e.id == widget.index)) {
+                    print('already exist');
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        backgroundColor: Colors.orange,
+                        content:
+                            Text("this item already selected for checkout")));
+                  } else {
+                    Provider.of<CheckoutController>(context, listen: false)
+                        .addProduct(CheckoutCartModel(
+                      id: widget.index.toString(),
+                      img: widget.isDirecthome
+                          ? product.imgMain
+                          : ctProducts.imgMain,
+                      name: widget.isDirecthome
+                          ? product.productName
+                          : ctProducts.productName,
+                      totalPrice: detailController.totalPrice.toString(),
+                      selectedDays: detailController.totalDays.toString(),
+                      perdayprice:
+                          Database.random[widget.index].price.toString(),
+                    ));
+                  }
+                },
+                child: Container(
+                  height: 40,
+                  width: 120,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Text(
+                        "Rent Now",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               )
             ],
           ),

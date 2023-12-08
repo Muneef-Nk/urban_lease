@@ -2,43 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:provider/provider.dart';
 import 'package:rent_cruise/controller/card_screeen/card_screen_controller.dart';
-import 'package:rent_cruise/model/products_model.dart';
+import 'package:rent_cruise/database/db.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
-import 'package:rent_cruise/view/product_detail_screen/product_detail_screen.dart';
 
 class CartContainer extends StatelessWidget {
   final int index;
 
-  const CartContainer({super.key, required this.index});
+  const CartContainer({
+    super.key,
+    required this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
+    print(index);
     final provider = Provider.of<CardScreenController>(context);
-    print('Index: $index, cardlist length: ${provider.cardlist.length}');
+    final product = provider.cardlist[index];
 
     return Row(
       children: [
-        GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => ProductDetailsScreen(
-                      index: index,
-                      dataList: [],
-                    )));
-          },
-          child: Container(
-            margin: EdgeInsets.all(8),
-            width: 130,
-            height: 130,
-            decoration: BoxDecoration(
-                color: Color.fromARGB(255, 207, 207, 205),
-                borderRadius: BorderRadius.circular(15)),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.network(
-                provider.cardlist[index].img,
-                fit: BoxFit.cover,
-              ),
+        Container(
+          margin: EdgeInsets.all(8),
+          width: 130,
+          height: 130,
+          decoration: BoxDecoration(
+              color: Color.fromARGB(255, 207, 207, 205),
+              borderRadius: BorderRadius.circular(15)),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: Image.network(
+              product.img,
+              fit: BoxFit.cover,
             ),
           ),
         ),
@@ -59,22 +53,26 @@ class CartContainer extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      provider.cardlist[index].name,
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: Text(
+                        product.name,
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
                     ),
                     GestureDetector(
                         onTap: () {
-                          //  showBottomSheet(context);
                           PanaraConfirmDialog.show(
                             context,
                             imagePath: "assets/images/warning.png",
                             title: "Hello",
                             message:
-                                "Are you sure back to homescreen if confirm all product remove",
+                                "Proceed to remove all products and return to the home screen?",
                             confirmButtonText: "Confirm",
                             cancelButtonText: "Cancel",
                             onTapCancel: () {
@@ -104,7 +102,7 @@ class CartContainer extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  '${provider.cardlist[index].perdayprice}/day',
+                  '${product.perdayprice}/day',
                   style: TextStyle(
                     fontSize: 13,
                     color: Colors.black,
@@ -114,13 +112,14 @@ class CartContainer extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  dataList[index].desc,
+                  Database.random[index].desc,
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.black,
                   ),
                   textAlign: TextAlign.justify,
-                  maxLines: 3,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(
                   height: 5,
@@ -136,7 +135,7 @@ class CartContainer extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8)),
                       child: Center(
                         child: Text(
-                          '${provider.cardlist[index].selectedDays} days',
+                          '${product.selectedDays} days',
                           style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,
@@ -155,7 +154,7 @@ class CartContainer extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8)),
                       child: Center(
                         child: Text(
-                          "₹${provider.cardlist[index].totalPrice}",
+                          "₹${product.totalPrice}",
                           style: TextStyle(
                               fontSize: 16,
                               color: Colors.black,
@@ -171,146 +170,5 @@ class CartContainer extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  Future<dynamic> showBottomSheet(BuildContext context) {
-    return showModalBottomSheet(
-        backgroundColor: Colors.transparent,
-        context: context,
-        builder: (context) {
-          return Container(
-            height: 250,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(30),
-                    topLeft: Radius.circular(30))),
-            child: Column(children: [
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                "Remove from cart?",
-                style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold),
-              ),
-              Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.all(8),
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 207, 207, 205),
-                        borderRadius: BorderRadius.circular(15)),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      // child: Image.network(
-                      //   provider.card[index].image,
-                      //   // product[index].image,
-                      //   fit: BoxFit.cover,
-                      // ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  SizedBox(
-                    width: 200,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        top: 10,
-                        bottom: 10,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            Provider.of<CardScreenController>(context)
-                                .cardlist[index]
-                                .name,
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            '${Provider.of<CardScreenController>(context).cardlist[index].perdayprice}/day',
-                            style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            'you selected ${Provider.of<CardScreenController>(context).cardlist[index].selectedDays}',
-                            style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Container(
-                      width: 150,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Center(
-                          child: Text(
-                        "Cancel",
-                        style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                      )),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Provider.of<CardScreenController>(context, listen: false)
-                          .deleteProduct(index);
-                      Navigator.of(context).pop();
-                    },
-                    child: Container(
-                      width: 150,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          color: ColorConstant.primaryColor,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Center(
-                          child: Text(
-                        "Yes, remove",
-                        style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      )),
-                    ),
-                  )
-                ],
-              )
-            ]),
-          );
-        });
   }
 }

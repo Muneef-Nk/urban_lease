@@ -1,5 +1,5 @@
 class CheckoutCartModel {
-  final int id;
+  final String id;
   final String img;
   final String name;
   final String totalPrice;
