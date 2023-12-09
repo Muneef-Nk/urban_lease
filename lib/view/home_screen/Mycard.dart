@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rent_cruise/controller/saved_screen_controller.dart/saved_controller.dart';
 import 'package:rent_cruise/database/db.dart';
 import 'package:rent_cruise/view/product_detail_screen/product_detail_screen.dart';
 
@@ -44,13 +46,29 @@ class _MycardState extends State<Mycard> {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20)),
-                  child: Image.network(
+                  child: Image.asset(
                     Database.random[widget.index].imgMain,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-              Positioned(top: 10, right: 10, child: Icon(Icons.favorite))
+              Positioned(
+                  top: 10,
+                  right: 10,
+                  child: GestureDetector(
+                      onTap: () {
+                        Provider.of<SavedController>(context, listen: false)
+                            .addtoSave(widget.index);
+                        setState(() {
+                          isFavorite = !isFavorite;
+                        });
+                      },
+                      child: isFavorite
+                          ? Icon(
+                              Icons.favorite,
+                              color: Colors.red,
+                            )
+                          : Icon(Icons.favorite_outline)))
             ]),
             Padding(
               padding: const EdgeInsets.only(top: 5, left: 10),

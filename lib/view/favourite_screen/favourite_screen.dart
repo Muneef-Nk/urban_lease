@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rent_cruise/controller/saved_screen_controller.dart/saved_controller.dart';
 import 'package:rent_cruise/view/favourite_screen/card_screen/card_screen.dart';
 
 class favourite_screeen extends StatelessWidget {
@@ -6,16 +8,21 @@ class favourite_screeen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List CategoryList = [
-      "Home Equipments",
-      "Medical Equipment",
-      "Electronics",
-      "Furnitures"
-    ];
+    final provider = Provider.of<SavedController>(context);
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+        ),
+        elevation: 0,
         title: Text(
-          "Favourite",
+          "Saved Products",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
         ),
         backgroundColor: Colors.white,
@@ -23,32 +30,6 @@ class favourite_screeen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              height: 50,
-              child: ListView.builder(
-                itemCount: CategoryList.length,
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.brown),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          CategoryList[index],
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: GridView.builder(
@@ -56,9 +37,11 @@ class favourite_screeen extends StatelessWidget {
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     mainAxisExtent: 230, crossAxisCount: 2),
-                itemCount: 10,
+                itemCount: provider.savedLIst.length,
                 itemBuilder: (context, index) {
-                  return card_screen();
+                  return card_screen(
+                    index: index,
+                  );
                 },
               ),
             )

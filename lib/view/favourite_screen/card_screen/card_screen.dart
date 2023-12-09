@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:rent_cruise/database/db.dart';
+import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 
 class card_screen extends StatefulWidget {
-  const card_screen({super.key});
+  final int index;
+  const card_screen({super.key, required this.index});
 
   @override
   State<card_screen> createState() => _card_screenState();
@@ -13,64 +16,82 @@ class _card_screenState extends State<card_screen> {
     return Scaffold(
       body: Center(
         child: Container(
-          height: 230,
+          height: 200,
           width: 160,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.white,
+              border: Border.all(color: Colors.grey.shade400)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 160,
-                width: 150,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                child: Stack(children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.network(
-                      "https://i.pinimg.com/564x/32/a9/b3/32a9b3e3a29e12a2c3d895ce87e8c639.jpg",
+              Stack(children: [
+                Container(
+                  height: 130,
+                  width: 160,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.asset(
+                      Database.random[widget.index].imgMain,
                       fit: BoxFit.fill,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: () {},
                     child: CircleAvatar(
-                        radius: 18,
-                        backgroundColor: Colors.brown,
+                        radius: 15,
+                        backgroundColor: ColorConstant.primaryColor,
                         child: Icon(
-                          Icons.favorite_border,
-                          color: Colors.white,
-                          size: 25,
+                          Icons.favorite,
+                          color: Colors.red,
+                          size: 18,
                         )),
-                  )
-                ]),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    "Mixer Grinder",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.black),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                        size: 18,
-                      ),
-                      Text(
-                        "4.5",
-                        style: TextStyle(color: Colors.black),
-                      )
-                    ],
-                  ),
-                ],
-              ),
+                )
+              ]),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("2000 Rs."),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      width: 100,
+                      child: Text(
+                        Database.random[0].productName,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                          size: 18,
+                        ),
+                        Text(
+                          Database.random[0].rating,
+                          style: TextStyle(color: Colors.black),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(
+                  Database.random[0].price.toString(),
+                  style: TextStyle(fontSize: 12),
+                ),
               )
             ],
           ),

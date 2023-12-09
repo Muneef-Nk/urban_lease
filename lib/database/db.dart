@@ -42,7 +42,8 @@ class Database {
   static List<ProductsModel> random = [
     ProductsModel(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
-        productName: "Canon EOS R8 (RF24-50mm f/4.5-6.3 IS STM)",
+        productName:
+            "Mario Bellini Taupe Velvet Camaleonda Sofa for B&B Italia, 1972, Set of 6",
         profileName: "Muneef",
         desc:
             "Many photographers who switch from DSLR to mirrorless struggle with the electronic viewfinder. Seeing a digital image, rather than seeing optically through the lens, is challenging. The image looks different, but there’s also more information available. Focusing and metering are often enhanced with an electronic viewfinder.",
@@ -50,8 +51,7 @@ class Database {
         place: "Kochi, Kakkanad",
         profilePic:
             "https://i.pinimg.com/564x/9d/db/5c/9ddb5c50fc1b25019921343128339ea3.jpg",
-        imgMain:
-            "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1638&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        imgMain: "assets/images/s5.jpg",
         rating: "4.3",
         image_png: "assets/images/atm_cart.png",
         gallery: [
@@ -62,7 +62,7 @@ class Database {
         ]),
     ProductsModel(
         id: DateTime.now().microsecondsSinceEpoch.toString(),
-        productName: "Nikon D5600 DSLR Camera",
+        productName: "Omega SA",
         profileName: "Muneef",
         desc:
             "Many photographers who switch from DSLR to mirrorless struggle with the electronic viewfinder. Seeing a digital image, rather than seeing optically through the lens, is challenging. The image looks different, but there’s also more information available. Focusing and metering are often enhanced with an electronic viewfinder.",
@@ -70,8 +70,7 @@ class Database {
         place: "Kochi, Kakkanad",
         profilePic:
             "https://i.pinimg.com/564x/9d/db/5c/9ddb5c50fc1b25019921343128339ea3.jpg",
-        imgMain:
-            "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1638&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        imgMain: "assets/images/a2.jpg",
         rating: "4.1",
         image_png: "assets/images/atm_cart.png",
         gallery: [
@@ -91,16 +90,15 @@ class Database {
             "Quis excepteur nostrud magna eiusmod veniam dolor Laborum cillum in elit aute.. Anim pariatur esse Lorem officia commodo id in commodo laborum. Voluptate adipisicing qui officia officia excepteur elit deserunt sit ea exercitation. Commodo eu aliquip duis nisi consequat officia ea laborum labore irure.Minim elit ex officia eu minim elit exercitation ea irure consectetur proident. Magna enim tempor ex est voluptate laborum enim nisi irure do officia excepteur elit officia excepteur elit reprehenderit cillum in reprehenderit. Amet nulla Lorem commodo pariatur. Fugiat qui ut exercitation cillum eu reprehenderit tempor qui veniam consectetur quis non nisi voluptate.",
         price: 600,
         place: "kollam",
-        profilePic:
-            "https://i.pinimg.com/564x/9d/db/5c/9ddb5c50fc1b25019921343128339ea3.jpg",
+        profilePic: "assets/images/profile.jpg",
         imgMain: "assets/images/s1.jpg",
         rating: "3.9",
         image_png: "assets/images/s4.png",
         gallery: [
           "assets/images/s2.jpg",
           "assets/images/s3.jpg",
-          "assets/images/s5.png",
-          "assets/images/s6.png"
+          "assets/images/s5.jpg",
+          "assets/images/s6.jpg"
         ]),
   ];
   static List<ProductsModel> electronics = [];

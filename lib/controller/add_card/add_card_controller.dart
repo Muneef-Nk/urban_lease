@@ -1,12 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rent_cruise/model/addCard/cardModel.dart';
 
 class AddCardController with ChangeNotifier {
-  List<CardModel> cardList = [];
+  CollectionReference debitCard =
+      FirebaseFirestore.instance.collection('debitCard');
 
   addCard(CardModel cardModel) {
-    cardList.add(cardModel);
-    print(cardList);
+    debitCard
+        .add({
+          "bank": cardModel.bankName,
+          "cvv": cardModel.cvv,
+          "expiry_date": cardModel.expiryDate,
+          "name": cardModel.name,
+          "card_number": cardModel.accountNumber,
+        })
+        .then((value) => print("card added"))
+        .catchError((Error) => print("failed to add card"));
     notifyListeners();
   }
 

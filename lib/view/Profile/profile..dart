@@ -79,7 +79,7 @@ class _ProfileState extends State<Profile> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: Text(
-                    "USER NAME",
+                    "Muneef",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),

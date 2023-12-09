@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rent_cruise/controller/search_controller/search_controller.dart';
+import 'package:rent_cruise/model/search_screen.dart/search_item_model.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 
 class search_screen extends StatefulWidget {
@@ -9,10 +12,17 @@ class search_screen extends StatefulWidget {
 }
 
 class _search_screenState extends State<search_screen> {
-  List searchItems = [];
+  @override
+  void initState() {
+    Provider.of<SearchScreenController>(context, listen: false).getData();
+    super.initState();
+  }
+
   TextEditingController _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<SearchScreenController>(context);
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -47,7 +57,15 @@ class _search_screenState extends State<search_screen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        searchItems.add(_searchController.text);
+                        Provider.of<SearchScreenController>(context,
+                                listen: false)
+                            .addSearchData(
+                                SearchItemModel(place: _searchController.text));
+
+                        Provider.of<SearchScreenController>(context,
+                                listen: false)
+                            .getData();
+                        _searchController.clear();
                         setState(() {});
                       },
                       child: Container(
@@ -85,7 +103,12 @@ class _search_screenState extends State<search_screen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          searchItems.clear();
+                          Provider.of<SearchScreenController>(context,
+                                  listen: false)
+                              .deleteAll();
+                          Provider.of<SearchScreenController>(context,
+                                  listen: false)
+                              .getData();
                           setState(() {});
                         },
                         child: Text(
@@ -100,7 +123,7 @@ class _search_screenState extends State<search_screen> {
                 )),
             SizedBox(
               child: ListView.builder(
-                itemCount: searchItems.length,
+                itemCount: provider.searchList.length,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
@@ -111,14 +134,19 @@ class _search_screenState extends State<search_screen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "${searchItems[index]}",
+                              "${provider.searchList[index].place}",
                               style: TextStyle(
                                 color: ColorConstant.primaryColor,
                               ),
                             ),
                             GestureDetector(
                               onTap: () {
-                                searchItems.removeAt(index);
+                                Provider.of<SearchScreenController>(context,
+                                        listen: false)
+                                    .deleteData(index);
+                                Provider.of<SearchScreenController>(context,
+                                        listen: false)
+                                    .getData();
                                 setState(() {});
                               },
                               child: Icon(

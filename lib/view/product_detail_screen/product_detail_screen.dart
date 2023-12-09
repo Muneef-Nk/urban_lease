@@ -49,7 +49,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   Container(
                     height: 300,
                     width: double.infinity,
-                    child: Image.network(
+                    child: Image.asset(
                       widget.isDirecthome
                           ? product.imgMain
                           : ctProducts.imgMain,
@@ -125,7 +125,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               width: 18,
                               height: 18,
                               decoration: BoxDecoration(
-                                  color: Colors.red, shape: BoxShape.circle),
+                                  color: const Color.fromRGBO(244, 67, 54, 1),
+                                  shape: BoxShape.circle),
                               child: Center(
                                   child: Text(
                                 cardController.cardlist.length.toString(),
@@ -226,7 +227,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ListTile(
                 leading: CircleAvatar(
                     radius: 26,
-                    backgroundImage: NetworkImage(
+                    backgroundImage: AssetImage(
                       widget.isDirecthome
                           ? product.profilePic
                           : ctProducts.profilePic,
@@ -322,7 +323,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(13),
-                      child: Image.network(
+                      child: Image.asset(
                         widget.isDirecthome
                             ? product.gallery[0]
                             : ctProducts.gallery[0],
@@ -338,7 +339,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(13),
-                      child: Image.network(
+                      child: Image.asset(
                         widget.isDirecthome
                             ? product.gallery[1]
                             : ctProducts.gallery[1],
@@ -354,7 +355,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(13),
-                      child: Image.network(
+                      child: Image.asset(
                         widget.isDirecthome
                             ? product.gallery[2]
                             : ctProducts.gallery[2],
@@ -368,11 +369,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                            image: NetworkImage(
-                          widget.isDirecthome
-                              ? product.gallery[3]
-                              : ctProducts.gallery[3],
-                        )),
+                            image: AssetImage(
+                              widget.isDirecthome
+                                  ? product.gallery[3]
+                                  : ctProducts.gallery[3],
+                            ),
+                            fit: BoxFit.cover),
                         color: Colors.grey),
                     child: Center(
                         child: Text(

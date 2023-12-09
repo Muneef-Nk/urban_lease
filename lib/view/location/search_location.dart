@@ -85,7 +85,7 @@ class SearchLocation extends StatelessWidget {
           ),
           SizedBox(
             child: ListView.builder(
-                itemCount: 10,
+                itemCount: 1,
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
@@ -94,7 +94,7 @@ class SearchLocation extends StatelessWidget {
                       Icons.near_me,
                       color: ColorConstant.primaryColor,
                     ),
-                    title: Text("gjfdsjlj"),
+                    title: Text("kochi"),
                     trailing: Icon(Icons.close),
                   );
                 }),

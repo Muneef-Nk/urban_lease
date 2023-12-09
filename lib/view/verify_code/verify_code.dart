@@ -96,7 +96,6 @@ class _VerifyCodeState extends State<VerifyCode> {
               if (pin == '7777') {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                     builder: (context) => EditProfile(
-                          isSkip: true,
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(

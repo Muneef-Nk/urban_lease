@@ -1,8 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:rent_cruise/utils/color_constant.dart/color_constant.dart';
 import 'package:rent_cruise/view/checkout_screen/Add_card_screen/add_card_screen.dart';
-import 'package:rent_cruise/controller/add_card/add_card_controller.dart';
 import 'package:rent_cruise/view/checkout_screen/Payment_screen/Payment_screen.dart';
 
 class PaymentMethods extends StatefulWidget {
@@ -13,12 +12,13 @@ class PaymentMethods extends StatefulWidget {
 }
 
 class _PaymentMethodsState extends State<PaymentMethods> {
-  int _selectedPaymentOption = 1; // Initialize with the default value
+  int _selectedPaymentOption = 10; // Initialize with the default value
 
-  int selectedIndex = 0;
+  int selectedIndex = 10;
+  CollectionReference debitCard =
+      FirebaseFirestore.instance.collection('profile');
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<AddCardController>(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -235,52 +235,65 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
-            ListView.builder(
-                shrinkWrap: true,
-                reverse: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: provider.cardList.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.only(left: 15, right: 15, bottom: 15),
-                    height: 60,
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.grey),
-                    ),
-                    child: InkWell(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AddCardScreen(),
-                          )),
-                      child: Center(
-                        child: GestureDetector(
-                          onDoubleTap: () {
-                            //
-                          },
-                          child: RadioListTile(
-                            value: index,
-                            groupValue: selectedIndex,
-                            onChanged: (value) {
-                              setState(() {
-                                selectedIndex = value!;
-                              });
-                            },
-                            activeColor: Colors.red,
-                            title: Text(
-                              provider.cardList[index].bankName,
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            secondary:
-                                Image.asset("assets/images/atm_cart.png"),
+            StreamBuilder(
+              stream: debitCard.snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                      shrinkWrap: true,
+                      reverse: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        DocumentSnapshot debitCard = snapshot.data!.docs[index];
+                        return Container(
+                          margin:
+                              EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                          height: 60,
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.grey),
                           ),
-                        ),
-                      ),
-                    ),
-                  );
-                })
+                          child: InkWell(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AddCardScreen(),
+                                )),
+                            child: Center(
+                              child: GestureDetector(
+                                onDoubleTap: () {
+                                  //
+                                },
+                                child: RadioListTile(
+                                  value: index,
+                                  groupValue: selectedIndex,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedIndex = value!;
+                                    });
+                                  },
+                                  activeColor: Colors.red,
+                                  title: Text(
+                                    "${debitCard["bank"]}",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  secondary:
+                                      Image.asset("assets/images/atm_cart.png"),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      });
+                } else {
+                  print("no data found");
+                }
+                return Text("no card found");
+              },
+            )
           ],
         ),
       ),
