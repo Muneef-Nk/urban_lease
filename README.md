@@ -3,7 +3,8 @@
 screenshots
 
 
-<img src="https://github.com/Muneef-Nk/urban_lease/assets/92105703/33b31ac8-537d-47fa-a0ac-bbf7e1108c02" width="200" height="400"/>
+
+<img src="https://github.com/Muneef-Nk/urban_lease/assets/92105703/e276d6f2-8e18-4e3f-8a49-61728d085809" width="200" height="400"/>
 <img src="https://github.com/Muneef-Nk/urban_lease/assets/92105703/59ac5a1d-1380-465c-b2d9-2e31c8ea2143" width="200" height="400"/>
 <img src="https://github.com/Muneef-Nk/urban_lease/assets/92105703/7f9338ff-96f2-489b-b5d4-bce53bc8112e" width="200" height="400"/>
 <img src="https://github.com/Muneef-Nk/urban_lease/assets/92105703/bb2e400b-3ea2-4cd9-b9f9-3c5e10070bd6" width="200" height="400"/>
